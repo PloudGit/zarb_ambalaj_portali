@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mvc:View
+    controllerName="com.app.abdiibrahim.zarbambalajportali.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:t="sap.ui.table"
+>
+    <App>
+        <pages>
+            <Page
+                id="mainPage"
+                showHeader="false"
+            >
+                <content>
+                    <f:DynamicPage
+                        id="mainDynamicPage"
+                        fitContent="false"
+                        preserveHeaderStateOnScroll="true"
+                    >
+                        <!-- HEADER -->
+                        <f:header>
+                            <f:DynamicPageHeader>
+                                <f:content>
+                                    <smartFilterBar:SmartFilterBar
+                                        id="smartFilterBar"
+                                        entitySet="AmbOrderListSet"
+                                        useToolbar="true"
+                                        showClearButton="true"
+                                        showGoOnFB="true"
+                                        persistencyKey="ZARBAMBALAJ_FILTERBAR"
+                                        search=".onSearch"
+                                    >
+                                        <smartFilterBar:controlConfiguration>
+                                            <smartFilterBar:ControlConfiguration
+                                                key="Slfdt"
+                                                label="{i18n>deliveryDate}"
+                                                index="1"
+                                                visibleInAdvancedArea="true"
+                                            />
+                                            <smartFilterBar:ControlConfiguration
+                                                key="Matnr"
+                                                label="{i18n>productIdentifier}"
+                                                index="2"
+                                                visibleInAdvancedArea="true"
+                                            />
+                                            <smartFilterBar:ControlConfiguration
+                                                key="Werks"
+                                                label="{i18n>plant}"
+                                                index="3"
+                                                visibleInAdvancedArea="true"
+                                            />
+                                            <smartFilterBar:ControlConfiguration
+                                                key="Eindt"
+                                                label="{i18n>receiptDate}"
+                                                index="4"
+                                                visibleInAdvancedArea="true"
+                                            />
+                                            <smartFilterBar:ControlConfiguration
+                                                key="Lifnr"
+                                                label="{i18n>vendor}"
+                                                index="5"
+                                                visibleInAdvancedArea="true"
+                                            />
+                                            <smartFilterBar:ControlConfiguration
+                                                key="Statu"
+                                                label="{i18n>status}"
+                                                index="6"
+                                                visibleInAdvancedArea="true"
+                                            />
+                                            <smartFilterBar:ControlConfiguration
+                                                key="Ebeln"
+                                                label="{i18n>purchaseOrderNumber}"
+                                                index="7"
+                                                visibleInAdvancedArea="true"
+                                            />
+                                            <smartFilterBar:ControlConfiguration
+                                                key="Uname"
+                                                label="{i18n>userName}"
+                                                index="8"
+                                                visibleInAdvancedArea="true"
+                                            />
+                                            <smartFilterBar:ControlConfiguration
+                                                key="Ekgrp"
+                                                label="{i18n>purchasingGroup}"
+                                                index="9"
+                                                visibleInAdvancedArea="true"
+                                            />
+                                            <smartFilterBar:ControlConfiguration
+                                                key="Ekorg"
+                                                label="{i18n>purchasingOrganization}"
+                                                index="10"
+                                                visibleInAdvancedArea="true"
+                                            />
+                                        </smartFilterBar:controlConfiguration>
+                                    </smartFilterBar:SmartFilterBar>
+                                </f:content>
+                            </f:DynamicPageHeader>
+                        </f:header>
+
+                        <!-- CONTENT -->
+                        <f:content>
+                            <IconTabBar
+                                id="idIconTabBar"
+                                expandable="false"
+                                selectedKey="{dm>/iconTabBarSelectedKey}"
+                                headerMode="Standard"
+                                upperCase="false"
+                            >
+                                <items>
+                                    <!-- PK Bilgisi Olmayan Çağrılar -->
+                                    <IconTabFilter
+                                        text="{i18n>tabNoPk}"
+                                        key="NOPK"
+                                        icon="sap-icon://alert"
+                                        design="Horizontal"
+                                        iconColor="Negative"
+                                    >
+                                        <mvc:XMLView
+                                            viewName="com.app.abdiibrahim.zarbambalajportali.view.NoPkCalls"
+                                            type="XML"
+                                        />
+                                    </IconTabFilter>
+
+                                    <!-- Açık Çağrılar -->
+                                    <IconTabFilter
+                                        text="{i18n>tabOpen}"
+                                        key="OCALLS"
+                                        icon="sap-icon://cart"
+                                        design="Horizontal"
+                                        iconColor="Positive"
+                                    >
+                                        <mvc:XMLView
+                                            viewName="com.app.abdiibrahim.zarbambalajportali.view.OpenCalls"
+                                            type="XML"
+                                        />
+                                    </IconTabFilter>
+
+                                    <!-- Teyit Edilen Çağrılar -->
+                                    <IconTabFilter
+                                        text="{i18n>tabConfirmed}"
+                                        key="CONF"
+                                        icon="sap-icon://accept"
+                                        design="Horizontal"
+                                        iconColor="Critical"
+                                    >
+                                        <!-- <mvc:XMLView
+                viewName="com.app.abdiibrahim.zarbambalajportali.view.ConfirmedCalls"
+                type="XML"
+            /> -->
+                                    </IconTabFilter>
+
+                                    <!-- Firma Revizyon Talepleri -->
+                                    <IconTabFilter
+                                        text="{i18n>tabCompanyRev}"
+                                        key="COMPREV"
+                                        icon="sap-icon://history"
+                                        design="Horizontal"
+                                        iconColor="Neutral"
+                                    >
+                                        <!-- <mvc:XMLView
+                viewName="com.app.abdiibrahim.zarbambalajportali.view.CompanyRevision"
+                type="XML"
+            /> -->
+                                    </IconTabFilter>
+
+                                    <!-- Abdi İbrahim Revizyon Talepleri -->
+                                    <IconTabFilter
+                                        text="{i18n>tabInternalRev}"
+                                        key="INTREV"
+                                        icon="sap-icon://refresh"
+                                        design="Horizontal"
+                                        iconColor="Critical"
+                                    >
+                                        <!-- <mvc:XMLView
+                viewName="com.app.abdiibrahim.zarbambalajportali.view.InternalRevision"
+                type="XML"
+            /> -->
+                                    </IconTabFilter>
+
+                                    <!-- İptal Edilen Çağrılar -->
+                                    <IconTabFilter
+                                        text="{i18n>tabCanceled}"
+                                        key="CANC"
+                                        icon="sap-icon://cancel"
+                                        design="Horizontal"
+                                        iconColor="Negative"
+                                    >
+                                        <!-- <mvc:XMLView
+                viewName="com.app.abdiibrahim.zarbambalajportali.view.CanceledCalls"
+                type="XML"
+            /> -->
+                                    </IconTabFilter>
+
+                                    <!-- Tüm Çağrılar -->
+                                    <IconTabFilter
+                                        text="{i18n>tabAllCalls}"
+                                        key="ALLCALLS"
+                                        icon="sap-icon://list"
+                                        design="Horizontal"
+                                        iconColor="Neutral"
+                                    >
+                                        <!-- <mvc:XMLView
+                viewName="com.app.abdiibrahim.zarbambalajportali.view.AllCalls"
+                type="XML"
+            /> -->
+                                    </IconTabFilter>
+
+                                    <!-- Tüm Siparişler -->
+                                    <IconTabFilter
+                                        text="{i18n>tabAllOrders}"
+                                        key="ALLORDERS"
+                                        icon="sap-icon://document-text"
+                                        design="Horizontal"
+                                        iconColor="Positive"
+                                    >
+                                        <!-- <mvc:XMLView
+                viewName="com.app.abdiibrahim.zarbambalajportali.view.AllOrders"
+                type="XML"
+            /> -->
+                                    </IconTabFilter>
+                                </items>
+                            </IconTabBar>
+                        </f:content>
+                    </f:DynamicPage>
+                </content>
+            </Page>
+        </pages>
+    </App>
+</mvc:View>

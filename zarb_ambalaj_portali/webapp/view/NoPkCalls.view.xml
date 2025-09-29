@@ -1,0 +1,21 @@
+<mvc:View
+    controllerName=""
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+>
+    <App>
+        <pages>
+            <Page
+                id="noPkCalls"
+                showHeader="false"
+            >
+                <content />
+            </Page>
+        </pages>
+    </App>
+</mvc:View>
