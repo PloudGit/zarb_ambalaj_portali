@@ -147,10 +147,10 @@
                                         design="Horizontal"
                                         iconColor="Critical"
                                     >
-                                        <!-- <mvc:XMLView
-                viewName="com.app.abdiibrahim.zarbambalajportali.view.ConfirmedCalls"
-                type="XML"
-            /> -->
+                                        <mvc:XMLView
+                                            viewName="com.app.abdiibrahim.zarbambalajportali.view.ConfirmedCalls"
+                                            type="XML"
+                                        />
                                     </IconTabFilter>
 
                                     <!-- Firma Revizyon Talepleri -->
@@ -161,10 +161,10 @@
                                         design="Horizontal"
                                         iconColor="Neutral"
                                     >
-                                        <!-- <mvc:XMLView
-                viewName="com.app.abdiibrahim.zarbambalajportali.view.CompanyRevision"
-                type="XML"
-            /> -->
+                                        <mvc:XMLView
+                                            viewName="com.app.abdiibrahim.zarbambalajportali.view.FirmRevision"
+                                            type="XML"
+                                        />
                                     </IconTabFilter>
 
                                     <!-- Abdi İbrahim Revizyon Talepleri -->

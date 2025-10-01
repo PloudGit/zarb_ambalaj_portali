@@ -10,31 +10,38 @@
     <App>
         <pages>
             <Page
-                id="noPkCallsPage"
+                id="approvedCallsPage"
                 showHeader="false"
             >
                 <content>
                     <t:Table
-                        id="noPkCalls"
-                        rows="{dm>/INITIAL_PK_S}"
+                        id="approvedCalls"
+                        rows="{dm>/ONAYLANAN_S_T}"
                         selectionMode="None"
                         enableColumnReordering="true"
                         width="100%"
                     >
                         <t:toolbar>
                             <Toolbar>
-                                <Title text="{i18n>noPkCallsTableTitle}" />
+                                <Title text="{i18n>approvedCallsTableTitle}" />
                                 <ToolbarSpacer />
                                 <Button
                                     icon="sap-icon://download"
                                     text="{i18n>download}"
-                                    press=".onExcelDownloadMainTable"
+                                    press=".onExcelDownloadApprovedTable"
                                     class="yellowButton"
                                 />
                             </Toolbar>
                         </t:toolbar>
 
                         <t:columns>
+                            <t:Column>
+                                <Label text="{i18n>description}" />
+                                <t:template>
+                                    <Text text="{dm>Aciklama}" />
+                                </t:template>
+                            </t:Column>
+
                             <t:Column>
                                 <Label text="{i18n>supplierCode}" />
                                 <t:template>
@@ -92,9 +99,30 @@
                             </t:Column>
 
                             <t:Column>
+                                <Label text="{i18n>plant}" />
+                                <t:template>
+                                    <Text text="{dm>Werkt}" />
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column>
+                                <Label text="{i18n>deliveryDate}" />
+                                <t:template>
+                                    <Text text="{dm>Eindt}" />
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column>
                                 <Label text="{i18n>firmDeliveryDate}" />
                                 <t:template>
                                     <Text text="{dm>Slfdt}" />
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column>
+                                <Label text="{i18n>shippingType}" />
+                                <t:template>
+                                    <Text text="{dm>Sevkm}" />
                                 </t:template>
                             </t:Column>
 
@@ -119,10 +147,38 @@
                                 </t:template>
                             </t:Column>
 
+                            <t:Column hAlign="End">
+                                <Label text="{i18n>priceUnit}" />
+                                <t:template>
+                                    <Text text="{dm>Peinh}" />
+                                </t:template>
+                            </t:Column>
+
                             <t:Column>
                                 <Label text="{i18n>currency}" />
                                 <t:template>
                                     <Text text="{dm>Waers}" />
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column>
+                                <Label text="{i18n>paymentTerm}" />
+                                <t:template>
+                                    <Text text="{dm>Zterm}" />
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column>
+                                <Label text="{i18n>orderForm}" />
+                                <t:template>
+                                    <Text text="{dm>SipFormu}" />
+                                </t:template>
+                            </t:Column>
+
+                            <t:Column>
+                                <Label text="{i18n>goodsReceipt}" />
+                                <t:template>
+                                    <Text text="{dm>MalGirisi}" />
                                 </t:template>
                             </t:Column>
 
