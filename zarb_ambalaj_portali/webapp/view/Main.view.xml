@@ -175,10 +175,10 @@
                                         design="Horizontal"
                                         iconColor="Critical"
                                     >
-                                        <!-- <mvc:XMLView
-                viewName="com.app.abdiibrahim.zarbambalajportali.view.InternalRevision"
-                type="XML"
-            /> -->
+                                        <mvc:XMLView
+                                            viewName="com.app.abdiibrahim.zarbambalajportali.view.AbdiRevision"
+                                            type="XML"
+                                        />
                                     </IconTabFilter>
 
                                     <!-- İptal Edilen Çağrılar -->
@@ -189,10 +189,10 @@
                                         design="Horizontal"
                                         iconColor="Negative"
                                     >
-                                        <!-- <mvc:XMLView
-                viewName="com.app.abdiibrahim.zarbambalajportali.view.CanceledCalls"
-                type="XML"
-            /> -->
+                                        <mvc:XMLView
+                                            viewName="com.app.abdiibrahim.zarbambalajportali.view.CanceledCalls"
+                                            type="XML"
+                                        />
                                     </IconTabFilter>
 
                                     <!-- Tüm Çağrılar -->
@@ -203,10 +203,10 @@
                                         design="Horizontal"
                                         iconColor="Neutral"
                                     >
-                                        <!-- <mvc:XMLView
-                viewName="com.app.abdiibrahim.zarbambalajportali.view.AllCalls"
-                type="XML"
-            /> -->
+                                        <mvc:XMLView
+                                            viewName="com.app.abdiibrahim.zarbambalajportali.view.AllCalls"
+                                            type="XML"
+                                        />
                                     </IconTabFilter>
 
                                     <!-- Tüm Siparişler -->
@@ -217,10 +217,10 @@
                                         design="Horizontal"
                                         iconColor="Positive"
                                     >
-                                        <!-- <mvc:XMLView
-                viewName="com.app.abdiibrahim.zarbambalajportali.view.AllOrders"
-                type="XML"
-            /> -->
+                                        <mvc:XMLView
+                                            viewName="com.app.abdiibrahim.zarbambalajportali.view.AllOrders"
+                                            type="XML"
+                                        />
                                     </IconTabFilter>
                                 </items>
                             </IconTabBar>

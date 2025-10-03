@@ -35,10 +35,10 @@
                         </t:toolbar>
 
                         <t:columns>
-                            <t:Column>
-                                <Label text="{i18n>description}" />
+                    <t:Column >
+                                <Label text="{i18n>notIsExist}" />
                                 <t:template>
-                                    <Text text="{dm>Aciklama}" />
+                                    <Text text="{dm>Lifnr}" />
                                 </t:template>
                             </t:Column>
 
@@ -99,20 +99,6 @@
                             </t:Column>
 
                             <t:Column>
-                                <Label text="{i18n>plant}" />
-                                <t:template>
-                                    <Text text="{dm>Werkt}" />
-                                </t:template>
-                            </t:Column>
-
-                            <t:Column>
-                                <Label text="{i18n>deliveryDate}" />
-                                <t:template>
-                                    <Text text="{dm>Eindt}" />
-                                </t:template>
-                            </t:Column>
-
-                            <t:Column>
                                 <Label text="{i18n>firmDeliveryDate}" />
                                 <t:template>
                                     <Text text="{dm>Slfdt}" />
@@ -120,7 +106,7 @@
                             </t:Column>
 
                             <t:Column>
-                                <Label text="{i18n>shippingType}" />
+                                <Label text="{i18n>reviseFirmDeliveryDate}" />
                                 <t:template>
                                     <Text text="{dm>Sevkm}" />
                                 </t:template>
@@ -147,38 +133,10 @@
                                 </t:template>
                             </t:Column>
 
-                            <t:Column hAlign="End">
-                                <Label text="{i18n>priceUnit}" />
-                                <t:template>
-                                    <Text text="{dm>Peinh}" />
-                                </t:template>
-                            </t:Column>
-
                             <t:Column>
                                 <Label text="{i18n>currency}" />
                                 <t:template>
                                     <Text text="{dm>Waers}" />
-                                </t:template>
-                            </t:Column>
-
-                            <t:Column>
-                                <Label text="{i18n>paymentTerm}" />
-                                <t:template>
-                                    <Text text="{dm>Zterm}" />
-                                </t:template>
-                            </t:Column>
-
-                            <t:Column>
-                                <Label text="{i18n>orderForm}" />
-                                <t:template>
-                                    <Text text="{dm>SipFormu}" />
-                                </t:template>
-                            </t:Column>
-
-                            <t:Column>
-                                <Label text="{i18n>goodsReceipt}" />
-                                <t:template>
-                                    <Text text="{dm>MalGirisi}" />
                                 </t:template>
                             </t:Column>
 
@@ -193,6 +151,12 @@
                                 <Label text="{i18n>callCreatedBy}" />
                                 <t:template>
                                     <Text text="{dm>CreateUname}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="{i18n>goodsReceipt}" />
+                                <t:template>
+                                    <Text text="{dm>MalGirisi}" />
                                 </t:template>
                             </t:Column>
                         </t:columns>

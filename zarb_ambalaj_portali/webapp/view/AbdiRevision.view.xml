@@ -10,12 +10,12 @@
     <App>
         <pages>
             <Page
-                id="revisionCallsPage"
+                id="abdiRevisionPage"
                 showHeader="false"
             >
                 <content>
                     <t:Table
-                        id="revisionCalls"
+                        id="abdiRevision"
                         rows="{dm>/REVF_S_T}"
                         selectionMode="None"
                         enableColumnReordering="true"
@@ -23,7 +23,7 @@
                     >
                         <t:toolbar>
                             <Toolbar>
-                                <Title text="{i18n>revisionCallsTableTitle}" />
+                                <Title text="{i18n>abdiRevisionTableTitle}" />
                                 <ToolbarSpacer />
                                 <Button
                                     icon="sap-icon://download"
@@ -34,7 +34,7 @@
                             </Toolbar>
                         </t:toolbar>
                         <t:columns>
-                                <t:Column >
+                       <t:Column >
                                 <Label text="{i18n>notIsExist}" />
                                 <t:template>
                                     <Text text="{dm>Lifnr}" />
@@ -131,7 +131,12 @@
                                     <Text text="{dm>Netpr}" />
                                 </t:template>
                             </t:Column>
-
+                            <t:Column>
+                                <Label text="{i18n>currency}" />
+                                <t:template>
+                                    <Text text="{dm>Waers}" />
+                                </t:template>
+                            </t:Column>
                             <t:Column>
                                 <Label text="{i18n>callCreatedDate}" />
                                 <t:template>

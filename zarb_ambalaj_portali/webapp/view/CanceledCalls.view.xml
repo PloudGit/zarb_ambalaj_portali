@@ -10,12 +10,12 @@
     <App>
         <pages>
             <Page
-                id="revisionCallsPage"
+                id="cancaledCallsPage"
                 showHeader="false"
             >
                 <content>
                     <t:Table
-                        id="revisionCalls"
+                        id="cancaledCalls"
                         rows="{dm>/REVF_S_T}"
                         selectionMode="None"
                         enableColumnReordering="true"
@@ -23,7 +23,7 @@
                     >
                         <t:toolbar>
                             <Toolbar>
-                                <Title text="{i18n>revisionCallsTableTitle}" />
+                                <Title text="{i18n>cancaledCallsTableTitle}" />
                                 <ToolbarSpacer />
                                 <Button
                                     icon="sap-icon://download"
@@ -34,7 +34,7 @@
                             </Toolbar>
                         </t:toolbar>
                         <t:columns>
-                                <t:Column >
+                   <t:Column >
                                 <Label text="{i18n>notIsExist}" />
                                 <t:template>
                                     <Text text="{dm>Lifnr}" />
@@ -104,13 +104,6 @@
                                 </t:template>
                             </t:Column>
 
-                            <t:Column>
-                                <Label text="{i18n>reviseFirmDeliveryDate}" />
-                                <t:template>
-                                    <Text text="{dm>EindtAlt}" />
-                                </t:template>
-                            </t:Column>
-
                             <t:Column hAlign="End">
                                 <Label text="{i18n>quantity}" />
                                 <t:template>
@@ -131,7 +124,12 @@
                                     <Text text="{dm>Netpr}" />
                                 </t:template>
                             </t:Column>
-
+                            <t:Column>
+                                <Label text="{i18n>currency}" />
+                                <t:template>
+                                    <Text text="{dm>Waers}" />
+                                </t:template>
+                            </t:Column>
                             <t:Column>
                                 <Label text="{i18n>callCreatedDate}" />
                                 <t:template>
