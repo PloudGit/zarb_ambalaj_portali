@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName=""
+    controllerName="com.app.abdiibrahim.zarbambalajportali.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:t="sap.ui.table"
@@ -15,8 +15,8 @@
             >
                 <content>
                     <t:Table
-                        id="revisionCalls"
-                        rows="{dm>/REVF_S_T}"
+                        id="tblRevisionCalls"
+                        rows="{dm>/OrderListFREVIZYON}"
                         selectionMode="None"
                         enableColumnReordering="true"
                         width="100%"
@@ -34,7 +34,7 @@
                             </Toolbar>
                         </t:toolbar>
                         <t:columns>
-                                <t:Column >
+                            <t:Column>
                                 <Label text="{i18n>notIsExist}" />
                                 <t:template>
                                     <Text text="{dm>Lifnr}" />
@@ -58,7 +58,11 @@
                             <t:Column>
                                 <Label text="{i18n>orderNumber}" />
                                 <t:template>
-                                    <Text text="{dm>Ebeln}" />
+                                     <Link
+                                        text="{dm>Ebeln}"
+                                        wrapping="true"
+                                        press="onPressEbeln"
+                                    />
                                 </t:template>
                             </t:Column>
 
@@ -100,14 +104,28 @@
                             <t:Column>
                                 <Label text="{i18n>firmDeliveryDate}" />
                                 <t:template>
-                                    <Text text="{dm>Slfdt}" />
+                                    <Text
+                                        text="{path: 'dm>Slfdt',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                                                }
+                                            }"
+                                    />
                                 </t:template>
                             </t:Column>
 
                             <t:Column>
                                 <Label text="{i18n>reviseFirmDeliveryDate}" />
                                 <t:template>
-                                    <Text text="{dm>EindtAlt}" />
+                                    <Text
+                                        text="{path: 'dm>Eindt',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                                                }
+                                            }"
+                                    />
                                 </t:template>
                             </t:Column>
 

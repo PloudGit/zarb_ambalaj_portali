@@ -37,9 +37,11 @@
                                         <smartFilterBar:controlConfiguration>
                                             <smartFilterBar:ControlConfiguration
                                                 key="Slfdt"
-                                                label="{i18n>deliveryDate}"
+                                                label="{i18n>firmDeliveryDate}"
                                                 index="1"
                                                 visibleInAdvancedArea="true"
+                                                controlType="date"
+                                                filterType="single"
                                             />
                                             <smartFilterBar:ControlConfiguration
                                                 key="Matnr"
@@ -58,6 +60,8 @@
                                                 label="{i18n>receiptDate}"
                                                 index="4"
                                                 visibleInAdvancedArea="true"
+                                                controlType="date"
+                                                filterType="single"
                                             />
                                             <smartFilterBar:ControlConfiguration
                                                 key="Lifnr"
@@ -67,7 +71,7 @@
                                             />
                                             <smartFilterBar:ControlConfiguration
                                                 key="Statu"
-                                                label="{i18n>status}"
+                                                label="{i18n>statu}"
                                                 index="6"
                                                 visibleInAdvancedArea="true"
                                             />
@@ -109,26 +113,30 @@
                                 selectedKey="{dm>/iconTabBarSelectedKey}"
                                 headerMode="Standard"
                                 upperCase="false"
+                                select="onIconTabBarSelect"
+                                
                             >
                                 <items>
                                     <!-- PK Bilgisi Olmayan Çağrılar -->
                                     <IconTabFilter
                                         text="{i18n>tabNoPk}"
-                                        key="NOPK"
+                                        key="PKOLMAYAN"
                                         icon="sap-icon://alert"
                                         design="Horizontal"
                                         iconColor="Negative"
+                                        
                                     >
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.NoPkCalls"
                                             type="XML"
+                                            models="{dm: ${dm}, i18n: ${i18n}}"
                                         />
                                     </IconTabFilter>
 
                                     <!-- Açık Çağrılar -->
                                     <IconTabFilter
                                         text="{i18n>tabOpen}"
-                                        key="OCALLS"
+                                        key="ACIKCAGRI"
                                         icon="sap-icon://cart"
                                         design="Horizontal"
                                         iconColor="Positive"
@@ -136,13 +144,14 @@
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.OpenCalls"
                                             type="XML"
+                                            models="{dm: ${dm}, i18n: ${i18n}}"
                                         />
                                     </IconTabFilter>
 
                                     <!-- Teyit Edilen Çağrılar -->
                                     <IconTabFilter
                                         text="{i18n>tabConfirmed}"
-                                        key="CONF"
+                                        key="TEYITCAGRI"
                                         icon="sap-icon://accept"
                                         design="Horizontal"
                                         iconColor="Critical"
@@ -150,13 +159,14 @@
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.ConfirmedCalls"
                                             type="XML"
+                                            models="{dm: ${dm}, i18n: ${i18n}}"
                                         />
                                     </IconTabFilter>
 
                                     <!-- Firma Revizyon Talepleri -->
                                     <IconTabFilter
                                         text="{i18n>tabCompanyRev}"
-                                        key="COMPREV"
+                                        key="FREVIZYON"
                                         icon="sap-icon://history"
                                         design="Horizontal"
                                         iconColor="Neutral"
@@ -164,13 +174,14 @@
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.FirmRevision"
                                             type="XML"
+                                            models="{dm: ${dm}, i18n: ${i18n}}"
                                         />
                                     </IconTabFilter>
 
                                     <!-- Abdi İbrahim Revizyon Talepleri -->
                                     <IconTabFilter
                                         text="{i18n>tabInternalRev}"
-                                        key="INTREV"
+                                        key="AIREVIZYON"
                                         icon="sap-icon://refresh"
                                         design="Horizontal"
                                         iconColor="Critical"
@@ -178,13 +189,14 @@
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.AbdiRevision"
                                             type="XML"
+                                            models="{dm: ${dm}, i18n: ${i18n}}"
                                         />
                                     </IconTabFilter>
 
                                     <!-- İptal Edilen Çağrılar -->
                                     <IconTabFilter
                                         text="{i18n>tabCanceled}"
-                                        key="CANC"
+                                        key="IPTALCAGRI"
                                         icon="sap-icon://cancel"
                                         design="Horizontal"
                                         iconColor="Negative"
@@ -192,13 +204,14 @@
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.CanceledCalls"
                                             type="XML"
+                                            models="{dm: ${dm}, i18n: ${i18n}}"
                                         />
                                     </IconTabFilter>
 
                                     <!-- Tüm Çağrılar -->
                                     <IconTabFilter
                                         text="{i18n>tabAllCalls}"
-                                        key="ALLCALLS"
+                                        key="TUMCAGRI"
                                         icon="sap-icon://list"
                                         design="Horizontal"
                                         iconColor="Neutral"
@@ -206,13 +219,14 @@
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.AllCalls"
                                             type="XML"
+                                            models="{dm: ${dm}, i18n: ${i18n}}"
                                         />
                                     </IconTabFilter>
 
                                     <!-- Tüm Siparişler -->
                                     <IconTabFilter
                                         text="{i18n>tabAllOrders}"
-                                        key="ALLORDERS"
+                                        key="TUMSIPARIS"
                                         icon="sap-icon://document-text"
                                         design="Horizontal"
                                         iconColor="Positive"
@@ -220,6 +234,7 @@
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.AllOrders"
                                             type="XML"
+                                            models="{dm: ${dm}, i18n: ${i18n}}"
                                         />
                                     </IconTabFilter>
                                 </items>

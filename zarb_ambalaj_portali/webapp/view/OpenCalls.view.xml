@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName=""
+    controllerName="com.app.abdiibrahim.zarbambalajportali.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:t="sap.ui.table"
@@ -16,7 +16,7 @@
                 <content>
                     <t:Table
                         id="tblOpenCalls"
-                        rows="{dm>/OpenedCallsList}"
+                        rows="{dm>/OrderListACIKCAGRI}"
                         selectionMode="None"
                         enableColumnReordering="true"
                         enableCellFilter="true"
@@ -29,14 +29,14 @@
                                 <Button
                                     icon="sap-icon://download"
                                     text="{i18n>download}"
-                                    press=".onExcelDownloadMainTable"
+                                    press="onExcelDownloadMainTable"
                                     class="yellowButton"
                                 />
                             </Toolbar>
                         </t:toolbar>
 
                         <t:columns>
-                           <t:Column >
+                            <t:Column>
                                 <Label text="{i18n>notIsExist}" />
                                 <t:template>
                                     <Text text="{dm>Lifnr}" />
@@ -59,7 +59,11 @@
                             <t:Column sortProperty="Ebeln">
                                 <Label text="{i18n>orderNumber}" />
                                 <t:template>
-                                    <Text text="{dm>Ebeln}" />
+                               <Link
+                                        text="{dm>Ebeln}"
+                                        wrapping="true"
+                                        press="onPressEbeln"
+                                    />
                                 </t:template>
                             </t:Column>
 
@@ -101,7 +105,14 @@
                             <t:Column sortProperty="Slfdt">
                                 <Label text="{i18n>firmDeliveryDate}" />
                                 <t:template>
-                                    <Text text="{dm>Slfdt}" />
+                                    <Text
+                                        text="{path: 'dm>Slfdt',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                                                }
+                                            }"
+                                    />
                                 </t:template>
                             </t:Column>
 

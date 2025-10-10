@@ -30,32 +30,37 @@ sap.ui.define([
 			}
 		},
 
-		getOrderList: function (that, aFilters) {
+		getList: function (that) {
 
-			debugger
-
-			var url = "/OrderListsSet";
+			var url = "/AmbOrderListSet";
 
 			var bModel = that.getOModel(that, "bm");
 			var bData = bModel.getData();
 
 			var dModel = that.getOModel(that, "dm");
 			var dData = dModel.getData();
+			var aFilters = [];
 
-			debugger;
+			var selectedKey = that._main.getIcontabBarSelectedKey(that);
+
+			var oSmartFilterBar = that.byId("smartFilterBar");
+			if (oSmartFilterBar) {
+				aFilters = oSmartFilterBar.getFilters();
+			}
+			aFilters.push(new Filter("StatuFiori", FilterOperator.EQ, selectedKey));
 
 			var oDataModel = that.getOwnerComponent().getModel();
-			var oFilters = [];
 
 			that.openBusyDialog();
 
 			oDataModel.read(url, {
 				filters: aFilters,
 				success: function (oData, oResponse) {
-					debugger;
 					that.closeBusyDialog();
-					dData["OrderList"] = oData["results"];
-					dModel.refresh();
+					if (oData && oData.results) {
+
+						that._main.setOrderList(that, oData.results);
+					}
 				},
 				error: function (oError) {
 					that.closeBusyDialog();
@@ -67,7 +72,7 @@ sap.ui.define([
 
 		},
 
-		
+
 
 	});
 });

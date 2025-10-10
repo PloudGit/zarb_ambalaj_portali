@@ -18,8 +18,16 @@ sap.ui.define([
 
 
 			var dData = {
-				iconTabBarSelectedKey:"NOPK",
-				OrderList: []
+				iconTabBarSelectedKey: "ACIKCAGRI",
+				OrderList: [],
+				OrderListPKOLMAYAN: [],
+				OrderListACIKCAGRI: [],
+				OrderListTEYITCAGRI: [],
+				OrderListFREVIZYON: [],
+				OrderListAIREVIZYON: [],
+				OrderListIPTALCAGRI: [],
+				OrderListTUMCAGRI: [],
+				OrderListTUMSIPARIS: [],
 			}
 
 
@@ -37,7 +45,7 @@ sap.ui.define([
 
 			var pData = {
 
-				
+
 			}
 
 			// pModel.loadData(sPath, "false");

@@ -65,6 +65,7 @@ sap.ui.define([
             var that = this;
 
             // listeyi al 
+            // that._main.getTabViewData(that);
 
         },
 
@@ -91,14 +92,80 @@ sap.ui.define([
 
         onSearch: function (oEvent) {
             debugger;
-            var oSmartFilterBar = this.byId("smartFilterBar");
+            // var oSmartFilterBar = this.byId("smartFilterBar");
 
-            var aFilters = oSmartFilterBar.getFilters();
+            // var aFilters = oSmartFilterBar.getFilters();
 
-            this._oData.getOrderList(this, aFilters);
+            this._oData.getList(this);
 
         },
 
-       
+        onPressEbeln: function (oEvent) {
+
+            // hangi tablodaki hangi satır verisine tıklandığını tutalım  ? 
+
+            // selectedkey tab zaten aslında hangi tablo olduğunu veryor - 
+            // satır bilgisi yeterli olur sanki 
+            var selectedKey = this._main.getIcontabBarSelectedKey(this);
+
+            var oContext = oEvent.getSource().getBindingContext("dm");
+            if (!oContext) {
+                return;
+            }
+            var oRowData = oContext.getObject();
+
+            // Ebeln değerini al
+            var sEbeln = oRowData.Ebeln;
+            var dModel= this.getOModel(this, "dm");
+            dModel.setProperty("/sSelectedEbelnRowData", oRowData);
+
+
+            this._selectedRow = oRowData;
+
+
+            this._orderDetailPopup(selectedKey).open();
+
+        },
+
+        _orderDetailPopup: function (selectedKey) {
+
+            var that = this;
+
+            if (!that.OrderDetailPopup) {
+
+                that.OrderDetailPopup = sap.ui.xmlfragment(selectedKey, "com.app.abdiibrahim.zarbambalajportali.view.fragments.OrderDetailPopup", that);
+
+                that.OrderDetailPopup.setModel(that.getView().getModel());
+
+                that.getView().addDependent(that.OrderDetailPopup);
+
+                jQuery.sap.syncStyleClass("sapUiSizeCompact", that.getView(), that.OrderDetailPopup);
+
+            }
+            return that.OrderDetailPopup;
+        },
+        onCloseOrderDetailPopup: function () {
+            if (this.OrderDetailPopup) {
+
+                this._oData.getList(this);
+
+                this.OrderDetailPopup.close();
+
+            }
+        },
+
+        onExcelDownloadMainTable: function () {
+            debugger;
+
+        },
+
+        onIconTabBarSelect: function (oEvent) {
+
+            this._oData.getList(this);
+
+        }
+
+
+
     });
 });
