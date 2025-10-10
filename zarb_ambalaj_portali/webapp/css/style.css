@@ -81,3 +81,24 @@
     margin-top: 10px !important;
     margin-right: 5px !important;
 }
+
+.gridTable .sapMListTbl {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .gridTable .sapMListTblCell,
+  .gridTable .sapMListTblHeaderCell {
+    border: 1px solid #d0d0d0; /* gri kenarlık */
+    padding: 0.5rem;
+  }
+  
+  .gridTable .sapMListTblHeaderCell {
+    background-color: #f2f2f2; /* başlık arka planı */
+    font-weight: bold;
+  }
+  
+  .gridTable .sapMText {
+    text-align: center;
+  }
+  

@@ -222,7 +222,7 @@
                 </HBox>
 
                 <HBox>
-                  <Label
+                    <Label
                         width="150px"
                         text=""
                         textAlign="Right"
@@ -234,6 +234,40 @@
                         press="onApproveOrder"
                     />
                 </HBox>
+                <Table
+                    id="OrderQuantityTable"
+                    inset="false"
+                    width="100%"
+                    class="sapUiSmallMarginTop gridTable"
+                    items="{dm>/sSelectedEbelnTableData}"
+                >
+                    <columns>
+                        <Column>
+                            <Text text="{i18n>OP_quantity}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>OP_unit}" />
+                        </Column>
+                        <Column>
+                            <Text text="{i18n>OP_firmDeliveryDate}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{dm>Menge}" />
+                                <Text text="{dm>Meins}" />
+                                <Text
+                                    text="{
+                        path: 'dm>Slfdt',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: { pattern: 'dd.MM.yyyy' }
+                    }"
+                                />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
             </VBox>
 
             <Toolbar class="sapUiTinyMarginTop">
