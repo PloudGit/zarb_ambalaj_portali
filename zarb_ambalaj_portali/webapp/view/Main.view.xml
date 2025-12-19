@@ -114,7 +114,6 @@
                                 headerMode="Standard"
                                 upperCase="false"
                                 select="onIconTabBarSelect"
-                                
                             >
                                 <items>
                                     <!-- PK Bilgisi Olmayan Çağrılar -->
@@ -124,7 +123,7 @@
                                         icon="sap-icon://alert"
                                         design="Horizontal"
                                         iconColor="Negative"
-                                        
+                                        visible="{pm>/iconTabBar/PKOLMAYAN}"
                                     >
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.NoPkCalls"
@@ -140,6 +139,7 @@
                                         icon="sap-icon://cart"
                                         design="Horizontal"
                                         iconColor="Positive"
+                                        visible="{pm>/iconTabBar/ACIKCAGRI}"
                                     >
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.OpenCalls"
@@ -151,10 +151,11 @@
                                     <!-- Teyit Edilen Çağrılar -->
                                     <IconTabFilter
                                         text="{i18n>tabConfirmed}"
-                                        key="TEYITCAGRI"
+                                        key="ONAY"
                                         icon="sap-icon://accept"
                                         design="Horizontal"
                                         iconColor="Critical"
+                                        visible="{pm>/iconTabBar/ONAY}"
                                     >
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.ConfirmedCalls"
@@ -166,10 +167,11 @@
                                     <!-- Firma Revizyon Talepleri -->
                                     <IconTabFilter
                                         text="{i18n>tabCompanyRev}"
-                                        key="FREVIZYON"
+                                        key="REVF"
                                         icon="sap-icon://history"
                                         design="Horizontal"
                                         iconColor="Neutral"
+                                        visible="{pm>/iconTabBar/REVF}"
                                     >
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.FirmRevision"
@@ -181,10 +183,11 @@
                                     <!-- Abdi İbrahim Revizyon Talepleri -->
                                     <IconTabFilter
                                         text="{i18n>tabInternalRev}"
-                                        key="AIREVIZYON"
+                                        key="REVE"
                                         icon="sap-icon://refresh"
                                         design="Horizontal"
                                         iconColor="Critical"
+                                        visible="{pm>/iconTabBar/REVE}"
                                     >
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.AbdiRevision"
@@ -196,10 +199,11 @@
                                     <!-- İptal Edilen Çağrılar -->
                                     <IconTabFilter
                                         text="{i18n>tabCanceled}"
-                                        key="IPTALCAGRI"
+                                        key="IPTT"
                                         icon="sap-icon://cancel"
                                         design="Horizontal"
                                         iconColor="Negative"
+                                        visible="{pm>/iconTabBar/IPTT}"
                                     >
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.CanceledCalls"
@@ -211,10 +215,11 @@
                                     <!-- Tüm Çağrılar -->
                                     <IconTabFilter
                                         text="{i18n>tabAllCalls}"
-                                        key="TUMCAGRI"
+                                        key="TUM"
                                         icon="sap-icon://list"
                                         design="Horizontal"
                                         iconColor="Neutral"
+                                        visible="{pm>/iconTabBar/TUM}"
                                     >
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.AllCalls"
@@ -226,10 +231,11 @@
                                     <!-- Tüm Siparişler -->
                                     <IconTabFilter
                                         text="{i18n>tabAllOrders}"
-                                        key="TUMSIPARIS"
+                                        key="GET_TUM_SIPARIS_S"
                                         icon="sap-icon://document-text"
                                         design="Horizontal"
                                         iconColor="Positive"
+                                        visible="{pm>/iconTabBar/GET_TUM_SIPARIS_S}"
                                     >
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.AllOrders"

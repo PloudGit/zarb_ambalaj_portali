@@ -221,18 +221,24 @@
                     />
                 </HBox>
 
-                <HBox>
+                <HBox visible="{pm>/detailPopup/addNote}">
                     <Label
                         width="150px"
-                        text=""
+                        text="{i18n>OP_addNote}"
                         textAlign="Right"
                     />
-                    <Button
+                    <TextArea
+                        value="{dm>/sSelectedEbelnRowData/Note}"
+                        rows="3"
+                        width="150%"
+                        editable="{pm>/detailPopup/addNoteEditable}"
+                    />
+                    <!-- <Button
                         text="{i18n>OP_addNote}"
                         icon="sap-icon://add"
                         class="blueButton"
                         press="onApproveOrder"
-                    />
+                    /> -->
                 </HBox>
                 <Table
                     id="OrderQuantityTable"
@@ -277,12 +283,28 @@
                     icon="sap-icon://accept"
                     class="greenButton"
                     press="onApproveOrder"
+                    visible="{pm>/detailPopup/approveButton}"
+                />
+                <Button
+                    text="{i18n>OP_btnCancel}"
+                    icon="sap-icon://cancel-maintenance"
+                    class="redButton"
+                    press="onCancelOrder"
+                    visible="{pm>/detailPopup/cancelButton}"
                 />
                 <Button
                     text="{i18n>OP_btnRevise}"
                     icon="sap-icon://edit"
                     class="yellowButton"
                     press="onReviseOrder"
+                    visible="{pm>/detailPopup/reviseButton}"
+                />
+                 <Button
+                    text="{i18n>OP_btnSave}"
+                    icon="sap-icon://save"
+                    class="greenButton"
+                    press="onSaveOrder"
+                    visible="{pm>/detailPopup/saveButton}"
                 />
                 <Button
                     text="{i18n>OP_btnClose}"

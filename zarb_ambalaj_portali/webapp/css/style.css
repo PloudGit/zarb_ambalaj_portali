@@ -102,3 +102,21 @@
     text-align: center;
   }
   
+
+  /* IconTabFilter iconColor="Critical" rengiyle uyumlu */
+.columnHeaderCritical {
+    color: #e9730c; /* UI5 'Critical' rengi - turuncumsu */
+    font-weight: bold;
+}
+
+/* iconColor="Positive" için örnek */
+.columnHeaderPositive {
+    color: #107e3e; /* yeşil */
+    font-weight: bold;
+}
+
+/* iconColor="Negative" için örnek */
+.columnHeaderNegative {
+    color: #bb0000; /* kırmızı */
+    font-weight: bold;
+}

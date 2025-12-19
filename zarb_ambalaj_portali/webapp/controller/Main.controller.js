@@ -122,6 +122,8 @@ sap.ui.define([
 
             this._selectedRow = oRowData;
 
+            this._main.setDetailPopupVisibility(this); 
+
 
             this._orderDetailPopup(selectedKey).open();
 
@@ -163,7 +165,9 @@ sap.ui.define([
 
             this._oData.getList(this);
 
-        }
+        },
+
+        
 
 
 

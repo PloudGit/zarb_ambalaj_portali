@@ -44,6 +44,24 @@ sap.ui.define([
 			var pModel = new JSONModel();
 
 			var pData = {
+				iconTabBar: {
+					PKOLMAYAN: true,
+					ACIKCAGRI: true,
+					ONAY: true,
+					REVF: true,
+					REVE: true,
+					IPTT: true,
+					TUM: true,
+					GET_TUM_SIPARIS_S: true
+				},
+				detailPopup: {
+					addNote: false,
+					addNoteEditable: false,
+					approveButton: false,
+					cancelButton: false,
+					reviseButton: false,
+					saveButton:false
+				}
 
 
 			}

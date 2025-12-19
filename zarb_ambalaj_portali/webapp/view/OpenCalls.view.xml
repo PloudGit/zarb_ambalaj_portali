@@ -36,12 +36,12 @@
                         </t:toolbar>
 
                         <t:columns>
-                            <t:Column>
+                            <!-- <t:Column>
                                 <Label text="{i18n>notIsExist}" />
                                 <t:template>
                                     <Text text="{dm>Lifnr}" />
                                 </t:template>
-                            </t:Column>
+                            </t:Column> -->
                             <t:Column sortProperty="Lifnr">
                                 <Label text="{i18n>supplierCode}" />
                                 <t:template>
