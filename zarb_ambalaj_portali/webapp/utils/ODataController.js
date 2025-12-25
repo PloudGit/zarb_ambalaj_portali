@@ -40,7 +40,6 @@ sap.ui.define([
 			var dModel = that.getOModel(that, "dm");
 			var dData = dModel.getData();
 			var aFilters = [];
-
 			var selectedKey = that._main.getIcontabBarSelectedKey(that);
 
 			var oSmartFilterBar = that.byId("smartFilterBar");
