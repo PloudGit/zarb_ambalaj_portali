@@ -156,7 +156,12 @@
                                     <Text text="{dm>CreateDate}" />
                                 </t:template>
                             </t:Column>
-
+                            <t:Column sortProperty="OpenDayCount">
+                                <Label text="{i18n>openDayCount}" />
+                                <t:template>
+                                    <Text text="{dm>AcikDcount}" />
+                                </t:template>
+                            </t:Column>
                             <t:Column sortProperty="CreateUname">
                                 <Label text="{i18n>callCreatedBy}" />
                                 <t:template>

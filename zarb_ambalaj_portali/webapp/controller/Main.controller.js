@@ -116,13 +116,24 @@ sap.ui.define([
 
             // Ebeln değerini al
             var sEbeln = oRowData.Ebeln;
-            var dModel= this.getOModel(this, "dm");
+            var dModel = this.getOModel(this, "dm");
             dModel.setProperty("/sSelectedEbelnRowData", oRowData);
 
+            var oRow  = {};
+            var oRows =[];
+
+            oRow["Ebeln"] = oRowData.Ebeln;
+            oRow["Ebelp"] = oRowData.Ebelp;
+            oRow["Menge"] = oRowData.Menge;
+            oRow["Meins"] = oRowData.Meins;
+            oRow["Slfdt"] = oRowData.Slfdt;
+            oRows.push(oRow);
+            dModel.setProperty("/sSelectedEbelnTableData", oRows);
+            dModel.refresh();
 
             this._selectedRow = oRowData;
 
-            this._main.setDetailPopupVisibility(this); 
+            this._main.setDetailPopupVisibility(this);
 
 
             this._orderDetailPopup(selectedKey).open();
@@ -167,7 +178,7 @@ sap.ui.define([
 
         },
 
-        
+
 
 
 
