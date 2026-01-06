@@ -14,12 +14,14 @@
             <Page
                 id="mainPage"
                 showHeader="false"
+                enableScrolling="false"
             >
                 <content>
                     <f:DynamicPage
                         id="mainDynamicPage"
-                        fitContent="false"
+                        fitContent="true"
                         preserveHeaderStateOnScroll="true"
+                        stretchContentHeight="true"
                     >
                         <!-- HEADER -->
                         <f:header>
@@ -129,6 +131,7 @@
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.NoPkCalls"
                                             type="XML"
                                             models="{dm: ${dm}, i18n: ${i18n}}"
+                                            height="100%"
                                         />
                                     </IconTabFilter>
 

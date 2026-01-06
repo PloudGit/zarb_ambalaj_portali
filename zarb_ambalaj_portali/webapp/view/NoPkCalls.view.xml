@@ -7,19 +7,21 @@
     height="100%"
     busyIndicatorDelay="0"
 >
-    <App>
+    <!-- <App>
         <pages>
             <Page
                 id="noPkCallsPage"
                 showHeader="false"
+                enableScrolling="false"
             >
-                <content>
+                <content> -->
                     <t:Table
                         id="tblNoPkCalls"
                         rows="{dm>/OrderListPKOLMAYAN}"
                         selectionMode="None"
                         enableColumnReordering="true"
                         width="100%"
+                        rowMode="Interactive"
                     >
                         <t:toolbar>
                             <Toolbar>
@@ -35,7 +37,7 @@
                         </t:toolbar>
 
                         <t:columns>
-                              <!-- <t:Column >
+                            <!-- <t:Column >
                                 <Label text="{i18n>notIsExist}" />
                                 <t:template>
                                     <Text text="{dm>Lifnr}" />
@@ -58,7 +60,7 @@
                             <t:Column>
                                 <Label text="{i18n>orderNumber}" />
                                 <t:template>
-                                      <Link
+                                    <Link
                                         text="{dm>Ebeln}"
                                         wrapping="true"
                                         press="onPressEbeln"
@@ -104,7 +106,7 @@
                             <t:Column>
                                 <Label text="{i18n>firmDeliveryDate}" />
                                 <t:template>
-                                       <Text
+                                    <Text
                                         text="{path: 'dm>Slfdt',
                         type: 'sap.ui.model.odata.type.DateTime',
                         formatOptions: {
@@ -158,8 +160,8 @@
                             </t:Column>
                         </t:columns>
                     </t:Table>
-                </content>
+                <!-- </content>
             </Page>
         </pages>
-    </App>
+    </App> -->
 </mvc:View>

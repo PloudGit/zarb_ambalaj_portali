@@ -7,19 +7,20 @@
     height="100%"
     busyIndicatorDelay="0"
 >
-    <App>
+    <!-- <App>
         <pages>
             <Page
                 id="allCallsPage"
                 showHeader="false"
             >
-                <content>
+                <content> -->
                     <t:Table
                         id="tblAllCalls"
                         rows="{dm>/OrderListTUMCAGRI}"
                         selectionMode="None"
                         enableColumnReordering="true"
                         width="100%"
+                           rowMode="Interactive"
                     >
                         <t:toolbar>
                             <Toolbar>
@@ -181,8 +182,8 @@
                             </t:Column>
                         </t:columns>
                     </t:Table>
-                </content>
+                <!-- </content>
             </Page>
         </pages>
-    </App>
+    </App> -->
 </mvc:View>
