@@ -246,6 +246,21 @@
                                             models="{dm: ${dm}, i18n: ${i18n}}"
                                         />
                                     </IconTabFilter>
+                                       <!-- ÖZET -->
+                                    <IconTabFilter
+                                        text="{i18n>tabSummary}"
+                                        key="SUMMARY"
+                                        icon="sap-icon://list"
+                                        design="Horizontal"
+                                        iconColor="Default"
+                                        visible="{pm>/iconTabBar/SUMMARY}"
+                                    >
+                                        <mvc:XMLView
+                                            viewName="com.app.abdiibrahim.zarbambalajportali.view.Summary"
+                                            type="XML"
+                                            models="{dm: ${dm}, i18n: ${i18n}}"
+                                        />
+                                    </IconTabFilter>
                                 </items>
                             </IconTabBar>
                         </f:content>
