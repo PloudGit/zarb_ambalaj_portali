@@ -133,8 +133,10 @@ sap.ui.define([
 
             this._selectedRow = oRowData;
 
-            this._main.setDetailPopupVisibility(this);
+            // this._main.setDetailPopupVisibility(this);
 
+            // get visibility data 
+            this._oData.getPopupInfo(this,oRowData );
 
             this._orderDetailPopup(selectedKey).open();
 

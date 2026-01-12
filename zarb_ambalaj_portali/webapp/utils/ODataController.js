@@ -71,6 +71,44 @@ sap.ui.define([
 
 		},
 
+		getPopupInfo: function (that, rowData) {
+
+			var url = "/AmbDetailOprSet";
+
+			var bModel = that.getOModel(that, "bm");
+			var bData = bModel.getData();
+
+			var dModel = that.getOModel(that, "dm");
+			var dData = dModel.getData();
+			var aFilters = [];
+
+			aFilters.push(new Filter("Ebeln", FilterOperator.EQ, rowData.Ebeln));
+			aFilters.push(new Filter("Ebelp", FilterOperator.EQ, rowData.Ebelp));
+			aFilters.push(new Filter("Etenr", FilterOperator.EQ, rowData.Etenr));
+			// aFilters.push(new Filter("Statu", FilterOperator.EQ, rowData.Statu));
+
+			var oDataModel = that.getOwnerComponent().getModel();
+
+			that.openBusyDialog();
+
+			oDataModel.read(url, {
+				filters: aFilters,
+				success: function (oData, oResponse) {
+					that.closeBusyDialog();
+					if (oData && oData.results) {
+						// that._main.setOrderList(that, oData.results);
+						that._main.setDetailPopupVisibility(that, oData.results);
+					}
+				},
+				error: function (oError) {
+					that.closeBusyDialog();
+					that._oData.handleODataErrors(that);
+
+				}
+
+			});
+
+		},
 
 
 	});

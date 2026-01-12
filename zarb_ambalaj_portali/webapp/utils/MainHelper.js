@@ -288,123 +288,137 @@ sap.ui.define([
             pModel.refresh();
         },
 
-        setDetailPopupVisibility: function (that) {
+        setDetailPopupVisibility: function (that, data) {
             var dModel = that.getOModel(that, "dm");
             var pModel = that.getOModel(that, "pm");
 
-            var role = dModel.getProperty("/Role");
-            var selectedKey = that._main.getIcontabBarSelectedKey(that);
+            // var role = dModel.getProperty("/Role");
+            // var selectedKey = that._main.getIcontabBarSelectedKey(that);
 
             var pData = pModel.getData();
             pData.detailPopup = pData.detailPopup || {};
 
-            // Tüm alanları default kapalı yap
-            var dp = pData.detailPopup;
-            dp["addNote"] = false;
-            dp["addNoteEditable"] = false;
-            dp["approveButton"] = false;
-            dp["cancelButton"] = false;
-            dp["reviseButton"] = false;
-            dp["saveButton"] = false;
+            // backendten gelen veriyi dirket bağla - 
 
-            // Tedarikçi için
-            if (role === "Tedarikçi") {
-                switch (selectedKey) {
-                    case "PKOLMAYAN":
-                        // dp["addNote"] = true;
-                        // dp["addNoteEditable"] = true;
-                        break;
-                    case "ACIKCAGRI":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["saveButton"] = true;
-                        break;
 
-                    case "ONAY":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["cancelButton"] = true;
-                        dp["reviseButton"] = true;
-                        dp["saveButton"] = true;
-                        break;
+            
+            // BtnVisApprove
+            // BtnVisReject
+            // BtnVisRevise
+            // BtnVisSend
+            // BtnVisAddNote
+            
 
-                    case "REVF":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["approveButton"] = true;
-                        dp["cancelButton"] = true;
-                        dp["reviseButton"] = true;
-                        dp["saveButton"] = true;
-                        break;
 
-                    case "REVE":
 
-                        break;
+            // // Tüm alanları default kapalı yap
+            // var dp = pData.detailPopup;
+            // dp["addNote"] = false;
+            // dp["addNoteEditable"] = false;
+            // dp["approveButton"] = false;
+            // dp["cancelButton"] = false;
+            // dp["reviseButton"] = false;
+            // dp["saveButton"] = false;
 
-                    case "IPTT":
+            // // Tedarikçi için
+            // if (role === "Tedarikçi") {
+            //     switch (selectedKey) {
+            //         case "PKOLMAYAN":
+            //             // dp["addNote"] = true;
+            //             // dp["addNoteEditable"] = true;
+            //             break;
+            //         case "ACIKCAGRI":
+            //             dp["addNote"] = true;
+            //             dp["addNoteEditable"] = true;
+            //             dp["saveButton"] = true;
+            //             break;
 
-                        break;
+            //         case "ONAY":
+            //             dp["addNote"] = true;
+            //             dp["addNoteEditable"] = true;
+            //             dp["cancelButton"] = true;
+            //             dp["reviseButton"] = true;
+            //             dp["saveButton"] = true;
+            //             break;
 
-                    case "TUM":
-                        break;
-                    case "GET_TUM_SIPARIS_S":
+            //         case "REVF":
+            //             dp["addNote"] = true;
+            //             dp["addNoteEditable"] = true;
+            //             dp["approveButton"] = true;
+            //             dp["cancelButton"] = true;
+            //             dp["reviseButton"] = true;
+            //             dp["saveButton"] = true;
+            //             break;
 
-                        break;
+            //         case "REVE":
 
-                    default:
-                        break;
-                }
-            }
-            // Abdici
-            else {
-                switch (selectedKey) {
-                    case "PKOLMAYAN":
-                        // dp["addNote"] = true;
-                        // dp["addNoteEditable"] = true;
-                        break;
-                    case "ACIKCAGRI":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["saveButton"] = true;
-                        break;
+            //             break;
 
-                    case "ONAY":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["cancelButton"] = true;
-                        dp["reviseButton"] = true;
-                        dp["saveButton"] = true;
-                        break;
+            //         case "IPTT":
 
-                    case "REVF":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["approveButton"] = true;
-                        dp["cancelButton"] = true;
-                        dp["reviseButton"] = true;
-                        dp["saveButton"] = true;
-                        break;
+            //             break;
 
-                    case "REVE":
+            //         case "TUM":
+            //             break;
+            //         case "GET_TUM_SIPARIS_S":
 
-                        break;
+            //             break;
 
-                    case "IPTT":
+            //         default:
+            //             break;
+            //     }
+            // }
+            // // Abdici
+            // else {
+            //     switch (selectedKey) {
+            //         case "PKOLMAYAN":
+            //             // dp["addNote"] = true;
+            //             // dp["addNoteEditable"] = true;
+            //             break;
+            //         case "ACIKCAGRI":
+            //             dp["addNote"] = true;
+            //             dp["addNoteEditable"] = true;
+            //             dp["saveButton"] = true;
+            //             break;
 
-                        break;
+            //         case "ONAY":
+            //             dp["addNote"] = true;
+            //             dp["addNoteEditable"] = true;
+            //             dp["cancelButton"] = true;
+            //             dp["reviseButton"] = true;
+            //             dp["saveButton"] = true;
+            //             break;
 
-                    case "TUM":
-                        break;
-                    case "GET_TUM_SIPARIS_S":
+            //         case "REVF":
+            //             dp["addNote"] = true;
+            //             dp["addNoteEditable"] = true;
+            //             dp["approveButton"] = true;
+            //             dp["cancelButton"] = true;
+            //             dp["reviseButton"] = true;
+            //             dp["saveButton"] = true;
+            //             break;
 
-                        break;
+            //         case "REVE":
 
-                    default:
-                        break;
-                }
-            }
+            //             break;
 
-            pModel.refresh();
+            //         case "IPTT":
+
+            //             break;
+
+            //         case "TUM":
+            //             break;
+            //         case "GET_TUM_SIPARIS_S":
+
+            //             break;
+
+            //         default:
+            //             break;
+            //     }
+            // }
+
+            // pModel.refresh();
+
         }
 
 
