@@ -183,6 +183,9 @@ sap.ui.define([
             dModel.setProperty(sPath, data);
             dModel.updateBindings(true);
 
+            if (selectedKey === "SUMMARY") {
+                that._main.splitOrderListByDeliveryDate(that, data);
+            }
             // IconTab bul
             var oIconTabBar = that.getView().byId("idIconTabBar");
             if (!oIconTabBar) return;
@@ -195,6 +198,43 @@ sap.ui.define([
 
             oInnerView.setModel(dModel, "dm");
 
+
+        },
+        splitOrderListByDeliveryDate: function (that, aOrderList) {
+            var oModel = that.getOModel(that, "dm");
+
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            var endOfWeek = new Date(today);
+            endOfWeek.setDate(endOfWeek.getDate() + 7);
+
+            var weeklyDeliveries = [];
+            var lateDeliveries = [];
+            var futureDeliveries = [];
+
+            aOrderList.forEach(function (oItem) {
+                var deliveryDate = that.dateConvert(oItem.Slfdt);
+                if (!deliveryDate) return;
+
+                if (deliveryDate < today) {
+                    lateDeliveries.push(oItem);
+                } else if (deliveryDate >= today && deliveryDate <= endOfWeek) {
+                    weeklyDeliveries.push(oItem);
+                } else {
+                    futureDeliveries.push(oItem);
+                }
+            });
+
+            oModel.setProperty("/OrderListWeeklyDeliveries", weeklyDeliveries);
+            oModel.setProperty("/OrderListLateDeliveries", lateDeliveries);
+            oModel.setProperty("/OrderListFutureDeliveries", futureDeliveries);
+
+            oModel.setProperty("/summaryCounts", {
+                weekly: Array.isArray(weeklyDeliveries) ? weeklyDeliveries.length : 0,
+                late: Array.isArray(lateDeliveries) ? lateDeliveries.length : 0,
+                future: Array.isArray(futureDeliveries) ? futureDeliveries.length : 0
+            });
 
         },
 

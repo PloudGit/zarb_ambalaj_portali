@@ -28,6 +28,17 @@ sap.ui.define([
 				OrderListIPTALCAGRI: [],
 				OrderListTUMCAGRI: [],
 				OrderListTUMSIPARIS: [],
+				OrderListSUMMARY: [],
+				OrderListWeeklyDeliveries: [],
+				OrderListLateDeliveries: [],
+				OrderListFutureDeliveries: [],
+				summaryCounts: {
+					weekly: 0,
+					late: 0,
+					future: 0
+				}
+				
+
 			}
 
 
@@ -60,7 +71,7 @@ sap.ui.define([
 					approveButton: false,
 					cancelButton: false,
 					reviseButton: false,
-					saveButton:false
+					saveButton: false
 				}
 
 
