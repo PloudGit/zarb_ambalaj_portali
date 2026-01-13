@@ -72,7 +72,11 @@
                         textAlign="Right"
                     />
                     <Input
-                        value="{dm>/sSelectedEbelnRowData/CreateDate}"
+                        value="{
+                        path: 'dm>/sSelectedEbelnRowData/CreateDate',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: { pattern: 'dd.MM.yyyy' }
+                    }"
                         width="100%"
                         editable="false"
                     />
@@ -100,7 +104,7 @@
                     <Input
                         value="{dm>/sSelectedEbelnRowData/Normt}"
                         width="100%"
-                        editable="false"
+                        editable="{pm>/detailPopup/NormtEdit}"
                     />
                 </HBox>
 
@@ -214,31 +218,38 @@
                         textAlign="Right"
                     />
                     <TextArea
-                        value="{dm>/sSelectedEbelnRowData/Note}"
+                        value="{dm>/sSelectedEbelnRowData/Desc1}"
                         rows="3"
                         width="150%"
                         editable="false"
                     />
                 </HBox>
 
-                <HBox visible="{pm>/detailPopup/addNote}">
+                <HBox visible="{pm>/detailPopup/BtnVisAddNote}">
                     <Label
                         width="150px"
                         text="{i18n>OP_addNote}"
                         textAlign="Right"
                     />
                     <TextArea
-                        value="{dm>/sSelectedEbelnRowData/Note}"
+                        value="{dm>/detailPopupNote}"
                         rows="3"
                         width="150%"
-                        editable="{pm>/detailPopup/addNoteEditable}"
+                        editable="{pm>/detailPopup/BtnVisAddNote}"
                     />
-                    <!-- <Button
+                </HBox>
+                <HBox visible="{pm>/detailPopup/BtnVisAddNote}">
+                    <Label
+                        width="150px"
+                        text=""
+                        textAlign="Right"
+                    />
+                    <Button
                         text="{i18n>OP_addNote}"
                         icon="sap-icon://add"
                         class="blueButton"
                         press="onApproveOrder"
-                    /> -->
+                    />
                 </HBox>
                 <Table
                     id="OrderQuantityTable"
@@ -249,13 +260,28 @@
                 >
                     <columns>
                         <Column>
-                            <Text text="{i18n>OP_quantity}" />
+                            <Text text="{i18n>quantity}" />
                         </Column>
                         <Column>
-                            <Text text="{i18n>OP_unit}" />
+                            <Text text="{i18n>unit}" />
                         </Column>
                         <Column>
                             <Text text="{i18n>OP_firmDeliveryDate}" />
+                        </Column>
+                        <Column visible="{pm>/detailPopup/SlfdiVis}">
+                            <Text text="{i18n>OP_reviseFirmDeliveryDate}" />
+                        </Column>
+                        <Column visible="{pm>/detailPopup/TesyrVis}">
+                            <Text text="{i18n>OP_deliveryPlace}" />
+                        </Column>
+                        <Column visible="{pm>/detailPopup/PlakaVis}">
+                            <Text text="{i18n>OP_plaka}" />
+                        </Column>
+                        <Column visible="{pm>/detailPopup/SoforVis}">
+                            <Text text="{i18n>OP_driverPhone}" />
+                        </Column>
+                        <Column visible="{pm>/detailPopup/SevkmVis}">
+                            <Text text="{i18n>OP_sevkQuantity}" />
                         </Column>
                     </columns>
                     <items>
@@ -270,6 +296,37 @@
                         formatOptions: { pattern: 'dd.MM.yyyy' }
                     }"
                                 />
+                                <DatePicker
+                                    value="{path: 'dm>Slfdi',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                                                }
+                                            }"
+                                    displayFormat="short"
+                                    editable="{pm>/detailPopup/SlfdiEdit}"
+                                    visible="{pm>/detailPopup/SlfdiVis}"
+                                />
+                                <Input
+                                    value="{dm>Tesyr}"
+                                    editable="{pm>/detailPopup/TesyrVis}"
+                                    visible="{pm>/detailPopup/TesyrVis}"
+                                />
+                                <Input
+                                    value="{dm>Plaka}"
+                                    editable="{pm>/detailPopup/PlakaVis}"
+                                    visible="{pm>/detailPopup/PlakaVis}"
+                                />
+                                <Input
+                                    value="{dm>Sofor}"
+                                    editable="{pm>/detailPopup/SoforVis}"
+                                    visible="{pm>/detailPopup/SoforVis}"
+                                />
+                                <Input
+                                    value="{dm>Sevkm}"
+                                    editable="{pm>/detailPopup/SevkmVis}"
+                                    visible="{pm>/detailPopup/SevkmVis}"
+                                />
                             </cells>
                         </ColumnListItem>
                     </items>
@@ -283,28 +340,42 @@
                     icon="sap-icon://accept"
                     class="greenButton"
                     press="onApproveOrder"
-                    visible="{pm>/detailPopup/approveButton}"
+                    visible="{pm>/detailPopup/BtnVisApprove}"
                 />
                 <Button
                     text="{i18n>OP_btnCancel}"
                     icon="sap-icon://cancel-maintenance"
                     class="redButton"
                     press="onCancelOrder"
-                    visible="{pm>/detailPopup/cancelButton}"
+                    visible="{pm>/detailPopup/BtnVisReject}"
                 />
                 <Button
                     text="{i18n>OP_btnRevise}"
                     icon="sap-icon://edit"
                     class="yellowButton"
                     press="onReviseOrder"
-                    visible="{pm>/detailPopup/reviseButton}"
+                    visible="{pm>/detailPopup/BtnVisRevise}"
                 />
-                 <Button
-                    text="{i18n>OP_btnSave}"
-                    icon="sap-icon://save"
+                <Button
+                    text="{i18n>OP_btnSend}"
+                    icon="sap-icon://send-task"
                     class="greenButton"
                     press="onSaveOrder"
-                    visible="{pm>/detailPopup/saveButton}"
+                    visible="{pm>/detailPopup/BtnVisSend}"
+                />
+                <Button
+                    text="{i18n>OP_btnSevk}"
+                    icon="sap-icon://icon-truck-driver"
+                    class="blueButton"
+                    press="onSaveOrder"
+                    visible="{pm>/detailPopup/BtnVisSevk}"
+                />
+                <Button
+                    text="{i18n>OP_btnPK}"
+                    icon="sap-icon://code1"
+                    class="orangeButton"
+                    press="onSaveOrder"
+                    visible="{pm>/detailPopup/BtnVisPk}"
                 />
                 <Button
                     text="{i18n>OP_btnClose}"

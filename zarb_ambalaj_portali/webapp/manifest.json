@@ -98,8 +98,8 @@
                     ]
                 },
                 {
-                    "name": "Display",
-                    "pattern": "Main/{ArbRfxId}",
+                    "name": "supplier",
+                    "pattern": "supplier/{SupplierNo}",
                     "target": [
                         "Main"
                     ]

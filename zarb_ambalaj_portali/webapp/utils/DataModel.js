@@ -18,6 +18,9 @@ sap.ui.define([
 
 
 			var dData = {
+				supplierNo:"",
+				isSupplier:false,
+				detailPopupNote:"",
 				iconTabBarSelectedKey: "ACIKCAGRI",
 				OrderList: [],
 				OrderListPKOLMAYAN: [],
@@ -37,7 +40,7 @@ sap.ui.define([
 					late: 0,
 					future: 0
 				}
-				
+
 
 			}
 
@@ -63,15 +66,31 @@ sap.ui.define([
 					REVE: true,
 					IPTT: true,
 					TUM: true,
-					GET_TUM_SIPARIS_S: true
+					GET_TUM_SIPARIS_S: true,
+					SUMMARY:false
 				},
 				detailPopup: {
-					addNote: false,
-					addNoteEditable: false,
-					approveButton: false,
-					cancelButton: false,
-					reviseButton: false,
-					saveButton: false
+					// addNote: false,
+					// addNoteEditable: false,
+					// approveButton: false,
+					// cancelButton: false,
+					// reviseButton: false,
+					// saveButton: false,
+					BtnVisAddNote: false,
+					BtnVisApprove: false,
+					BtnVisPk: false,
+					BtnVisReject: false,
+					BtnVisRevise: false,
+					BtnVisSend: false,
+					BtnVisSevk: false,
+					IsSupplier: false,
+					NormtEdit: false,
+					PlakaVis: false,
+					SevkmVis: false,
+					SlfdiEdit: false,
+					SlfdiVis: false,
+					SoforVis: false,
+					TesyrVis: false
 				}
 
 

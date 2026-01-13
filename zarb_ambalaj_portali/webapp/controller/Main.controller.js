@@ -37,7 +37,7 @@ sap.ui.define([
         onInit: function (oEvent) {
             this._Router = this.getOwnerComponent().getRouter();
             this._Router.getRoute("Main").attachMatched(this._onRouteMatched, this);
-            // this._Router.getRoute("Display").attachMatched(this._onRouteMatchedDisplay, this);
+            this._Router.getRoute("supplier").attachMatched(this._onRouteMatchedSupplier, this);
 
             //Datamodel js 
             this._dataModel = new DataModel();
@@ -69,10 +69,18 @@ sap.ui.define([
 
         },
 
-        _onRouteMatchedDisplay: function (oEvent) {
+        _onRouteMatchedSupplier: function (oEvent) {
             // Route matched işlemleri
             var that = this;
 
+            var oArgs = oEvent.getParameter("arguments");
+            var supplierNo = oArgs.SupplierNo;
+
+            if (supplierNo) { //btp ile gelince 
+
+                this._main.setUiForSupplier(this, supplierNo);
+
+            }
 
         },
 
@@ -102,6 +110,7 @@ sap.ui.define([
 
         onPressEbeln: function (oEvent) {
 
+            var that = this;
             // hangi tablodaki hangi satır verisine tıklandığını tutalım  ? 
 
             // selectedkey tab zaten aslında hangi tablo olduğunu veryor - 
@@ -119,14 +128,19 @@ sap.ui.define([
             var dModel = this.getOModel(this, "dm");
             dModel.setProperty("/sSelectedEbelnRowData", oRowData);
 
-            var oRow  = {};
-            var oRows =[];
+            var oRow = {};
+            var oRows = [];
 
             oRow["Ebeln"] = oRowData.Ebeln;
             oRow["Ebelp"] = oRowData.Ebelp;
             oRow["Menge"] = oRowData.Menge;
             oRow["Meins"] = oRowData.Meins;
             oRow["Slfdt"] = oRowData.Slfdt;
+            oRow["Slfdi"] = oRowData.Slfdt;
+            oRow["Plaka"] = oRowData.Plaka;
+            oRow["Sevkm"] = oRowData.Sevkm;
+            oRow["Sofor"] = oRowData.Sofor;
+            oRow["Tesyr"] = oRowData.Tesyr;
             oRows.push(oRow);
             dModel.setProperty("/sSelectedEbelnTableData", oRows);
             dModel.refresh();
@@ -136,9 +150,12 @@ sap.ui.define([
             // this._main.setDetailPopupVisibility(this);
 
             // get visibility data 
-            this._oData.getPopupInfo(this,oRowData );
 
-            this._orderDetailPopup(selectedKey).open();
+            this._oData.getPopupInfo(that, oRowData)
+                .then(function () {
+                    that._orderDetailPopup(selectedKey).open();
+                });
+
 
         },
 

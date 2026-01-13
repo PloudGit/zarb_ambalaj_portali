@@ -79,6 +79,23 @@ sap.ui.define([
             });
         },
 
+        setUiForSupplier: function (that, supplierNo) {
+
+            var dModel = that.getOModel(that, "dm");
+            var dData = dModel.getData();
+
+            var pModel = that.getOModel(that, "pm");
+            var pData = pModel.getData();
+
+            dData["isSupplier"] = true;
+            dData["supplierNo"] = supplierNo;
+            dModel.refresh();
+
+            pData["iconTabBar"]["PKOLMAYAN"] = false;
+            pData["iconTabBar"]["SUMMARY"] = true;
+            pModel.refresh();
+        },
+
         onOpenCallScreen: function (that) {
             debugger;
 
@@ -214,7 +231,9 @@ sap.ui.define([
             var futureDeliveries = [];
 
             aOrderList.forEach(function (oItem) {
-                var deliveryDate = that.dateConvert(oItem.Slfdt);
+                var deliveryDate = oItem.Slfdt;
+                deliveryDate.setHours(0, 0, 0, 0);
+
                 if (!deliveryDate) return;
 
                 if (deliveryDate < today) {
@@ -289,141 +308,31 @@ sap.ui.define([
         },
 
         setDetailPopupVisibility: function (that, data) {
+
             var dModel = that.getOModel(that, "dm");
             var pModel = that.getOModel(that, "pm");
-
-            // var role = dModel.getProperty("/Role");
-            // var selectedKey = that._main.getIcontabBarSelectedKey(that);
 
             var pData = pModel.getData();
             pData.detailPopup = pData.detailPopup || {};
 
-            // backendten gelen veriyi dirket bağla - 
+            if (!data || data.length === 0) {
+                return;
+            }
 
+            var result = data[0];
 
-            
-            // BtnVisApprove
-            // BtnVisReject
-            // BtnVisRevise
-            // BtnVisSend
-            // BtnVisAddNote
-            
+            for (var key in pData.detailPopup) {
+                if (result.hasOwnProperty(key)) {
+                    pData.detailPopup[key] = result[key];
+                }
+            }
 
+            pModel.refresh();
 
-
-            // // Tüm alanları default kapalı yap
-            // var dp = pData.detailPopup;
-            // dp["addNote"] = false;
-            // dp["addNoteEditable"] = false;
-            // dp["approveButton"] = false;
-            // dp["cancelButton"] = false;
-            // dp["reviseButton"] = false;
-            // dp["saveButton"] = false;
-
-            // // Tedarikçi için
-            // if (role === "Tedarikçi") {
-            //     switch (selectedKey) {
-            //         case "PKOLMAYAN":
-            //             // dp["addNote"] = true;
-            //             // dp["addNoteEditable"] = true;
-            //             break;
-            //         case "ACIKCAGRI":
-            //             dp["addNote"] = true;
-            //             dp["addNoteEditable"] = true;
-            //             dp["saveButton"] = true;
-            //             break;
-
-            //         case "ONAY":
-            //             dp["addNote"] = true;
-            //             dp["addNoteEditable"] = true;
-            //             dp["cancelButton"] = true;
-            //             dp["reviseButton"] = true;
-            //             dp["saveButton"] = true;
-            //             break;
-
-            //         case "REVF":
-            //             dp["addNote"] = true;
-            //             dp["addNoteEditable"] = true;
-            //             dp["approveButton"] = true;
-            //             dp["cancelButton"] = true;
-            //             dp["reviseButton"] = true;
-            //             dp["saveButton"] = true;
-            //             break;
-
-            //         case "REVE":
-
-            //             break;
-
-            //         case "IPTT":
-
-            //             break;
-
-            //         case "TUM":
-            //             break;
-            //         case "GET_TUM_SIPARIS_S":
-
-            //             break;
-
-            //         default:
-            //             break;
-            //     }
-            // }
-            // // Abdici
-            // else {
-            //     switch (selectedKey) {
-            //         case "PKOLMAYAN":
-            //             // dp["addNote"] = true;
-            //             // dp["addNoteEditable"] = true;
-            //             break;
-            //         case "ACIKCAGRI":
-            //             dp["addNote"] = true;
-            //             dp["addNoteEditable"] = true;
-            //             dp["saveButton"] = true;
-            //             break;
-
-            //         case "ONAY":
-            //             dp["addNote"] = true;
-            //             dp["addNoteEditable"] = true;
-            //             dp["cancelButton"] = true;
-            //             dp["reviseButton"] = true;
-            //             dp["saveButton"] = true;
-            //             break;
-
-            //         case "REVF":
-            //             dp["addNote"] = true;
-            //             dp["addNoteEditable"] = true;
-            //             dp["approveButton"] = true;
-            //             dp["cancelButton"] = true;
-            //             dp["reviseButton"] = true;
-            //             dp["saveButton"] = true;
-            //             break;
-
-            //         case "REVE":
-
-            //             break;
-
-            //         case "IPTT":
-
-            //             break;
-
-            //         case "TUM":
-            //             break;
-            //         case "GET_TUM_SIPARIS_S":
-
-            //             break;
-
-            //         default:
-            //             break;
-            //     }
-            // }
-
-            // pModel.refresh();
+            // busy dialog kapat
+            that.closeBusyDialog();
 
         }
-
-
-
-
 
     });
 });

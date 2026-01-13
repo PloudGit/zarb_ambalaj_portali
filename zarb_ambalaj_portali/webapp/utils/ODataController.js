@@ -70,45 +70,47 @@ sap.ui.define([
 			});
 
 		},
-
 		getPopupInfo: function (that, rowData) {
+			return new Promise(function (resolve, reject) {
 
-			var url = "/AmbDetailOprSet";
+				var dModel = that.getOModel(that, "dm");
+				var dData = dModel.getData();
 
-			var bModel = that.getOModel(that, "bm");
-			var bData = bModel.getData();
+				var url = "/AmbDetailOprSet";
+				var oDataModel = that.getOwnerComponent().getModel();
 
-			var dModel = that.getOModel(that, "dm");
-			var dData = dModel.getData();
-			var aFilters = [];
+				var aFilters = [
+					new Filter("Ebeln", FilterOperator.EQ, rowData.Ebeln),
+					new Filter("Ebelp", FilterOperator.EQ, rowData.Ebelp),
+					new Filter("Etenr", FilterOperator.EQ, rowData.Etenr),
+					new Filter("Statu", FilterOperator.EQ, rowData.Statu),
+					new Filter("IsSupplier", FilterOperator.EQ, dData.isSupplier),
+					new Filter("Tabinfo", FilterOperator.EQ, dData.iconTabBarSelectedKey)
+				];
 
-			aFilters.push(new Filter("Ebeln", FilterOperator.EQ, rowData.Ebeln));
-			aFilters.push(new Filter("Ebelp", FilterOperator.EQ, rowData.Ebelp));
-			aFilters.push(new Filter("Etenr", FilterOperator.EQ, rowData.Etenr));
-			// aFilters.push(new Filter("Statu", FilterOperator.EQ, rowData.Statu));
+				that.openBusyDialog();
 
-			var oDataModel = that.getOwnerComponent().getModel();
+				oDataModel.read(url, {
+					filters: aFilters,
+					success: function (oData) {
+						// that.closeBusyDialog();
 
-			that.openBusyDialog();
-
-			oDataModel.read(url, {
-				filters: aFilters,
-				success: function (oData, oResponse) {
-					that.closeBusyDialog();
-					if (oData && oData.results) {
-						// that._main.setOrderList(that, oData.results);
-						that._main.setDetailPopupVisibility(that, oData.results);
+						if (oData && oData.results) {
+							that._main.setDetailPopupVisibility(that, oData.results);
+							resolve();
+						} else {
+							reject();
+						}
+					},
+					error: function (oError) {
+						that.closeBusyDialog();
+						that._oData.handleODataErrors(that);
+						reject(oError);
 					}
-				},
-				error: function (oError) {
-					that.closeBusyDialog();
-					that._oData.handleODataErrors(that);
-
-				}
-
+				});
 			});
+		}
 
-		},
 
 
 	});
