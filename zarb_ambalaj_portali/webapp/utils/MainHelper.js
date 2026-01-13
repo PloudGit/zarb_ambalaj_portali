@@ -332,7 +332,36 @@ sap.ui.define([
             // busy dialog kapat
             that.closeBusyDialog();
 
-        }
+        },
 
+        checkData: function (that, action) {
+
+            var dModel = that.getOModel(that, "dm");
+            var dData = dModel.getData();
+
+            switch (action) {
+                case 'ADD_NOTE':
+                    var note = dData.detailPopupNote?.trim();
+
+                    if (!note) {
+                        // MessageBox.error(
+                        //     oBundle.getText("note_field_required"), // i18n: "Lütfen bir not giriniz."
+                        //     {
+                        //         title: oBundle.getText("missing_fields_title"),
+                        //         actions: [MessageBox.Action.OK],
+                        //         emphasizedAction: MessageBox.Action.OK
+                        //     }
+                        // );
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
+
+                    that.confirmMessageWithActonResponse(that, "confirmAddNote", that.onConfirmResponse, 'ADD_NOTE'); // i18n: "Notu eklemek istediğinize emin misiniz?"
+                    break;
+                default:
+                    break;
+            }
+
+        }
     });
 });

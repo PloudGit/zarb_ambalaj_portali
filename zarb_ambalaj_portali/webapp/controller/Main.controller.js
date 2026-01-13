@@ -197,6 +197,63 @@ sap.ui.define([
 
         },
 
+        // detail popup not ekle butonu - direkt backende gitsin notu kaydetsin 
+        onApproveOrder: function (oEvent) {
+            var that = this;
+            that._main.checkData(that, 'ADD_NOTE');
+        },
+
+        onConfirmResponse: function (that, response, action) {
+            var dModel = that.getOModel(that, "dm");
+            var dData = dModel.getData();
+            var oBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+            if (response === 'OK') {
+                switch (action) {
+                    case 'ADD_NOTE':
+                        var row = dData.sSelectedEbelnRowData;
+                        var newNote = dData.detailPopupNote?.trim();
+                        var oldNote = row.Desc1?.trim() || "";
+                        var status = row.Statu;
+
+                        var prefix = "";
+                        switch (status) {
+                            case 'INIT':
+                                prefix = oBundle.getText("note_type_INIT");
+                                break;
+                            case 'ACCE':
+                                prefix = oBundle.getText("note_type_ACCE");
+                                break;
+                            case 'DELI':
+                                prefix = oBundle.getText("note_type_DELI");
+                                break;
+                            case 'REVF':
+                                prefix = oBundle.getText("note_type_REVF");
+                                break;
+                            case 'REVE':
+                                prefix = oBundle.getText("note_type_REVE");
+                                break;
+                            case 'IPTL':
+                                prefix = oBundle.getText("note_type_IPTL");
+                                break;
+                            case 'AIPT':
+                                prefix = oBundle.getText("note_type_AIPT");
+                                break;
+                            default:
+                                prefix = oBundle.getText("note_type_DEFAULT");
+                        }
+
+                        var finalNote = prefix + " " + newNote;
+                        var combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+
+                        dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
+                        dModel.setProperty("/detailPopupNote", "");
+
+
+                        break;
+                }
+            }
+        }
 
 
 
