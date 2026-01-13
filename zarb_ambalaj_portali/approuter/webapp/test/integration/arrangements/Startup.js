@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/test/Opa5"],function(a){"use strict";return a.extend("integration.arrangements.Startup",{iStartMyApp:function(a){var t=a||{};t.delay=t.delay||50;this.iStartMyUIComponent({componentConfig:{name:"com.app.abdiibrahim.zarbambalajportali",async:true},hash:t.hash,autoWait:t.autoWait})}})});
+//# sourceMappingURL=Startup.js.map

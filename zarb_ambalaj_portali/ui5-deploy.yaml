@@ -5,21 +5,13 @@ metadata:
   name: com.app.abdiibrahim.zarbambalajportali
 type: application
 builder:
-  resources:
-    excludes:
-      - /test/**
-      - /localService/**
   customTasks:
     - name: deploy-to-abap
       afterTask: generateCachebusterInfo
       configuration:
         target:
-          url: https://vhvctds4ci.sap.abdiibrahim.com.tr:44300/
-          client: '100'
+          destination: ds4rt
         app:
-          name: ZARBUI_AMBALAJP
-          description: Ambalaj Portali Uygulaması
-          package: ZARIBA
-          transport: DS4K900378
-        exclude:
-          - /test/
+          name: ZARB_AMBALAJ_PORTALI
+          package: $TMP
+          transport: 

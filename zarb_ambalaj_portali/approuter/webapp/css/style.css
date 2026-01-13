@@ -1,0 +1,122 @@
+/* Sarı */
+.yellowButton .sapMBtnInner {
+    background-color: rgb(243, 222, 162) !important;
+    color: black !important;
+}
+
+.yellowButton .sapMBtnIcon,
+.yellowButton .sapMBtnText {
+    color: black !important;
+    fill: black !important;
+    text-shadow: none !important;
+}
+
+/* Mavi */
+.blueButton .sapMBtnInner {
+    background-color: rgb(173, 216, 230) !important;
+    color: black !important;
+}
+
+.blueButton .sapMBtnIcon,
+.blueButton .sapMBtnText {
+    color: black !important;
+    fill: black !important;
+    text-shadow: none !important;
+}
+
+/* Yeşil */
+.greenButton .sapMBtnInner {
+    background-color: rgb(144, 238, 144) !important;
+    color: black !important;
+}
+
+.greenButton .sapMBtnIcon,
+.greenButton .sapMBtnText {
+    color: black !important;
+    fill: black !important;
+    text-shadow: none !important;
+}
+
+/* Turuncu */
+.orangeButton .sapMBtnInner {
+    background-color: rgb(255, 200, 124) !important;
+    color: black !important;
+}
+
+.orangeButton .sapMBtnIcon,
+.orangeButton .sapMBtnText {
+    color: black !important;
+    fill: black !important;
+    text-shadow: none !important;
+}
+
+/* Kırmızı */
+.redButton .sapMBtnInner {
+    background-color: rgb(255, 140, 140) !important;
+    color: black !important;
+}
+
+.redButton .sapMBtnIcon,
+.redButton .sapMBtnText {
+    color: black !important;
+    fill: black !important;
+    text-shadow: none !important;
+}
+
+/* Gri */
+.greyButton .sapMBtnInner {
+    background-color: rgb(211, 211, 211) !important;
+    color: black !important;
+}
+
+.greyButton .sapMBtnIcon,
+.greyButton .sapMBtnText {
+    color: black !important;
+    fill: black !important;
+    text-shadow: none !important;
+}
+
+
+.orderDetailDialog .sapMLabel {
+    margin-top: 10px !important;
+    margin-right: 5px !important;
+}
+
+.gridTable .sapMListTbl {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .gridTable .sapMListTblCell,
+  .gridTable .sapMListTblHeaderCell {
+    border: 1px solid #d0d0d0; /* gri kenarlık */
+    padding: 0.5rem;
+  }
+  
+  .gridTable .sapMListTblHeaderCell {
+    background-color: #f2f2f2; /* başlık arka planı */
+    font-weight: bold;
+  }
+  
+  .gridTable .sapMText {
+    text-align: center;
+  }
+  
+
+  /* IconTabFilter iconColor="Critical" rengiyle uyumlu */
+.columnHeaderCritical {
+    color: #e9730c; /* UI5 'Critical' rengi - turuncumsu */
+    font-weight: bold;
+}
+
+/* iconColor="Positive" için örnek */
+.columnHeaderPositive {
+    color: #107e3e; /* yeşil */
+    font-weight: bold;
+}
+
+/* iconColor="Negative" için örnek */
+.columnHeaderNegative {
+    color: #bb0000; /* kırmızı */
+    font-weight: bold;
+}

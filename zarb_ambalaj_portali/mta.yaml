@@ -1,0 +1,30 @@
+﻿_schema-version: "3.2"
+ID: zarbambalajportali
+version: 1.0.0
+modules:
+  - name: zarbambalajportali-approuter
+    type: approuter.nodejs
+    path: approuter
+    parameters:
+      disk-quota: 512M
+      memory: 256M
+    requires:
+      - name: zarbambalajportali-destination
+      - name: zarbambalajportali-uaa
+      - name: zarbambalajportali-connectivity
+resources:
+  - name: zarbambalajportali-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+  - name: zarbambalajportali-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: xs-security.json
+  - name: zarbambalajportali-connectivity
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: zarbambalajportali-connectivity
