@@ -334,34 +334,104 @@ sap.ui.define([
 
         },
 
-        checkData: function (that, action) {
+        // checkData: function (that, action) {
 
-            var dModel = that.getOModel(that, "dm");
+        //     var dModel = that.getOModel(that, "dm");
+        //     var dData = dModel.getData();
+
+        //     switch (action) {
+        //         case 'ADD_NOTE':
+        //             var note = dData.detailPopupNote?.trim();
+
+        //             if (!note) {
+        //                 // MessageBox.error(
+        //                 //     oBundle.getText("note_field_required"), // i18n: "Lütfen bir not giriniz."
+        //                 //     {
+        //                 //         title: oBundle.getText("missing_fields_title"),
+        //                 //         actions: [MessageBox.Action.OK],
+        //                 //         emphasizedAction: MessageBox.Action.OK
+        //                 //     }
+        //                 // );
+        //                 that.showMessage("error", "note_field_required");
+        //                 return;
+        //             }
+
+        //             that.confirmMessageWithActonResponse(that, "confirmAddNote", that.onConfirmResponse, 'ADD_NOTE'); // i18n: "Notu eklemek istediğinize emin misiniz?"
+        //             break;
+        //         default:
+        //             break;
+        //     }
+
+        // },
+
+
+        checkData: function (that, action) {
+            var dModel = that.getOModel(that, "pm");
             var dData = dModel.getData();
 
             switch (action) {
-                case 'ADD_NOTE':
+                case 'AN': // Not ekleme
                     var note = dData.detailPopupNote?.trim();
-
                     if (!note) {
-                        // MessageBox.error(
-                        //     oBundle.getText("note_field_required"), // i18n: "Lütfen bir not giriniz."
-                        //     {
-                        //         title: oBundle.getText("missing_fields_title"),
-                        //         actions: [MessageBox.Action.OK],
-                        //         emphasizedAction: MessageBox.Action.OK
-                        //     }
-                        // );
                         that.showMessage("error", "note_field_required");
                         return;
                     }
-
-                    that.confirmMessageWithActonResponse(that, "confirmAddNote", that.onConfirmResponse, 'ADD_NOTE'); // i18n: "Notu eklemek istediğinize emin misiniz?"
+                    that.confirmMessageWithActonResponse(that, "confirmAddNote", that.onConfirmResponse, action);
                     break;
+
+                case 'AC': // Onayla
+
+                    that.confirmMessageWithActonResponse(that, "confirmApprove", that.onConfirmResponse, action);
+                    break;
+
+                case 'RJ': // Reddet
+
+                    that.confirmMessageWithActonResponse(that, "confirmReject", that.onConfirmResponse, action);
+                    break;
+
+                case 'CN': // İptal Et
+
+                    that.confirmMessageWithActonResponse(that, "confirmCancel", that.onConfirmResponse, action);
+                    break;
+
+                case 'CA': // İptali Onayla
+                    that.confirmMessageWithActonResponse(that, "confirmCancelApprove", that.onConfirmResponse, action);
+                    break;
+
+                case 'CR': // İptali Reddet
+                    that.confirmMessageWithActonResponse(that, "confirmCancelReject", that.onConfirmResponse, action);
+                    break;
+
+                case 'CV': // İptali Revize Et
+                    that.confirmMessageWithActonResponse(that, "confirmCancelRevise", that.onConfirmResponse, action);
+                    break;
+
+                case 'RV': // Revize Et
+
+                    that.confirmMessageWithActonResponse(that, "confirmRevise", that.onConfirmResponse, action);
+                    break;
+
+                case 'SD': // Gönder
+
+                    that.confirmMessageWithActonResponse(that, "confirmSend", that.onConfirmResponse, action);
+                    break;
+
+                case 'SE': // Sevk Et
+
+                    that.confirmMessageWithActonResponse(that, "confirmSevk", that.onConfirmResponse, action);
+                    break;
+
+                case 'PK': // PK
+
+                    that.confirmMessageWithActonResponse(that, "confirmPackage", that.onConfirmResponse, action);
+                    break;
+
                 default:
                     break;
             }
-
         }
+
+
+
     });
 });

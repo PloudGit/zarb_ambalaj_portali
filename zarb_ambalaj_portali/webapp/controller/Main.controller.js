@@ -200,7 +200,13 @@ sap.ui.define([
         // detail popup not ekle butonu - direkt backende gitsin notu kaydetsin 
         onApproveOrder: function (oEvent) {
             var that = this;
-            that._main.checkData(that, 'ADD_NOTE');
+            that._main.checkData(that, 'AN');
+        },
+
+        onPressAction: function (oEvent, sActionCode) {
+            var that = this;
+
+            that._main.checkData(that, sActionCode);
         },
 
         onConfirmResponse: function (that, response, action) {
@@ -209,9 +215,25 @@ sap.ui.define([
             var oBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle();
 
             if (response === 'OK') {
+                var row = dData.sSelectedEbelnRowData;
+                var payload = {
+                    Action: action,
+                    Ebeln: rowData.Ebeln,
+                    Ebelp: rowData.Ebelp,
+                    Etenr: rowData.Etenr,
+                    Normt: rowData.Normt,
+                    Plaka: rowData.Plaka,
+                    Sofor: rowData.Sofor,
+                    Statu: rowData.Statu,
+                    Tabinfo: rowData.Tabinfo,
+                    Tesyr: rowData.Tesyr,
+                    Slfdi: rowData.Slfdi,
+                    Sevkm: rowData.Sevkm,
+                    Desc1: rowData.Desc1  // aşağıda eklenecek not ekle denirse 
+                };
+
                 switch (action) {
-                    case 'ADD_NOTE':
-                        var row = dData.sSelectedEbelnRowData;
+                    case 'AN':
                         var newNote = dData.detailPopupNote?.trim();
                         var oldNote = row.Desc1?.trim() || "";
                         var status = row.Statu;
@@ -219,26 +241,19 @@ sap.ui.define([
                         var prefix = "";
                         switch (status) {
                             case 'INIT':
-                                prefix = oBundle.getText("note_type_INIT");
-                                break;
+                                prefix = oBundle.getText("note_type_INIT"); break;
                             case 'ACCE':
-                                prefix = oBundle.getText("note_type_ACCE");
-                                break;
+                                prefix = oBundle.getText("note_type_ACCE"); break;
                             case 'DELI':
-                                prefix = oBundle.getText("note_type_DELI");
-                                break;
+                                prefix = oBundle.getText("note_type_DELI"); break;
                             case 'REVF':
-                                prefix = oBundle.getText("note_type_REVF");
-                                break;
+                                prefix = oBundle.getText("note_type_REVF"); break;
                             case 'REVE':
-                                prefix = oBundle.getText("note_type_REVE");
-                                break;
+                                prefix = oBundle.getText("note_type_REVE"); break;
                             case 'IPTL':
-                                prefix = oBundle.getText("note_type_IPTL");
-                                break;
+                                prefix = oBundle.getText("note_type_IPTL"); break;
                             case 'AIPT':
-                                prefix = oBundle.getText("note_type_AIPT");
-                                break;
+                                prefix = oBundle.getText("note_type_AIPT"); break;
                             default:
                                 prefix = oBundle.getText("note_type_DEFAULT");
                         }
@@ -249,12 +264,81 @@ sap.ui.define([
                         dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
                         dModel.setProperty("/detailPopupNote", "");
 
+                        payload.Desc1 = finalNote;
 
                         break;
-                }
-            }
-        }
 
+                    case 'AC': // Approve
+                    case 'RJ': // Reject
+                    case 'CN': // Cancel
+                    case 'CA': // Cancel Approve
+                    case 'CR': // Cancel Reject
+                    case 'CV': // Cancel Revise
+                    case 'RV': // Revise
+                    case 'SD': // Send
+                    case 'SE': // Sevk
+                    case 'PK': // PK
+
+                        break;
+
+                    default:
+                        return;
+                }
+
+                that._oData.approveProcess(that, payload);
+            }
+        },
+        // onConfirmResponse: function (that, response, action) {
+        //     var dModel = that.getOModel(that, "dm");
+        //     var dData = dModel.getData();
+        //     var oBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+        //     if (response === 'OK') {
+        //         switch (action) {
+        //             case 'ADD_NOTE':
+        //                 var row = dData.sSelectedEbelnRowData;
+        //                 var newNote = dData.detailPopupNote?.trim();
+        //                 var oldNote = row.Desc1?.trim() || "";
+        //                 var status = row.Statu;
+
+        //                 var prefix = "";
+        //                 switch (status) {
+        //                     case 'INIT':
+        //                         prefix = oBundle.getText("note_type_INIT");
+        //                         break;
+        //                     case 'ACCE':
+        //                         prefix = oBundle.getText("note_type_ACCE");
+        //                         break;
+        //                     case 'DELI':
+        //                         prefix = oBundle.getText("note_type_DELI");
+        //                         break;
+        //                     case 'REVF':
+        //                         prefix = oBundle.getText("note_type_REVF");
+        //                         break;
+        //                     case 'REVE':
+        //                         prefix = oBundle.getText("note_type_REVE");
+        //                         break;
+        //                     case 'IPTL':
+        //                         prefix = oBundle.getText("note_type_IPTL");
+        //                         break;
+        //                     case 'AIPT':
+        //                         prefix = oBundle.getText("note_type_AIPT");
+        //                         break;
+        //                     default:
+        //                         prefix = oBundle.getText("note_type_DEFAULT");
+        //                 }
+
+        //                 var finalNote = prefix + " " + newNote;
+        //                 var combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+
+        //                 dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
+        //                 dModel.setProperty("/detailPopupNote", "");
+
+
+        //                 break;
+        //         }
+        //     }
+        // },
 
 
 

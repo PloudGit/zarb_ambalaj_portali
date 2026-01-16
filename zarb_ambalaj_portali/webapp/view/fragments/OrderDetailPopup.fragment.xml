@@ -339,49 +339,87 @@
                     text="{i18n>OP_btnApprove}"
                     icon="sap-icon://accept"
                     class="greenButton"
-                    press="onApproveOrder"
+                    press="onPressAction($event, 'AC')"
                     visible="{pm>/detailPopup/BtnVisApprove}"
                 />
+
+                <Button
+                    text="{i18n>OP_btnReject}"
+                    icon="sap-icon://sys-cancel"
+                    class="redButton"
+                    press="onPressAction($event, 'RJ')"
+                    visible="{pm>/detailPopup/BtnVisReject}"
+                />
+
                 <Button
                     text="{i18n>OP_btnCancel}"
                     icon="sap-icon://cancel-maintenance"
                     class="redButton"
-                    press="onCancelOrder"
-                    visible="{pm>/detailPopup/BtnVisReject}"
+                    press="onPressAction($event, 'CN')"
+                    visible="{pm>/detailPopup/BtnVisAiCancel}"
                 />
+
+                <Button
+                    text="{i18n>OP_btnCancelAppr}"
+                    icon="sap-icon://cancel-share"
+                    class="greenButton"
+                    press="onPressAction($event, 'CA')"
+                    visible="{pm>/detailPopup/BtnVisTedCancAppr}"
+                />
+
+                <Button
+                    text="{i18n>OP_btnCancelReject}"
+                    icon="sap-icon://cancel-share"
+                    class="redButton"
+                    press="onPressAction($event, 'CR')"
+                    visible="{pm>/detailPopup/BtnVisTedCancReject}"
+                />
+
+                <Button
+                    text="{i18n>OP_btnCancelRevise}"
+                    icon="sap-icon://cancel-share"
+                    class="orangeButton"
+                    press="onPressAction($event, 'CV')"
+                    visible="{pm>/detailPopup/BtnVisTedCancRevise}"
+                />
+
                 <Button
                     text="{i18n>OP_btnRevise}"
                     icon="sap-icon://edit"
                     class="yellowButton"
-                    press="onReviseOrder"
+                    press="onPressAction($event, 'RV')"
                     visible="{pm>/detailPopup/BtnVisRevise}"
                 />
+
                 <Button
                     text="{i18n>OP_btnSend}"
                     icon="sap-icon://send-task"
                     class="greenButton"
-                    press="onSaveOrder"
+                    press="onPressAction($event, 'SD')"
                     visible="{pm>/detailPopup/BtnVisSend}"
                 />
+
                 <Button
                     text="{i18n>OP_btnSevk}"
                     icon="sap-icon://icon-truck-driver"
                     class="blueButton"
-                    press="onSaveOrder"
+                    press="onPressAction($event, 'SE')"
                     visible="{pm>/detailPopup/BtnVisSevk}"
                 />
+
                 <Button
                     text="{i18n>OP_btnPK}"
                     icon="sap-icon://code1"
                     class="orangeButton"
-                    press="onSaveOrder"
+                    press="onPressAction($event, 'PK')"
                     visible="{pm>/detailPopup/BtnVisPk}"
                 />
+
                 <Button
                     text="{i18n>OP_btnClose}"
                     icon="sap-icon://sys-cancel"
                     class="redButton"
-                    press="onCloseOrderDetailPopup"
+                    press="onPressAction($event, 'CL')"
                 />
             </Toolbar>
         </VBox>
