@@ -1,4 +1,32 @@
-{
+﻿{
   "xsappname": "zarbambalajportali",
-  "tenant-mode": "dedicated"
+  "tenant-mode": "dedicated",
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://*.cfapps.eu10-004.hana.ondemand.com/login/callback",
+      "https://abdi-ibrahim-ilac-san--ve-tic--a-s--ariba-dev-9ueqhlcg-552c5eca.cfapps.eu10-004.hana.ondemand.com/login/callback"
+    ]
+  },
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Supplier",
+      "description": "Tedarikci Erisimi"
+    },
+    {
+      "name": "$XSAPPNAME.Admin",
+      "description": "Yonetici Erisimi"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Supplier",
+      "description": "Tedarikci Rolu",
+      "scope-references": ["$XSAPPNAME.Supplier"]
+    },
+    {
+      "name": "Administrator",
+      "description": "Yonetici Rolu",
+      "scope-references": ["$XSAPPNAME.Admin"]
+    }
+  ]
 }
