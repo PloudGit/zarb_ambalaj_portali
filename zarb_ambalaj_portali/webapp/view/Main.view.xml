@@ -70,6 +70,7 @@
                                                 label="{i18n>vendor}"
                                                 index="5"
                                                 visibleInAdvancedArea="true"
+                                                visible="{pm>/header/lifnrFilter}"
                                             />
                                             <smartFilterBar:ControlConfiguration
                                                 key="Statu"

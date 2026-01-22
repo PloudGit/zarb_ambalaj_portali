@@ -68,6 +68,7 @@ sap.ui.define([
                             new sap.m.Button({
                                 text: "Çağrı Uygulamasına Git",
                                 icon: "sap-icon://headset",
+                                visible:"{pm>/header/routeCallApplication}",
                                 press: that._main.onOpenCallScreen.bind(that)
                             }).addStyleClass("orangeButton sapUiSmallMarginLeft")
                         );
@@ -93,6 +94,10 @@ sap.ui.define([
 
             pData["iconTabBar"]["PKOLMAYAN"] = false;
             pData["iconTabBar"]["SUMMARY"] = true;
+
+            pData["header"]["lifnrFilter"] = false;
+            pData["header"]["routeCallApplication"] = false;
+            
             pModel.refresh();
         },
 

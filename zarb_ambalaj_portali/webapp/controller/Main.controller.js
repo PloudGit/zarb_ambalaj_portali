@@ -285,7 +285,7 @@ sap.ui.define([
 
                         var prefix = "";
 
-                        prefix = oBundle.getText("note_type_INIT"); break;
+                        prefix = oBundle.getText("note_type_REVISE"); break;
 
                         var finalNote = prefix + " " + newNote;
                         var combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;

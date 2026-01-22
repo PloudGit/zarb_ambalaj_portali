@@ -58,6 +58,10 @@ sap.ui.define([
 			var pModel = new JSONModel();
 
 			var pData = {
+				header: {
+					lifnrFilter: true,
+					routeCallApplication:true
+				},
 				iconTabBar: {
 					PKOLMAYAN: true,
 					ACIKCAGRI: true,
@@ -76,7 +80,7 @@ sap.ui.define([
 					// cancelButton: false,
 					// reviseButton: false,
 					// saveButton: false,
-			
+
 					BtnVisAddNote: false,
 					BtnVisAiCancel: false,
 					BtnVisApprove: false,

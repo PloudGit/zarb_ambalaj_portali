@@ -48,6 +48,13 @@ sap.ui.define([
 			}
 			aFilters.push(new Filter("StatuFiori", FilterOperator.EQ, selectedKey));
 
+			if (dData["isSupplier"] === true && dData["supplierNo"] !== "") { // tedarikçi ise filtre olarak gönder 
+
+				aFilters.push(new Filter("Lifnr", FilterOperator.EQ, dData["supplierNo"]));
+
+			}
+
+
 			var oDataModel = that.getOwnerComponent().getModel();
 
 			that.openBusyDialog();
