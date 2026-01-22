@@ -214,23 +214,25 @@ sap.ui.define([
             var dModel = that.getOModel(that, "dm");
             var dData = dModel.getData();
             var oBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle();
+            var finalNote = "";
+            var combinedNote = "";
 
             if (response === 'OK') {
                 var row = dData.sSelectedEbelnRowData;
                 var payload = {
                     Action: action,
-                    Ebeln: rowData.Ebeln,
-                    Ebelp: rowData.Ebelp,
-                    Etenr: rowData.Etenr,
-                    Normt: rowData.Normt,
-                    Plaka: rowData.Plaka,
-                    Sofor: rowData.Sofor,
-                    Statu: rowData.Statu,
-                    Tabinfo: rowData.Tabinfo,
-                    Tesyr: rowData.Tesyr,
-                    Slfdi: rowData.Slfdi,
-                    Sevkm: rowData.Sevkm,
-                    Desc1: rowData.Desc1  // aşağıda eklenecek not ekle denirse 
+                    Ebeln: row.Ebeln,
+                    Ebelp: row.Ebelp,
+                    Etenr: row.Etenr,
+                    Normt: row.Normt,
+                    Plaka: row.Plaka,
+                    Sofor: row.Sofor,
+                    Statu: row.Statu,
+                    Tabinfo: row.Tabinfo,
+                    Tesyr: row.Tesyr,
+                    Slfdi: row.Slfdi,
+                    Sevkm: row.Sevkm,
+                    Desc1: row.Desc1  // aşağıda eklenecek not ekle denirse 
                 };
 
                 switch (action) {
@@ -259,13 +261,13 @@ sap.ui.define([
                                 prefix = oBundle.getText("note_type_DEFAULT");
                         }
 
-                        var finalNote = prefix + " " + newNote;
-                        var combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+                        finalNote = prefix + " " + newNote;
+                        combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
 
                         dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
                         dModel.setProperty("/detailPopupNote", "");
 
-                        payload.Desc1 = finalNote;
+                        payload.Desc1 = combinedNote;
 
                         break;
 
@@ -276,6 +278,21 @@ sap.ui.define([
                     case 'CR': // Cancel Reject
                     case 'CV': // Cancel Revise
                     case 'RV': // Revise
+                        // firma teslim tarihini revize edebilir yani zorunlu  - not girişi zorunludur
+                        var newNote = dData.detailPopupNote?.trim();
+                        var oldNote = row.Desc1?.trim() || "";
+                        var status = row.Statu;
+
+                        var prefix = "";
+
+                        prefix = oBundle.getText("note_type_INIT"); break;
+
+                        var finalNote = prefix + " " + newNote;
+                        var combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+
+                        payload.Desc1 = finalNote;
+
+                        break;
                     case 'SD': // Send
                     case 'SE': // Sevk
                     case 'PK': // PK

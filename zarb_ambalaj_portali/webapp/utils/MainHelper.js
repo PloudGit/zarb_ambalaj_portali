@@ -366,7 +366,7 @@ sap.ui.define([
 
 
         checkData: function (that, action) {
-            var dModel = that.getOModel(that, "pm");
+            var dModel = that.getOModel(that, "dm");
             var dData = dModel.getData();
 
             switch (action) {

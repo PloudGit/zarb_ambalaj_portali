@@ -109,6 +109,32 @@ sap.ui.define([
 					}
 				});
 			});
+		},
+
+		approveProcess: function (that, data) {
+
+			var url = "/AmbDetailOprSet";
+
+			debugger;
+			var oDataModel = that.getOwnerComponent().getModel();
+			that.openBusyDialog();
+			oDataModel.create(url, data, {
+				success: function (oData, oResponse) {
+
+					debugger;
+					that.closeBusyDialog();
+				},
+				error: function (oError) {
+					debugger;
+					// that.openMessagePopover(that);
+					that.closeBusyDialog();
+					that._oData.handleODataErrors(that);
+
+				}
+			});
+
+
+
 		}
 
 
