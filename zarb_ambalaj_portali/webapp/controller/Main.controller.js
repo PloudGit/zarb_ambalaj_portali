@@ -126,6 +126,7 @@ sap.ui.define([
 
             // Ebeln değerini al
             var sEbeln = oRowData.Ebeln;
+            oRowData.Slfdi = null; // Firma Revizyon Teslim Tarihi boş olsun .
             var dModel = this.getOModel(this, "dm");
             dModel.setProperty("/sSelectedEbelnRowData", oRowData);
 
@@ -214,6 +215,8 @@ sap.ui.define([
             var dModel = that.getOModel(that, "dm");
             var dData = dModel.getData();
             var oBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle();
+            var tableRow = dData.sSelectedEbelnTableData[0];
+            var prefix = "";
             var finalNote = "";
             var combinedNote = "";
 
@@ -225,13 +228,15 @@ sap.ui.define([
                     Ebelp: row.Ebelp,
                     Etenr: row.Etenr,
                     Normt: row.Normt,
-                    Plaka: row.Plaka,
-                    Sofor: row.Sofor,
+                    Plaka: tableRow.Plaka,
+                    Sofor: tableRow.Sofor,
                     Statu: row.Statu,
                     Tabinfo: row.Tabinfo,
-                    Tesyr: row.Tesyr,
-                    Slfdi: row.Slfdi,
-                    Sevkm: row.Sevkm,
+                    Tesyr: tableRow.Tesyr,
+                    Slfdi: that.formatters.adjustStartDateForUTC(tableRow.Slfdi),
+                    IsSupplier: dData["isSupplier"],
+                    Lifnr: dData["supplierNo"],
+                    Sevkm: tableRow.Sevkm,
                     Desc1: row.Desc1  // aşağıda eklenecek not ekle denirse 
                 };
 
@@ -241,7 +246,6 @@ sap.ui.define([
                         var oldNote = row.Desc1?.trim() || "";
                         var status = row.Statu;
 
-                        var prefix = "";
                         switch (status) {
                             case 'INIT':
                                 prefix = oBundle.getText("note_type_INIT"); break;
@@ -273,24 +277,47 @@ sap.ui.define([
 
                     case 'AC': // Approve
                     case 'RJ': // Reject
-                    case 'CN': // Cancel
-                    case 'CA': // Cancel Approve
-                    case 'CR': // Cancel Reject
-                    case 'CV': // Cancel Revise
-                    case 'RV': // Revise
-                        // firma teslim tarihini revize edebilir yani zorunlu  - not girişi zorunludur
                         var newNote = dData.detailPopupNote?.trim();
                         var oldNote = row.Desc1?.trim() || "";
                         var status = row.Statu;
 
-                        var prefix = "";
+                        prefix = oBundle.getText("note_type_REJECT");
+                        finalNote = prefix + " " + newNote;
+                        combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
 
-                        prefix = oBundle.getText("note_type_REVISE"); break;
+                        dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
+                        dModel.setProperty("/detailPopupNote", "");
+                        payload.Desc1 = combinedNote;
 
-                        var finalNote = prefix + " " + newNote;
-                        var combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+                    case 'CN': // Cancel
+                        var newNote = dData.detailPopupNote?.trim();
+                        var oldNote = row.Desc1?.trim() || "";
+                        var status = row.Statu;
 
-                        payload.Desc1 = finalNote;
+                        prefix = oBundle.getText("note_type_CANCEL");
+                        finalNote = prefix + " " + newNote;
+                        combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+
+                        dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
+                        dModel.setProperty("/detailPopupNote", "");
+                        payload.Desc1 = combinedNote;
+
+                    case 'CA': // Cancel Approve
+                    case 'CR': // Cancel Reject
+                    case 'CV': // Cancel Revise
+                    case 'RV': // Revise
+
+                        var newNote = dData.detailPopupNote?.trim();
+                        var oldNote = row.Desc1?.trim() || "";
+                        var status = row.Statu;
+
+                        prefix = oBundle.getText("note_type_REVISE");
+                        finalNote = prefix + " " + newNote;
+                        combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+
+                        dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
+                        dModel.setProperty("/detailPopupNote", "");
+                        payload.Desc1 = combinedNote;
 
                         break;
                     case 'SD': // Send

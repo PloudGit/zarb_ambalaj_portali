@@ -68,7 +68,7 @@ sap.ui.define([
                             new sap.m.Button({
                                 text: "Çağrı Uygulamasına Git",
                                 icon: "sap-icon://headset",
-                                visible:"{pm>/header/routeCallApplication}",
+                                visible: "{pm>/header/routeCallApplication}",
                                 press: that._main.onOpenCallScreen.bind(that)
                             }).addStyleClass("orangeButton sapUiSmallMarginLeft")
                         );
@@ -97,7 +97,7 @@ sap.ui.define([
 
             pData["header"]["lifnrFilter"] = false;
             pData["header"]["routeCallApplication"] = false;
-            
+
             pModel.refresh();
         },
 
@@ -373,10 +373,10 @@ sap.ui.define([
         checkData: function (that, action) {
             var dModel = that.getOModel(that, "dm");
             var dData = dModel.getData();
+            var note = dData.detailPopupNote?.trim();
 
             switch (action) {
                 case 'AN': // Not ekleme
-                    var note = dData.detailPopupNote?.trim();
                     if (!note) {
                         that.showMessage("error", "note_field_required");
                         return;
@@ -390,12 +390,18 @@ sap.ui.define([
                     break;
 
                 case 'RJ': // Reddet
-
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
                     that.confirmMessageWithActonResponse(that, "confirmReject", that.onConfirmResponse, action);
                     break;
 
                 case 'CN': // İptal Et
-
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
                     that.confirmMessageWithActonResponse(that, "confirmCancel", that.onConfirmResponse, action);
                     break;
 
@@ -411,8 +417,18 @@ sap.ui.define([
                     that.confirmMessageWithActonResponse(that, "confirmCancelRevise", that.onConfirmResponse, action);
                     break;
 
-                case 'RV': // Revize Et
+                case 'RV': // Revize Et 
+                    // firma teslim tarihini revize edebilir yani zorunlu  - not girişi zorunludur
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
 
+                    var slfdi = dData.sSelectedEbelnTableData[0].Slfdi
+                    if (!slfdi || slfdi.toString().trim() === "") {
+                        that.showMessage("error", "slfdi_field_required");
+                        return;
+                    }
                     that.confirmMessageWithActonResponse(that, "confirmRevise", that.onConfirmResponse, action);
                     break;
 
