@@ -419,7 +419,7 @@
                     text="{i18n>OP_btnClose}"
                     icon="sap-icon://sys-cancel"
                     class="redButton"
-                    press="onPressAction($event, 'CL')"
+                    press="onCloseOrderDetailPopup"
                 />
             </Toolbar>
         </VBox>

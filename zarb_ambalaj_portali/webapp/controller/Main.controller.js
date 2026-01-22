@@ -110,6 +110,7 @@ sap.ui.define([
 
         onPressEbeln: function (oEvent) {
 
+            debugger;
             var that = this;
             // hangi tablodaki hangi satır verisine tıklandığını tutalım  ? 
 
@@ -136,7 +137,7 @@ sap.ui.define([
             oRow["Menge"] = oRowData.Menge;
             oRow["Meins"] = oRowData.Meins;
             oRow["Slfdt"] = oRowData.Slfdt;
-            oRow["Slfdi"] = oRowData.Slfdt;
+            oRow["Slfdi"] = null;
             oRow["Plaka"] = oRowData.Plaka;
             oRow["Sevkm"] = oRowData.Sevkm;
             oRow["Sofor"] = oRowData.Sofor;
