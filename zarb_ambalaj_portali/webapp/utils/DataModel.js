@@ -80,7 +80,8 @@ sap.ui.define([
 					// cancelButton: false,
 					// reviseButton: false,
 					// saveButton: false,
-
+					currentAction:"",
+					BtnVisConfirmAction:false,
 					BtnVisAddNote: false,
 					BtnVisAiCancel: false,
 					BtnVisApprove: false,
@@ -99,7 +100,8 @@ sap.ui.define([
 					SlfdiEdit: false,
 					SlfdiVis: false,
 					SoforVis: false,
-					TesyrVis: false
+					TesyrVis: false,
+					AddNoteArea:false
 				}
 
 

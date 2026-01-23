@@ -129,6 +129,7 @@ sap.ui.define([
             oRowData.Slfdi = null; // Firma Revizyon Teslim Tarihi boş olsun .
             var dModel = this.getOModel(this, "dm");
             dModel.setProperty("/sSelectedEbelnRowData", oRowData);
+            dModel.setProperty("/detailPopupNote", "");
 
             var oRow = {};
             var oRows = [];
@@ -205,11 +206,69 @@ sap.ui.define([
             that._main.checkData(that, 'AN');
         },
 
+        // onPressAction: function (oEvent, sActionCode) {
+        //     var that = this;
+
+        //     that._main.checkData(that, sActionCode);
+        // },
         onPressAction: function (oEvent, sActionCode) {
             var that = this;
+            var pModel = that.getOModel(that, "pm");
+            var pData = pModel.getData();
 
-            that._main.checkData(that, sActionCode);
+            if (sActionCode === "CONFIRM") {
+                var actionToRun = pData.detailPopup.currentAction; // yapmak istediği işlemi modelden al
+                if (actionToRun) {
+                    that._main.checkData(that, actionToRun);
+                }
+                return;
+            }
+
+            if (sActionCode === "AC" || sActionCode === 'RJ' || sActionCode === 'CN' || sActionCode === 'CA' || sActionCode === 'CR') {
+                that._main.checkData(that, sActionCode);
+                return;
+            }
+
+            // görünümü değiştir
+            Object.keys(pData.detailPopup).forEach(function (key) {
+                if (typeof pData.detailPopup[key] === "boolean") {
+                    pData.detailPopup[key] = false;
+                }
+            });
+
+            // tıklanan actionı al
+            pData.detailPopup.currentAction = sActionCode;
+
+            // aksiyona göre modeli yönet 
+            if (sActionCode === "RV") { // revize et 
+                pData.detailPopup.SlfdiVis = true;
+                pData.detailPopup.SlfdiEdit = true;
+                pData.detailPopup.BtnVisAddNote = false;
+                pData.detailPopup.AddNoteArea = true;
+
+            } else if (sActionCode === "SE") { // sevk et 
+                pData.detailPopup.SevkmVis = true;
+                pData.detailPopup.PlakaVis = true;
+                pData.detailPopup.SoforVis = true;
+                pData.detailPopup.TesyrVis = true;
+                pData.detailPopup.BtnVisAddNote = false;
+                pData.detailPopup.AddNoteArea = true;
+
+            }
+            else if (sActionCode === "CV") { // iptali revize et 
+                pData.detailPopup.SlfdiVis = true;
+                pData.detailPopup.SlfdiEdit = true;
+                pData.detailPopup.BtnVisAddNote = false;
+                pData.detailPopup.AddNoteArea = true;
+
+            }
+
+            // işlemi tamamla butonunu da aç 
+            pData.detailPopup.BtnVisConfirmAction = true;
+
+            pModel.refresh();
         },
+
 
         onConfirmResponse: function (that, response, action) {
             var dModel = that.getOModel(that, "dm");

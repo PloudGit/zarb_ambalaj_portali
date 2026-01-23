@@ -225,7 +225,7 @@
                     />
                 </HBox>
 
-                <HBox visible="{pm>/detailPopup/BtnVisAddNote}">
+                <HBox visible="{pm>/detailPopup/AddNoteArea}">
                     <Label
                         width="150px"
                         text="{i18n>OP_addNote}"
@@ -235,7 +235,6 @@
                         value="{dm>/detailPopupNote}"
                         rows="3"
                         width="150%"
-                        editable="{pm>/detailPopup/BtnVisAddNote}"
                     />
                 </HBox>
                 <HBox visible="{pm>/detailPopup/BtnVisAddNote}">
@@ -414,7 +413,13 @@
                     press="onPressAction($event, 'PK')"
                     visible="{pm>/detailPopup/BtnVisPk}"
                 />
-
+                <Button
+                    text="{i18n>OP_btnCompleteAction}"
+                    icon="sap-icon://complete"
+                    class="greenButton"
+                    press="onPressAction($event, 'CONFIRM')"
+                    visible="{pm>/detailPopup/BtnVisConfirmAction}"
+                />
                 <Button
                     text="{i18n>OP_btnClose}"
                     icon="sap-icon://sys-cancel"

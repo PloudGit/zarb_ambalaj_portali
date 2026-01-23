@@ -313,31 +313,35 @@ sap.ui.define([
         },
 
         setDetailPopupVisibility: function (that, data) {
-
-            var dModel = that.getOModel(that, "dm");
             var pModel = that.getOModel(that, "pm");
-
             var pData = pModel.getData();
-            pData.detailPopup = pData.detailPopup || {};
 
-            if (!data || data.length === 0) {
-                return;
-            }
-
-            var result = data[0];
-
+            // hepsini önce false yap 
             for (var key in pData.detailPopup) {
-                if (result.hasOwnProperty(key)) {
-                    pData.detailPopup[key] = result[key];
+                if (typeof pData.detailPopup[key] === "boolean") {
+                    pData.detailPopup[key] = false;
                 }
             }
 
+            // sadece butonları yönet
+            if (data && data.length > 0) {
+                var result = data[0];
+                Object.keys(result).forEach(function (key) {
+                    if (key.startsWith("BtnVis") && pData.detailPopup.hasOwnProperty(key)) {
+                        pData.detailPopup[key] = result[key];
+                    }
+                });
+            }
+
+            // not ekle açıksa 
+            if (pData.detailPopup["BtnVisAddNote"] === true) {
+                pData.detailPopup["AddNoteArea"] = true;
+            }
+
             pModel.refresh();
-
-            // busy dialog kapat
             that.closeBusyDialog();
-
         },
+
 
         // checkData: function (that, action) {
 
