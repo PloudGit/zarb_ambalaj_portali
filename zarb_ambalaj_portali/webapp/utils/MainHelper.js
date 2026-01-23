@@ -414,10 +414,23 @@ sap.ui.define([
                     break;
 
                 case 'CR': // İptali Reddet
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
                     that.confirmMessageWithActonResponse(that, "confirmCancelReject", that.onConfirmResponse, action);
                     break;
 
                 case 'CV': // İptali Revize Et
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
+                    var slfdi = dData.sSelectedEbelnTableData[0].Slfdi
+                    if (!slfdi || slfdi.toString().trim() === "") {
+                        that.showMessage("error", "slfdi_field_required");
+                        return;
+                    }
                     that.confirmMessageWithActonResponse(that, "confirmCancelRevise", that.onConfirmResponse, action);
                     break;
 
@@ -436,12 +449,33 @@ sap.ui.define([
                     that.confirmMessageWithActonResponse(that, "confirmRevise", that.onConfirmResponse, action);
                     break;
 
-                case 'SD': // Gönder
+                // case 'SD': // Gönder
 
-                    that.confirmMessageWithActonResponse(that, "confirmSend", that.onConfirmResponse, action);
-                    break;
+                //     that.confirmMessageWithActonResponse(that, "confirmSend", that.onConfirmResponse, action);
+                //     break;
 
                 case 'SE': // Sevk Et
+                    debugger;
+                    var tesyr = dData.sSelectedEbelnTableData[0].Tesyr?.trim();
+                    var plaka = dData.sSelectedEbelnTableData[0].Plaka?.trim();
+                    var sofor = dData.sSelectedEbelnTableData[0].Sofor?.trim();
+                    var sevkm = dData.sSelectedEbelnTableData[0].Sevkm?.trim();
+                    if (!tesyr) {
+                        that.showMessage("error", "tesyr_field_required");
+                        return;
+                    }
+                    if (!plaka) {
+                        that.showMessage("error", "plaka_field_required");
+                        return;
+                    }
+                    if (!sofor) {
+                        that.showMessage("error", "sofor_field_required");
+                        return;
+                    }
+                    if (!sevkm || sevkm === "0") {
+                        that.showMessage("error", "sevkm_field_required");
+                        return;
+                    }
 
                     that.confirmMessageWithActonResponse(that, "confirmSevk", that.onConfirmResponse, action);
                     break;
