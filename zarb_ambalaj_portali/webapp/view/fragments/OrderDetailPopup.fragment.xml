@@ -391,13 +391,13 @@
                     visible="{pm>/detailPopup/BtnVisRevise}"
                 />
 
-                <Button
+                <!-- <Button
                     text="{i18n>OP_btnSend}"
                     icon="sap-icon://send-task"
                     class="greenButton"
                     press="onPressAction($event, 'SD')"
                     visible="{pm>/detailPopup/BtnVisSend}"
-                />
+                /> -->
 
                 <Button
                     text="{i18n>OP_btnSevk}"

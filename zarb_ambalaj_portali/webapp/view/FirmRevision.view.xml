@@ -16,7 +16,7 @@
                 <content> -->
                     <t:Table
                         id="tblRevisionCalls"
-                        rows="{dm>/OrderListFREVIZYON}"
+                        rows="{dm>/OrderListREVF}"
                         selectionMode="None"
                         enableColumnReordering="true"
                         width="100%"

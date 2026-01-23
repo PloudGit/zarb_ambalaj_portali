@@ -16,7 +16,7 @@
                 <content> -->
                     <t:Table
                         id="tblCanceledCalls"
-                        rows="{dm>/OrderListIPTALCAGRI}"
+                        rows="{dm>/OrderListIPTT}"
                         selectionMode="None"
                         enableColumnReordering="true"
                         width="100%"

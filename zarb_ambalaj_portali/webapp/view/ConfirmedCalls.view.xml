@@ -16,7 +16,7 @@
                 <content> -->
                     <t:Table
                         id="tblConfirmedCalls"
-                        rows="{dm>/OrderListTEYITCAGRI}"
+                        rows="{dm>/OrderListONAY}"
                         selectionMode="None"
                         enableColumnReordering="true"
                         width="100%"
