@@ -18,6 +18,7 @@ sap.ui.define([
 
 
 			var dData = {
+				TeslimYeriList:[],
 				supplierNo: "",
 				isSupplier: false,
 				detailPopupNote: "",
@@ -101,6 +102,7 @@ sap.ui.define([
 					SlfdiVis: false,
 					SoforVis: false,
 					TesyrVis: false,
+					SevkedVis:false,
 					AddNoteArea:false
 				}
 

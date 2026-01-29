@@ -120,7 +120,7 @@
                             >
                                 <items>
                                     <!-- PK Bilgisi Olmayan Çağrılar -->
-                                    <IconTabFilter
+                                    <!-- <IconTabFilter
                                         text="{i18n>tabNoPk}"
                                         key="PKOLMAYAN"
                                         icon="sap-icon://alert"
@@ -134,7 +134,7 @@
                                             models="{dm: ${dm}, i18n: ${i18n}}"
                                             height="100%"
                                         />
-                                    </IconTabFilter>
+                                    </IconTabFilter> -->
 
                                     <!-- Açık Çağrılar -->
                                     <IconTabFilter

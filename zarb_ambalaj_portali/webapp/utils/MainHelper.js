@@ -313,6 +313,15 @@ sap.ui.define([
         },
 
         setDetailPopupVisibility: function (that, data) {
+
+            // sevk miktarı alanlarını da güncelle 
+            var dModel = that.getOModel(that, "dm");
+            var dData = dModel.getData();
+
+            dData["sSelectedEbelnTableData"][0]["Sevkm"] = data[0].Sevkm;
+            dData["sSelectedEbelnTableData"][0]["RestSevkm"] = data[0].RestSevkm;
+            dModel.refresh();
+
             var pModel = that.getOModel(that, "pm");
             var pData = pModel.getData();
 
@@ -332,6 +341,12 @@ sap.ui.define([
                     }
                 });
             }
+
+            // sevk mktarı açıksa - sevk yapılan miktarı görsün - 
+            if (pData.detailPopup["BtnVisSevk"]) {
+                pData.detailPopup["SevkedVis"] = true;
+            }
+
 
             // not ekle açıksa 
             if (pData.detailPopup["BtnVisAddNote"] === true) {
@@ -459,7 +474,7 @@ sap.ui.define([
                     var tesyr = dData.sSelectedEbelnTableData[0].Tesyr?.trim();
                     var plaka = dData.sSelectedEbelnTableData[0].Plaka?.trim();
                     var sofor = dData.sSelectedEbelnTableData[0].Sofor?.trim();
-                    var sevkm = dData.sSelectedEbelnTableData[0].Sevkm?.trim();
+                    var sevkm = dData.sSelectedEbelnTableData[0].RestSevkm?.trim();
                     if (!tesyr) {
                         that.showMessage("error", "tesyr_field_required");
                         return;

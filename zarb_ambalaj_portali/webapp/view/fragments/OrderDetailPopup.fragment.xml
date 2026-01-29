@@ -166,7 +166,10 @@
                         textAlign="Right"
                     />
                     <Input
-                        value="{dm>/sSelectedEbelnRowData/Netpr}"
+                        value="{
+                                                path: 'dm>/sSelectedEbelnRowData/Netpr',
+                                                formatter: '.formatters.formatDecimal'
+                                            }"
                         width="100%"
                         editable="false"
                     />
@@ -179,7 +182,10 @@
                         textAlign="Right"
                     />
                     <Input
-                        value="{dm>/sSelectedEbelnRowData/Peinh}"
+                        value="{
+                                                path: 'dm>/sSelectedEbelnRowData/Peinh',
+                                                formatter: '.formatters.formatDecimal'
+                                            }"
                         width="100%"
                         editable="false"
                     />
@@ -250,86 +256,133 @@
                         press="onApproveOrder"
                     />
                 </HBox>
-                <Table
-                    id="OrderQuantityTable"
-                    inset="false"
+                <ScrollContainer
+                    horizontal="true"
                     width="100%"
-                    class="sapUiSmallMarginTop gridTable"
-                    items="{dm>/sSelectedEbelnTableData}"
                 >
-                    <columns>
-                        <Column>
-                            <Text text="{i18n>quantity}" />
-                        </Column>
-                        <Column>
-                            <Text text="{i18n>unit}" />
-                        </Column>
-                        <Column>
-                            <Text text="{i18n>OP_firmDeliveryDate}" />
-                        </Column>
-                        <Column visible="{pm>/detailPopup/SlfdiVis}">
-                            <Text text="{i18n>OP_reviseFirmDeliveryDate}" />
-                        </Column>
-                        <Column visible="{pm>/detailPopup/TesyrVis}">
-                            <Text text="{i18n>OP_deliveryPlace}" />
-                        </Column>
-                        <Column visible="{pm>/detailPopup/PlakaVis}">
-                            <Text text="{i18n>OP_plaka}" />
-                        </Column>
-                        <Column visible="{pm>/detailPopup/SoforVis}">
-                            <Text text="{i18n>OP_driverPhone}" />
-                        </Column>
-                        <Column visible="{pm>/detailPopup/SevkmVis}">
-                            <Text text="{i18n>OP_sevkQuantity}" />
-                        </Column>
-                    </columns>
-                    <items>
-                        <ColumnListItem>
-                            <cells>
-                                <Text text="{dm>Menge}" />
-                                <Text text="{dm>Meins}" />
-                                <Text
-                                    text="{
+                    <Table
+                        id="OrderQuantityTable"
+                        inset="false"
+                        width="100%"
+                        class="sapUiSmallMarginTop gridTable"
+                        items="{dm>/sSelectedEbelnTableData}"
+                        fixedLayout="true"
+                    >
+                        <columns>
+                            <Column width="70px">
+                                <Text text="{i18n>quantity}" />
+                            </Column>
+                            <Column width="60px">
+                                <Text text="{i18n>unit}" />
+                            </Column>
+                            <Column width="100px">
+                                <Text text="{i18n>OP_firmDeliveryDate}" />
+                            </Column>
+                            <Column
+                                width="100px"
+                                visible="{pm>/detailPopup/SevkedVis}"
+                            >
+                                <Text text="{i18n>OP_sevkedQuantity}" />
+                            </Column>
+                            <Column width="100px">
+                                <Text text="{i18n>OP_reviseFirmDeliveryDate}" />
+                            </Column>
+
+                            <Column
+                                width="230px"
+                                visible="{pm>/detailPopup/TesyrVis}"
+                            >
+                                <Text text="{i18n>OP_deliveryPlace}" />
+                            </Column>
+                            <Column
+                                width="150px"
+                                visible="{pm>/detailPopup/PlakaVis}"
+                            >
+                                <Text text="{i18n>OP_plaka}" />
+                            </Column>
+                            <Column
+                                width="150px"
+                                visible="{pm>/detailPopup/SoforVis}"
+                            >
+                                <Text text="{i18n>OP_driverPhone}" />
+                            </Column>
+                            <Column
+                                width="100px"
+                                visible="{pm>/detailPopup/SevkmVis}"
+                            >
+                                <Text text="{i18n>OP_sevkQuantity}" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text  text="{
+                                                path: 'dm>Menge',
+                                                formatter: '.formatters.formatDecimal'
+                                            }"/>
+                                    <Text text="{dm>Meins}" />
+                                    <Text
+                                        text="{
                         path: 'dm>Slfdt',
                         type: 'sap.ui.model.odata.type.DateTime',
                         formatOptions: { pattern: 'dd.MM.yyyy' }
                     }"
-                                />
-                                <DatePicker
-                                    value="{path: 'dm>Slfdi',
+                                    />
+                                    <Text  text="{
+                                                path: 'dm>Sevkm',
+                                                formatter: '.formatters.formatDecimal'
+                                            }" />
+                                    <DatePicker
+                                        value="{path: 'dm>Slfdi',
                         type: 'sap.ui.model.odata.type.DateTime',
                         formatOptions: {
                         pattern: 'dd.MM.yyyy'
                                                 }
                                             }"
-                                    displayFormat="short"
-                                    editable="{pm>/detailPopup/SlfdiEdit}"
-                                    visible="{pm>/detailPopup/SlfdiVis}"
-                                />
-                                <Input
+                                        displayFormat="short"
+                                        editable="{pm>/detailPopup/SlfdiEdit}"
+                                    />
+                                    <!-- visible="{pm>/detailPopup/SlfdiVis}" -->
+                                    <!-- <Input
                                     value="{dm>Tesyr}"
                                     editable="{pm>/detailPopup/TesyrVis}"
                                     visible="{pm>/detailPopup/TesyrVis}"
-                                />
-                                <Input
-                                    value="{dm>Plaka}"
-                                    editable="{pm>/detailPopup/PlakaVis}"
-                                    visible="{pm>/detailPopup/PlakaVis}"
-                                />
-                                <Input
-                                    value="{dm>Sofor}"
-                                    editable="{pm>/detailPopup/SoforVis}"
-                                    visible="{pm>/detailPopup/SoforVis}"
-                                />
-                                <Input
-                                    value="{dm>Sevkm}"
-                                    editable="{pm>/detailPopup/SevkmVis}"
-                                    visible="{pm>/detailPopup/SevkmVis}"
-                                />
-                            </cells>
-                        </ColumnListItem>
-                    </items>
-                </Table>
+                                /> -->
+                                    <Select
+                                        selectedKey="{dm>Tesyr}"
+                                        items="{dm>/TeslimYeriList}"
+                                        templateShareable="true"
+                                        forceSelection="false"
+                                        width="190px"
+                                    >
+                                        <core:Item
+                                            key="{dm>DomvalueL}"
+                                            text="{dm>Ddtext}"
+                                        />
+                                    </Select>
+                                    <Input
+                                        value="{dm>Plaka}"
+                                        editable="{pm>/detailPopup/PlakaVis}"
+                                        visible="{pm>/detailPopup/PlakaVis}"
+                                    />
+                                    <Input
+                                        value="{dm>Sofor}"
+                                        editable="{pm>/detailPopup/SoforVis}"
+                                        visible="{pm>/detailPopup/SoforVis}"
+                                    />
+                                    <Input
+                                        value="{
+                                                path: 'dm>RestSevkm',
+                                                formatter: '.formatters.formatDecimal'
+                                            }"
+                                        editable="{pm>/detailPopup/SevkmVis}"
+                                        visible="{pm>/detailPopup/SevkmVis}"
+                                    />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </ScrollContainer>
             </VBox>
 
             <Toolbar class="sapUiTinyMarginTop">
@@ -400,7 +453,7 @@
 
                 <Button
                     text="{i18n>OP_btnSevk}"
-                    icon="sap-icon://icon-truck-driver"
+                    icon="sap-icon://shipping-status"
                     class="blueButton"
                     press="onPressAction($event, 'SE')"
                     visible="{pm>/detailPopup/BtnVisSevk}"

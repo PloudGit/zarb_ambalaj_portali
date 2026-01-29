@@ -140,7 +140,38 @@ sap.ui.define([
 				}
 			});
 
+		},
 
+		getTeslimYeriList: function (that) {
+
+			var url = "/DomainValueSet";
+
+			var bModel = that.getOModel(that, "bm");
+			var bData = bModel.getData();
+
+			var dModel = that.getOModel(that, "dm");
+			var dData = dModel.getData();
+			var aFilters = [];
+
+			aFilters.push(new Filter("Domname", FilterOperator.EQ, 'ZARBD_AP_TESYR'));
+
+			var oDataModel = that.getOwnerComponent().getModel();
+
+			oDataModel.read(url, {
+				filters: aFilters,
+				success: function (oData, oResponse) {
+
+					dData["TeslimYeriList"] = oData.results;
+					dModel.refresh();
+
+				},
+				error: function (oError) {
+					that.closeBusyDialog();
+					that._oData.handleODataErrors(that);
+
+				}
+
+			});
 
 		}
 

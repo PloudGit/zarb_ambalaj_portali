@@ -58,6 +58,8 @@ sap.ui.define([
             var that = this;
 
             this._main.setFilterBar(this, "smartFilterBar");
+
+            this._oData.getTeslimYeriList(this);
         },
 
         _onRouteMatched: function () {
@@ -126,7 +128,7 @@ sap.ui.define([
 
             // Ebeln değerini al
             var sEbeln = oRowData.Ebeln;
-            oRowData.Slfdi = null; // Firma Revizyon Teslim Tarihi boş olsun .
+
             var dModel = this.getOModel(this, "dm");
             dModel.setProperty("/sSelectedEbelnRowData", oRowData);
             dModel.setProperty("/detailPopupNote", "");
@@ -139,9 +141,10 @@ sap.ui.define([
             oRow["Menge"] = oRowData.Menge;
             oRow["Meins"] = oRowData.Meins;
             oRow["Slfdt"] = oRowData.Slfdt;
-            oRow["Slfdi"] = null;
+            oRow["Slfdi"] = oRowData.Slfdi;
             oRow["Plaka"] = oRowData.Plaka;
             oRow["Sevkm"] = oRowData.Sevkm;
+            oRow["RestSevkm"] = "",
             oRow["Sofor"] = oRowData.Sofor;
             oRow["Tesyr"] = oRowData.Tesyr;
             oRows.push(oRow);
@@ -253,6 +256,8 @@ sap.ui.define([
                 pData.detailPopup.TesyrVis = true;
                 pData.detailPopup.BtnVisAddNote = false;
                 pData.detailPopup.AddNoteArea = true;
+                pData.detailPopup.SevkedVis = true;
+                
 
             }
             else if (sActionCode === "CV") { // iptali revize et 
@@ -295,7 +300,7 @@ sap.ui.define([
                     Slfdi: that.formatters.adjustStartDateForUTC(tableRow.Slfdi),
                     IsSupplier: dData["isSupplier"],
                     Lifnr: dData["supplierNo"],
-                    Sevkm: tableRow.Sevkm,
+                    Sevkm: tableRow.RestSevkm,
                     Desc1: row.Desc1  // aşağıda eklenecek not ekle denirse 
                 };
 

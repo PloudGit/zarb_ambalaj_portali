@@ -120,7 +120,10 @@
                             <t:Column hAlign="End">
                                 <Label text="{i18n>quantity}" />
                                 <t:template>
-                                    <Text text="{dm>Menge}" />
+                                    <Text  text="{
+                                                path: 'dm>Menge',
+                                                formatter: '.formatters.formatDecimal'
+                                            }" />
                                 </t:template>
                             </t:Column>
 
@@ -134,7 +137,10 @@
                             <t:Column hAlign="End">
                                 <Label text="{i18n>price}" />
                                 <t:template>
-                                    <Text text="{dm>Netpr}" />
+                                    <Text text="{
+                                                path: 'dm>Netpr',
+                                                formatter: '.formatters.formatDecimal'
+                                            }" />
                                 </t:template>
                             </t:Column>
 
