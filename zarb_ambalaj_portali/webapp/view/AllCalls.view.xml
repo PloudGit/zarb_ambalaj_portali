@@ -152,6 +152,12 @@
                     <Text text="{dm>Waers}" />
                 </t:template>
             </t:Column>
+               <t:Column>
+                <Label text="{i18n>callNumber}" />
+                <t:template>
+                    <Text text="{dm>ApKey}" />
+                </t:template>
+            </t:Column>
             <t:Column>
                 <Label text="{i18n>callCreatedDate}" />
                 <t:template>

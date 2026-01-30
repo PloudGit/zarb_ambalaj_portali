@@ -503,7 +503,61 @@ sap.ui.define([
                 default:
                     break;
             }
+        },
+
+        approveSuccessInformation: function (that, data) {
+            var i18n = that.getView().getModel("i18n").getResourceBundle();
+            var action = data.Action;
+            var successTitle = i18n.getText("Success");
+            var messageKey = "";
+
+            switch (action) {
+                case "AN":
+                    messageKey = "noteAddedSuccessfully";
+                    break;
+                case "AC":
+                    messageKey = "approvedSuccessfully";
+                    break;
+                case "RJ":
+                    messageKey = "rejectedSuccessfully";
+                    break;
+                case "CN":
+                    messageKey = "cancelledSuccessfully";
+                    break;
+                case "CA":
+                    messageKey = "cancelApproveSuccess";
+                    break;
+                case "CR":
+                    messageKey = "cancelRejectSuccess";
+                    break;
+                case "CV":
+                    messageKey = "cancelReviseSuccess";
+                    break;
+                case "RV":
+                    messageKey = "reviseSuccess";
+                    break;
+                case "SE":
+                    messageKey = "sevkSuccess";
+                    break;
+                case "PK":
+                    messageKey = "pkSuccess";
+                    break;
+                default:
+                    messageKey = "processSuccesfullyDone";
+                    break;
+            }
+
+            MessageBox.success(i18n.getText(messageKey), {
+                title: successTitle,
+                onClose: function () {
+                    if (that.OrderDetailPopup) {
+                        that.OrderDetailPopup.close();
+                    }
+                    that._oData.getList(that);
+                }
+            });
         }
+
 
 
 

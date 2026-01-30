@@ -130,6 +130,7 @@ sap.ui.define([
 
 					debugger;
 					that.closeBusyDialog();
+					that._main.approveSuccessInformation(that, oData);
 				},
 				error: function (oError) {
 					debugger;
