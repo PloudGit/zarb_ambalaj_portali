@@ -22,6 +22,17 @@
                 width="100%"
                 rowMode="Interactive"
             >
+                <t:toolbar>
+                    <Toolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            icon="sap-icon://download"
+                            text="{i18n>download}"
+                            press="onExcelDownload($event, 'OrderListWeeklyDeliveries')"
+                            class="yellowButton"
+                        />
+                    </Toolbar>
+                </t:toolbar>
                 <t:columns>
                     <t:Column sortProperty="Lifnr">
                         <Label text="{i18n>supplierCode}" />
@@ -168,6 +179,17 @@
                 width="100%"
                 rowMode="Interactive"
             >
+                <t:toolbar>
+                    <Toolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            icon="sap-icon://download"
+                            text="{i18n>download}"
+                            press="onExcelDownload($event, 'OrderListLateDeliveries')"
+                            class="yellowButton"
+                        />
+                    </Toolbar>
+                </t:toolbar>
                 <!-- Aynı kolonlar -->
                 <t:columns>
                     <t:Column sortProperty="Lifnr">
@@ -315,6 +337,17 @@
                 width="100%"
                 rowMode="Interactive"
             >
+                <t:toolbar>
+                    <Toolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            icon="sap-icon://download"
+                            text="{i18n>download}"
+                            press="onExcelDownload($event, 'OrderListFutureDeliveries')"
+                            class="yellowButton"
+                        />
+                    </Toolbar>
+                </t:toolbar>
                 <t:columns>
                     <t:Column sortProperty="Lifnr">
                         <Label text="{i18n>supplierCode}" />

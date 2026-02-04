@@ -7,6 +7,7 @@ sap.ui.define([
     "com/app/abdiibrahim/zarbambalajportali/utils/MainHelper",
     "com/app/abdiibrahim/zarbambalajportali/utils/Mapping",
     "com/app/abdiibrahim/zarbambalajportali/utils/formatter",
+    "com/app/abdiibrahim/zarbambalajportali/utils/Excel",
     "sap/ui/model/BindingMode",
     "sap/ui/export/Spreadsheet",
     "sap/m/HBox",
@@ -21,6 +22,7 @@ sap.ui.define([
     MainHelper,
     Mapping,
     formatter,
+    Excel,
     BindingMode,
     Spreadsheet,
     HBox,
@@ -50,6 +52,9 @@ sap.ui.define([
 
             // Mapping.js
             this._mapping = new Mapping();
+
+            // Excel js
+            this._excel = new Excel();
 
             // Create Model 
             this._dataModel.createAllModel(this);
@@ -145,7 +150,7 @@ sap.ui.define([
             oRow["Plaka"] = oRowData.Plaka;
             oRow["Sevkm"] = oRowData.Sevkm;
             oRow["RestSevkm"] = "",
-            oRow["Sofor"] = oRowData.Sofor;
+                oRow["Sofor"] = oRowData.Sofor;
             oRow["Tesyr"] = oRowData.Tesyr;
             oRows.push(oRow);
             dModel.setProperty("/sSelectedEbelnTableData", oRows);
@@ -190,11 +195,6 @@ sap.ui.define([
                 this.OrderDetailPopup.close();
 
             }
-        },
-
-        onExcelDownloadMainTable: function () {
-            debugger;
-
         },
 
         onIconTabBarSelect: function (oEvent) {
@@ -257,7 +257,7 @@ sap.ui.define([
                 pData.detailPopup.BtnVisAddNote = false;
                 pData.detailPopup.AddNoteArea = true;
                 pData.detailPopup.SevkedVis = true;
-                
+
 
             }
             else if (sActionCode === "CV") { // iptali revize et 
@@ -449,6 +449,29 @@ sap.ui.define([
         //     }
         // },
 
+        // EXCEL İŞLEMLERİ
+        onExcelDownload: function (oEvent, sModelPath) {
+            debugger;
+            var that = this;
+            var oView = this.getView();
+            var oModel = oView.getModel("dm");
+            var aData = oModel.getProperty("/" + sModelPath) || [];
+
+            if (!aData.length) {
+                sap.m.MessageToast.show(
+                    this.getView().getModel("i18n").getResourceBundle().getText("noData")
+                );
+                return;
+            }
+
+            that._excel.export({
+                data: aData,
+                columns: that._excel.getColumnConfig(that, sModelPath, oView),
+                fileName: that._excel._getExcelFileName(that, sModelPath),
+                sheetName: sModelPath
+            }, that);
+
+        },
 
 
     });

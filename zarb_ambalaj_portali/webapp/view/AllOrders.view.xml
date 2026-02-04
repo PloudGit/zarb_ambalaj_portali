@@ -29,7 +29,7 @@
                 <Button
                     icon="sap-icon://download"
                     text="{i18n>download}"
-                    press=".onExcelDownloadRevisionTable"
+                    press="onExcelDownload($event, 'OrderListGET_TUM_SIPARIS_S')"
                     class="yellowButton"
                 />
             </Toolbar>
@@ -58,7 +58,14 @@
             <t:Column>
                 <Label text="{i18n>orderDate}" />
                 <t:template>
-                    <Text text="{dm>Lifnr}" />
+                    <Text
+                        text="{path: 'dm>CreateDate',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                                                }
+                                            }"
+                    />
                 </t:template>
             </t:Column>
             <t:Column>

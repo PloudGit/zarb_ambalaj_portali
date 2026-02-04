@@ -29,7 +29,7 @@
                 <Button
                     icon="sap-icon://download"
                     text="{i18n>download}"
-                    press=".onExcelDownloadRevisionTable"
+                     press="onExcelDownload($event, 'OrderListREVE')"
                     class="yellowButton"
                 />
             </Toolbar>

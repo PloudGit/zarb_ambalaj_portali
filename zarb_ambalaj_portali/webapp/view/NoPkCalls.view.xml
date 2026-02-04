@@ -30,7 +30,7 @@
                 <Button
                     icon="sap-icon://download"
                     text="{i18n>download}"
-                    press=".onExcelDownloadMainTable"
+                   press="onExcelDownload($event, 'OrderListPKOLMAYAN')"
                     class="yellowButton"
                 />
             </Toolbar>
