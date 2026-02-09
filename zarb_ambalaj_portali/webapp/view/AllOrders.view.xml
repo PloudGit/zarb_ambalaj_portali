@@ -36,38 +36,12 @@
         </t:toolbar>
         <t:columns>
             <t:Column>
-                <Label text="{i18n>statu}" />
+                <Label text="{i18n>callNumber}" />
                 <t:template>
-                    <Text text="{dm>Statu}" />
+                    <Text text="{dm>ApKey}" />
                 </t:template>
             </t:Column>
 
-            <t:Column>
-                <Label text="{i18n>supplierCode}" />
-                <t:template>
-                    <Text text="{dm>Lifnr}" />
-                </t:template>
-            </t:Column>
-
-            <t:Column>
-                <Label text="{i18n>supplierName}" />
-                <t:template>
-                    <Text text="{dm>Name1}" />
-                </t:template>
-            </t:Column>
-            <t:Column>
-                <Label text="{i18n>orderDate}" />
-                <t:template>
-                    <Text
-                        text="{path: 'dm>CreateDate',
-                        type: 'sap.ui.model.odata.type.DateTime',
-                        formatOptions: {
-                        pattern: 'dd.MM.yyyy'
-                                                }
-                                            }"
-                    />
-                </t:template>
-            </t:Column>
             <t:Column>
                 <Label text="{i18n>orderNumber}" />
                 <t:template>
@@ -87,6 +61,20 @@
             </t:Column>
 
             <t:Column>
+                <Label text="{i18n>supplierCode}" />
+                <t:template>
+                    <Text text="{dm>Lifnr}" />
+                </t:template>
+            </t:Column>
+
+            <t:Column>
+                <Label text="{i18n>supplierName}" />
+                <t:template>
+                    <Text text="{dm>Name1}" />
+                </t:template>
+            </t:Column>
+
+            <t:Column>
                 <Label text="{i18n>materialCode}" />
                 <t:template>
                     <Text text="{dm>Matnr}" />
@@ -99,17 +87,11 @@
                     <Text text="{dm>Txt01}" />
                 </t:template>
             </t:Column>
+
             <t:Column>
-                <Label text="{i18n>firmDeliveryDate}" />
+                <Label text="{i18n>printCode}" />
                 <t:template>
-                    <Text
-                        text="{path: 'dm>Slfdt',
-                        type: 'sap.ui.model.odata.type.DateTime',
-                        formatOptions: {
-                        pattern: 'dd.MM.yyyy'
-                                                }
-                                            }"
-                    />
+                    <Text text="{dm>Normt}" />
                 </t:template>
             </t:Column>
 
@@ -118,20 +100,9 @@
                 <t:template>
                     <Text
                         text="{
-                                                path: 'dm>Menge',
-                                                formatter: '.formatters.formatDecimal'
-                                            }"
-                    />
-                </t:template>
-            </t:Column>
-            <t:Column hAlign="End">
-                <Label text="{i18n>openQuantity}" />
-                <t:template>
-                    <Text
-                        text="{
-                                                path: 'dm>Menge',
-                                                formatter: '.formatters.formatDecimal'
-                                            }"
+                    path: 'dm>Menge',
+                    formatter: '.formatters.formatDecimal'
+                }"
                     />
                 </t:template>
             </t:Column>
@@ -143,43 +114,81 @@
                 </t:template>
             </t:Column>
 
+            <t:Column>
+                <Label text="{i18n>orderDate}" />
+                <t:template>
+                    <Text
+                        text="{path: 'dm>CreateDate',
+                    type: 'sap.ui.model.odata.type.DateTime',
+                    formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                    }
+                }"
+                    />
+                </t:template>
+            </t:Column>
+
+            <t:Column>
+                <Label text="{i18n>firmDeliveryDate}" />
+                <t:template>
+                    <Text
+                        text="{path: 'dm>Slfdt',
+                    type: 'sap.ui.model.odata.type.DateTime',
+                    formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                    }
+                }"
+                    />
+                </t:template>
+            </t:Column>
+
             <t:Column hAlign="End">
                 <Label text="{i18n>price}" />
                 <t:template>
                     <Text
                         text="{
-                                                path: 'dm>Netpr',
-                                                formatter: '.formatters.formatDecimal'
-                                            }"
+                    path: 'dm>Netpr',
+                    formatter: '.formatters.formatDecimal'
+                }"
                     />
                 </t:template>
             </t:Column>
+
             <t:Column>
                 <Label text="{i18n>currency}" />
                 <t:template>
                     <Text text="{dm>Waers}" />
                 </t:template>
             </t:Column>
+
+            <!-- Extra columns (not in reference), added last -->
             <t:Column>
-                <Label text="{i18n>callNumber}" />
+                <Label text="{i18n>statu}" />
                 <t:template>
-                    <Text text="{dm>ApKey}" />
+                    <Text text="{dm>Statu}" />
                 </t:template>
             </t:Column>
-            <t:Column>
-                <Label text="{i18n>printCode}" />
+
+            <t:Column hAlign="End">
+                <Label text="{i18n>openQuantity}" />
                 <t:template>
-                    <Text text="{dm>Normt}" />
+                    <Text
+                        text="{
+                    path: 'dm>Menge',
+                    formatter: '.formatters.formatDecimal'
+                }"
+                    />
                 </t:template>
             </t:Column>
+
             <t:Column>
                 <Label text="{i18n>goodsReceipt}" />
                 <t:template>
                     <Text
                         text="{
-                                                path: 'dm>MalGirisi',
-                                                formatter: '.formatters.formatDecimal'
-                                            }"
+                    path: 'dm>MalGirisi',
+                    formatter: '.formatters.formatDecimal'
+                }"
                     />
                 </t:template>
             </t:Column>

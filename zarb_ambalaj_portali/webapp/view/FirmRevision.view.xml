@@ -35,24 +35,10 @@
             </Toolbar>
         </t:toolbar>
         <t:columns>
-            <!-- <t:Column>
-                                <Label text="{i18n>notIsExist}" />
-                                <t:template>
-                                    <Text text="{dm>Lifnr}" />
-                                </t:template>
-                            </t:Column> -->
-
             <t:Column>
-                <Label text="{i18n>supplierCode}" />
+                <Label text="{i18n>callNumber}" />
                 <t:template>
-                    <Text text="{dm>Lifnr}" />
-                </t:template>
-            </t:Column>
-
-            <t:Column>
-                <Label text="{i18n>supplierName}" />
-                <t:template>
-                    <Text text="{dm>Name1}" />
+                    <Text text="{dm>ApKey}" />
                 </t:template>
             </t:Column>
 
@@ -75,9 +61,16 @@
             </t:Column>
 
             <t:Column>
-                <Label text="{i18n>deliveryNumber}" />
+                <Label text="{i18n>supplierCode}" />
                 <t:template>
-                    <Text text="{dm>Etenr}" />
+                    <Text text="{dm>Lifnr}" />
+                </t:template>
+            </t:Column>
+
+            <t:Column>
+                <Label text="{i18n>supplierName}" />
+                <t:template>
+                    <Text text="{dm>Name1}" />
                 </t:template>
             </t:Column>
 
@@ -102,42 +95,14 @@
                 </t:template>
             </t:Column>
 
-            <t:Column>
-                <Label text="{i18n>firmDeliveryDate}" />
-                <t:template>
-                    <Text
-                        text="{path: 'dm>Slfdt',
-                        type: 'sap.ui.model.odata.type.DateTime',
-                        formatOptions: {
-                        pattern: 'dd.MM.yyyy'
-                                                }
-                                            }"
-                    />
-                </t:template>
-            </t:Column>
-
-            <t:Column>
-                <Label text="{i18n>reviseFirmDeliveryDate}" />
-                <t:template>
-                    <Text
-                        text="{path: 'dm>Slfdi',
-                        type: 'sap.ui.model.odata.type.DateTime',
-                        formatOptions: {
-                        pattern: 'dd.MM.yyyy'
-                                                }
-                                            }"
-                    />
-                </t:template>
-            </t:Column>
-
             <t:Column hAlign="End">
                 <Label text="{i18n>quantity}" />
                 <t:template>
                     <Text
                         text="{
-                                                path: 'dm>Menge',
-                                                formatter: '.formatters.formatDecimal'
-                                            }"
+                    path: 'dm>Menge',
+                    formatter: '.formatters.formatDecimal'
+                }"
                     />
                 </t:template>
             </t:Column>
@@ -149,27 +114,62 @@
                 </t:template>
             </t:Column>
 
+            <t:Column>
+                <Label text="{i18n>callCreatedDate}" />
+                <t:template>
+                    <Text text="{dm>CreateDate}" />
+                </t:template>
+            </t:Column>
+
+            <t:Column>
+                <Label text="{i18n>firmDeliveryDate}" />
+                <t:template>
+                    <Text
+                        text="{path: 'dm>Slfdt',
+                    type: 'sap.ui.model.odata.type.DateTime',
+                    formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                    }
+                }"
+                    />
+                </t:template>
+            </t:Column>
+            <t:Column>
+                <Label text="{i18n>reviseFirmDeliveryDate}" />
+                <t:template>
+                    <Text
+                        text="{path: 'dm>Slfdi',
+                    type: 'sap.ui.model.odata.type.DateTime',
+                    formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                    }
+                }"
+                    />
+                </t:template>
+            </t:Column>
             <t:Column hAlign="End">
                 <Label text="{i18n>price}" />
                 <t:template>
                     <Text
                         text="{
-                                                path: 'dm>Netpr',
-                                                formatter: '.formatters.formatDecimal'
-                                            }"
+                    path: 'dm>Netpr',
+                    formatter: '.formatters.formatDecimal'
+                }"
                     />
                 </t:template>
             </t:Column>
+
             <t:Column>
-                <Label text="{i18n>callNumber}" />
+                <Label text="{i18n>currency}" />
                 <t:template>
-                    <Text text="{dm>ApKey}" />
+                    <Text text="{dm>Waers}" />
                 </t:template>
             </t:Column>
+
             <t:Column>
-                <Label text="{i18n>callCreatedDate}" />
+                <Label text="{i18n>deliveryNumber}" />
                 <t:template>
-                    <Text text="{dm>CreateDate}" />
+                    <Text text="{dm>Etenr}" />
                 </t:template>
             </t:Column>
 

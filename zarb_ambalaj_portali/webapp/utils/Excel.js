@@ -94,243 +94,226 @@ sap.ui.define([
 
         _getSummaryCols: function (i18n) {
             return [
-                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
-                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
-
+                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
                 { label: i18n.getText("orderNumber"), property: "Ebeln", width: 15 },
                 { label: i18n.getText("orderItem"), property: "Ebelp", width: 10 },
-                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
-
+                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
+                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
                 { label: i18n.getText("materialCode"), property: "Matnr", width: 15 },
                 { label: i18n.getText("materialDesc"), property: "Txt01", width: 40 },
                 { label: i18n.getText("printCode"), property: "Normt", width: 15 },
-
-                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
-
                 { label: i18n.getText("quantity"), property: "Menge", width: 12 },
                 { label: i18n.getText("unit"), property: "Meins", width: 8 },
-
+                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
+                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
+                { label: i18n.getText("openDayCount"), property: "AcikDcount", width: 12 },
                 { label: i18n.getText("price"), property: "Netpr", width: 12 },
                 { label: i18n.getText("currency"), property: "Waers", width: 8 },
-
-                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
-                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
-                { label: i18n.getText("openDayCount"), property: "AcikDcount", width: 12 },
+                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
                 { label: i18n.getText("callCreatedBy"), property: "CreateUname", width: 20 }
             ];
         },
-
         _getAbdiRevisionCols: function (i18n) {
             return [
-                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
-                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
-
+                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
                 { label: i18n.getText("orderNumber"), property: "Ebeln", width: 15 },
                 { label: i18n.getText("orderItem"), property: "Ebelp", width: 10 },
-                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
-
+        
+                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
+                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
+        
                 { label: i18n.getText("materialCode"), property: "Matnr", width: 15 },
                 { label: i18n.getText("materialDesc"), property: "Txt01", width: 40 },
                 { label: i18n.getText("printCode"), property: "Normt", width: 15 },
-
+        
+                { label: i18n.getText("quantity"), property: "Menge", width: 12 },
+                { label: i18n.getText("unit"), property: "Meins", width: 8 },
+        
+                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
                 { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
                 { label: i18n.getText("reviseFirmDeliveryDate"), property: "Slfdi", type: "date", width: 15 },
-
-                { label: i18n.getText("quantity"), property: "Menge", width: 12 },
-                { label: i18n.getText("unit"), property: "Meins", width: 8 },
                 { label: i18n.getText("price"), property: "Netpr", width: 12 },
                 { label: i18n.getText("currency"), property: "Waers", width: 8 },
-
-                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
-                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
-                { label: i18n.getText("callCreatedBy"), property: "CreateUname", width: 20 }
+                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
+        
+                { label: i18n.getText("callCreatedBy"), property: "CreateUname", width: 20 },
+    
             ];
         },
-
+        
         _getAllCallsCols: function (i18n) {
             return [
-                { label: i18n.getText("statu"), property: "Statu", width: 12 },
-
-                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
-                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
-
+                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
                 { label: i18n.getText("orderNumber"), property: "Ebeln", width: 15 },
                 { label: i18n.getText("orderItem"), property: "Ebelp", width: 10 },
-                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
-
+        
+                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
+                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
+        
                 { label: i18n.getText("materialCode"), property: "Matnr", width: 15 },
                 { label: i18n.getText("materialDesc"), property: "Txt01", width: 40 },
                 { label: i18n.getText("printCode"), property: "Normt", width: 15 },
-
-                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
-
+        
                 { label: i18n.getText("quantity"), property: "Menge", width: 12 },
                 { label: i18n.getText("unit"), property: "Meins", width: 8 },
+        
+                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
+                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
+        
+                { label: i18n.getText("reviseFirmDeliveryDate"), property: "Eindt", type: "date", width: 15 },
                 { label: i18n.getText("price"), property: "Netpr", width: 12 },
                 { label: i18n.getText("currency"), property: "Waers", width: 8 },
-
-                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
-                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
-                { label: i18n.getText("reviseFirmDeliveryDate"), property: "Eindt", type: "date", width: 15 },
+                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
+        
                 { label: i18n.getText("callCreatedBy"), property: "CreateUname", width: 20 },
-
-                { label: i18n.getText("goodsReceipt"), property: "MalGirisi", width: 15 }
+        
+                { label: i18n.getText("goodsReceipt"), property: "MalGirisi", width: 15 },
+                { label: i18n.getText("statu"), property: "Statu", width: 12 }
             ];
         },
+        
 
         _getAllOrdersCols: function (i18n) {
             return [
-                { label: i18n.getText("statu"), property: "Statu", width: 12 },
-
-                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
-                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
-
-                { label: i18n.getText("orderDate"), property: "CreateDate", type: "date", width: 15 },
-
+                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
                 { label: i18n.getText("orderNumber"), property: "Ebeln", width: 15 },
                 { label: i18n.getText("orderItem"), property: "Ebelp", width: 10 },
-
+                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
+                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
                 { label: i18n.getText("materialCode"), property: "Matnr", width: 15 },
                 { label: i18n.getText("materialDesc"), property: "Txt01", width: 40 },
-
-                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
-
-                { label: i18n.getText("quantity"), property: "Menge", width: 12 },
+                { label: i18n.getText("printCode"), property: "Normt", width: 15 },
                 { label: i18n.getText("openQuantity"), property: "RestMenge", width: 12 },
-
+                { label: i18n.getText("quantity"), property: "Menge", width: 12 },
                 { label: i18n.getText("unit"), property: "Meins", width: 8 },
-
+                { label: i18n.getText("orderDate"), property: "CreateDate", type: "date", width: 15 },
+                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
                 { label: i18n.getText("price"), property: "Netpr", width: 12 },
                 { label: i18n.getText("currency"), property: "Waers", width: 8 },
-
-                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
-                { label: i18n.getText("printCode"), property: "Normt", width: 15 },
-
-                { label: i18n.getText("goodsReceipt"), property: "MalGirisi", width: 15 }
+                { label: i18n.getText("goodsReceipt"), property: "MalGirisi", width: 15 },
+                { label: i18n.getText("statu"), property: "Statu", width: 12 }
             ];
         },
-
+        
         _getCanceledCallsCols: function (i18n) {
             return [
-                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
-                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
+                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
                 { label: i18n.getText("orderNumber"), property: "Ebeln", width: 15 },
                 { label: i18n.getText("orderItem"), property: "Ebelp", width: 10 },
-                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
+        
+                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
+                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
+        
                 { label: i18n.getText("materialCode"), property: "Matnr", width: 15 },
                 { label: i18n.getText("materialDesc"), property: "Txt01", width: 40 },
                 { label: i18n.getText("printCode"), property: "Normt", width: 15 },
-
-                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
-
+        
                 { label: i18n.getText("quantity"), property: "Menge", width: 12 },
                 { label: i18n.getText("unit"), property: "Meins", width: 8 },
+        
+                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
+                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
+        
                 { label: i18n.getText("price"), property: "Netpr", width: 12 },
                 { label: i18n.getText("currency"), property: "Waers", width: 8 },
-
-                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
-                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
+                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
+        
                 { label: i18n.getText("callCreatedBy"), property: "CreateUname", width: 20 }
             ];
         },
-
+    
         _getApprovedCallsCols: function (i18n) {
             return [
-                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
-                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
+                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
                 { label: i18n.getText("orderNumber"), property: "Ebeln", width: 15 },
                 { label: i18n.getText("orderItem"), property: "Ebelp", width: 10 },
-                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
+                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
+                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
                 { label: i18n.getText("materialCode"), property: "Matnr", width: 15 },
                 { label: i18n.getText("materialDesc"), property: "Txt01", width: 40 },
                 { label: i18n.getText("printCode"), property: "Normt", width: 15 },
-
-                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
-                { label: i18n.getText("reviseFirmDeliveryDate"), property: "Slfdi", type: "date", width: 15 },
-
                 { label: i18n.getText("quantity"), property: "Menge", width: 12 },
                 { label: i18n.getText("unit"), property: "Meins", width: 8 },
+                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
+                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
+                { label: i18n.getText("reviseFirmDeliveryDate"), property: "Slfdi", type: "date", width: 15 },
                 { label: i18n.getText("price"), property: "Netpr", width: 12 },
                 { label: i18n.getText("currency"), property: "Waers", width: 8 },
-
-                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
-                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
-                { label: i18n.getText("callCreatedBy"), property: "CreateUname", width: 20 },
-
+                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
+                { label: i18n.getText("callCreatedBy"), property: "CreateUname", width: 20 },           
                 { label: i18n.getText("goodsReceipt"), property: "MalGirisi", width: 15 }
             ];
         },
+        
 
         _getRevisionCallsCols: function (i18n) {
             return [
-                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
-                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
+                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
                 { label: i18n.getText("orderNumber"), property: "Ebeln", width: 15 },
                 { label: i18n.getText("orderItem"), property: "Ebelp", width: 10 },
-                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
+
+                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
+                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
+
                 { label: i18n.getText("materialCode"), property: "Matnr", width: 15 },
                 { label: i18n.getText("materialDesc"), property: "Txt01", width: 40 },
                 { label: i18n.getText("printCode"), property: "Normt", width: 15 },
 
-                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
-                { label: i18n.getText("reviseFirmDeliveryDate"), property: "Slfdi", type: "date", width: 15 },
-
                 { label: i18n.getText("quantity"), property: "Menge", width: 12 },
                 { label: i18n.getText("unit"), property: "Meins", width: 8 },
-                { label: i18n.getText("price"), property: "Netpr", width: 12 },
 
-                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
                 { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
+                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
+                { label: i18n.getText("reviseFirmDeliveryDate"), property: "Slfdi", type: "date", width: 15 },
+                { label: i18n.getText("price"), property: "Netpr", width: 12 },
+                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
                 { label: i18n.getText("callCreatedBy"), property: "CreateUname", width: 20 }
+
             ];
         },
 
         _getNoPkCallsCols: function (i18n) {
             return [
-                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
-                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
+                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
                 { label: i18n.getText("orderNumber"), property: "Ebeln", width: 15 },
                 { label: i18n.getText("orderItem"), property: "Ebelp", width: 10 },
-                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
+                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
+                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
                 { label: i18n.getText("materialCode"), property: "Matnr", width: 15 },
                 { label: i18n.getText("materialDesc"), property: "Txt01", width: 40 },
                 { label: i18n.getText("printCode"), property: "Normt", width: 15 },
-
-                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
-
                 { label: i18n.getText("quantity"), property: "Menge", width: 12 },
                 { label: i18n.getText("unit"), property: "Meins", width: 8 },
+                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
+                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
                 { label: i18n.getText("price"), property: "Netpr", width: 12 },
                 { label: i18n.getText("currency"), property: "Waers", width: 8 },
-
-                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
-                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
+                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
                 { label: i18n.getText("callCreatedBy"), property: "CreateUname", width: 20 }
             ];
         },
 
         _getOpenCallsCols: function (i18n) {
             return [
-                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
-                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
+
+                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
                 { label: i18n.getText("orderNumber"), property: "Ebeln", width: 15 },
                 { label: i18n.getText("orderItem"), property: "Ebelp", width: 10 },
-                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
+                { label: i18n.getText("supplierCode"), property: "Lifnr", width: 15 },
+                { label: i18n.getText("supplierName"), property: "Name1", width: 30 },
                 { label: i18n.getText("materialCode"), property: "Matnr", width: 15 },
                 { label: i18n.getText("materialDesc"), property: "Txt01", width: 40 },
                 { label: i18n.getText("printCode"), property: "Normt", width: 15 },
-
-                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
-
                 { label: i18n.getText("quantity"), property: "Menge", width: 12 },
                 { label: i18n.getText("unit"), property: "Meins", width: 8 },
+                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
+                { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
+                { label: i18n.getText("openDayCount"), property: "AcikDcount", width: 12 },
                 { label: i18n.getText("price"), property: "Netpr", width: 12 },
                 { label: i18n.getText("currency"), property: "Waers", width: 8 },
+                { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },
+                { label: i18n.getText("callCreatedBy"), property: "CreateUname", width: 20 },
 
-                { label: i18n.getText("callNumber"), property: "ApKey", width: 20 },
-                { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
-                { label: i18n.getText("openDayCount"), property: "AcikDcount", width: 12 },
-                { label: i18n.getText("callCreatedBy"), property: "CreateUname", width: 20 }
             ];
         },
 

@@ -43,20 +43,12 @@
                                     <Text text="{dm>Lifnr}" />
                                 </t:template>
                             </t:Column> -->
-            <t:Column sortProperty="Lifnr">
-                <Label text="{i18n>supplierCode}" />
+            <t:Column>
+                <Label text="{i18n>callNumber}" />
                 <t:template>
-                    <Text text="{dm>Lifnr}" />
+                    <Text text="{dm>ApKey}" />
                 </t:template>
             </t:Column>
-
-            <t:Column sortProperty="Name1">
-                <Label text="{i18n>supplierName}" />
-                <t:template>
-                    <Text text="{dm>Name1}" />
-                </t:template>
-            </t:Column>
-
             <t:Column sortProperty="Ebeln">
                 <Label text="{i18n>orderNumber}" />
                 <t:template>
@@ -75,10 +67,17 @@
                 </t:template>
             </t:Column>
 
-            <t:Column sortProperty="Etenr">
-                <Label text="{i18n>deliveryNumber}" />
+            <t:Column sortProperty="Lifnr">
+                <Label text="{i18n>supplierCode}" />
                 <t:template>
-                    <Text text="{dm>Etenr}" />
+                    <Text text="{dm>Lifnr}" />
+                </t:template>
+            </t:Column>
+
+            <t:Column sortProperty="Name1">
+                <Label text="{i18n>supplierName}" />
+                <t:template>
+                    <Text text="{dm>Name1}" />
                 </t:template>
             </t:Column>
 
@@ -102,21 +101,6 @@
                     <Text text="{dm>Normt}" />
                 </t:template>
             </t:Column>
-
-            <t:Column sortProperty="Slfdt">
-                <Label text="{i18n>firmDeliveryDate}" />
-                <t:template>
-                    <Text
-                        text="{path: 'dm>Slfdt',
-                        type: 'sap.ui.model.odata.type.DateTime',
-                        formatOptions: {
-                        pattern: 'dd.MM.yyyy'
-                                                }
-                                            }"
-                    />
-                </t:template>
-            </t:Column>
-
             <t:Column
                 sortProperty="Menge"
                 hAlign="End"
@@ -131,11 +115,42 @@
                     />
                 </t:template>
             </t:Column>
-
             <t:Column sortProperty="Meins">
                 <Label text="{i18n>unit}" />
                 <t:template>
                     <Text text="{dm>Meins}" />
+                </t:template>
+            </t:Column>
+            <t:Column sortProperty="CreateDate">
+                <Label text="{i18n>callCreatedDate}" />
+                <t:template>
+                    <Text
+                        text="{path: 'dm>CreateDate',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                                                }
+                                            }"
+                    />
+                </t:template>
+            </t:Column>
+            <t:Column sortProperty="Slfdt">
+                <Label text="{i18n>firmDeliveryDate}" />
+                <t:template>
+                    <Text
+                        text="{path: 'dm>Slfdt',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                                                }
+                                            }"
+                    />
+                </t:template>
+            </t:Column>
+            <t:Column sortProperty="OpenDayCount">
+                <Label text="{i18n>openDayCount}" />
+                <t:template>
+                    <Text text="{dm>AcikDcount}" />
                 </t:template>
             </t:Column>
 
@@ -160,29 +175,10 @@
                     <Text text="{dm>Waers}" />
                 </t:template>
             </t:Column>
-            <t:Column>
-                <Label text="{i18n>callNumber}" />
+            <t:Column sortProperty="Etenr">
+                <Label text="{i18n>deliveryNumber}" />
                 <t:template>
-                    <Text text="{dm>ApKey}" />
-                </t:template>
-            </t:Column>
-            <t:Column sortProperty="CreateDate">
-                <Label text="{i18n>callCreatedDate}" />
-                <t:template>
-                    <Text
-                        text="{path: 'dm>CreateDate',
-                        type: 'sap.ui.model.odata.type.DateTime',
-                        formatOptions: {
-                        pattern: 'dd.MM.yyyy'
-                                                }
-                                            }"
-                    />
-                </t:template>
-            </t:Column>
-            <t:Column sortProperty="OpenDayCount">
-                <Label text="{i18n>openDayCount}" />
-                <t:template>
-                    <Text text="{dm>AcikDcount}" />
+                    <Text text="{dm>Etenr}" />
                 </t:template>
             </t:Column>
             <t:Column sortProperty="CreateUname">
