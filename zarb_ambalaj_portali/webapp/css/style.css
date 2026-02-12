@@ -102,6 +102,12 @@
     text-align: center;
   }
   
+  .autoWidthTable {
+    display: inline-block;  /* sadece içerik kadar genişle */
+    min-width: 100%;        /* ama en az container kadar olsun */
+    white-space: nowrap;    /* wrap olmasın, yatay scroll aktif olsun */
+  }
+  
 
   /* IconTabFilter iconColor="Critical" rengiyle uyumlu */
 .columnHeaderCritical {

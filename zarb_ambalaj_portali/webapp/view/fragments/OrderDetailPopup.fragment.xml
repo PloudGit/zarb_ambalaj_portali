@@ -72,7 +72,11 @@
                         textAlign="Right"
                     />
                     <Input
-                        value="{dm>/sSelectedEbelnRowData/CreateDate}"
+                        value="{
+                        path: 'dm>/sSelectedEbelnRowData/CreateDate',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: { pattern: 'dd.MM.yyyy' }
+                    }"
                         width="100%"
                         editable="false"
                     />
@@ -100,7 +104,7 @@
                     <Input
                         value="{dm>/sSelectedEbelnRowData/Normt}"
                         width="100%"
-                        editable="false"
+                        editable="{pm>/detailPopup/NormtEdit}"
                     />
                 </HBox>
 
@@ -162,7 +166,10 @@
                         textAlign="Right"
                     />
                     <Input
-                        value="{dm>/sSelectedEbelnRowData/Netpr}"
+                        value="{
+                                                path: 'dm>/sSelectedEbelnRowData/Netpr',
+                                                formatter: '.formatters.formatDecimal'
+                                            }"
                         width="100%"
                         editable="false"
                     />
@@ -175,7 +182,10 @@
                         textAlign="Right"
                     />
                     <Input
-                        value="{dm>/sSelectedEbelnRowData/Peinh}"
+                        value="{
+                                                path: 'dm>/sSelectedEbelnRowData/Peinh',
+                                                formatter: '.formatters.formatDecimal'
+                                            }"
                         width="100%"
                         editable="false"
                     />
@@ -214,66 +224,165 @@
                         textAlign="Right"
                     />
                     <TextArea
-                        value="{dm>/sSelectedEbelnRowData/Note}"
+                        value="{dm>/sSelectedEbelnRowData/Desc1}"
                         rows="3"
                         width="150%"
                         editable="false"
                     />
                 </HBox>
 
-                <HBox visible="{pm>/detailPopup/addNote}">
+                <HBox visible="{pm>/detailPopup/AddNoteArea}">
                     <Label
                         width="150px"
                         text="{i18n>OP_addNote}"
                         textAlign="Right"
                     />
                     <TextArea
-                        value="{dm>/sSelectedEbelnRowData/Note}"
+                        value="{dm>/detailPopupNote}"
                         rows="3"
                         width="150%"
-                        editable="{pm>/detailPopup/addNoteEditable}"
                     />
-                    <!-- <Button
+                </HBox>
+                <HBox visible="{pm>/detailPopup/BtnVisAddNote}">
+                    <Label
+                        width="150px"
+                        text=""
+                        textAlign="Right"
+                    />
+                    <Button
                         text="{i18n>OP_addNote}"
                         icon="sap-icon://add"
                         class="blueButton"
                         press="onApproveOrder"
-                    /> -->
+                    />
                 </HBox>
-                <Table
-                    id="OrderQuantityTable"
-                    inset="false"
+                <ScrollContainer
+                    horizontal="true"
                     width="100%"
-                    class="sapUiSmallMarginTop gridTable"
-                    items="{dm>/sSelectedEbelnTableData}"
                 >
-                    <columns>
-                        <Column>
-                            <Text text="{i18n>OP_quantity}" />
-                        </Column>
-                        <Column>
-                            <Text text="{i18n>OP_unit}" />
-                        </Column>
-                        <Column>
-                            <Text text="{i18n>OP_firmDeliveryDate}" />
-                        </Column>
-                    </columns>
-                    <items>
-                        <ColumnListItem>
-                            <cells>
-                                <Text text="{dm>Menge}" />
-                                <Text text="{dm>Meins}" />
-                                <Text
-                                    text="{
+                    <Table
+                        id="OrderQuantityTable"
+                        inset="false"
+                        width="100%"
+                        class="sapUiSmallMarginTop gridTable"
+                        items="{dm>/sSelectedEbelnTableData}"
+                        fixedLayout="true"
+                    >
+                        <columns>
+                            <Column width="70px">
+                                <Text text="{i18n>quantity}" />
+                            </Column>
+                            <Column width="60px">
+                                <Text text="{i18n>unit}" />
+                            </Column>
+                            <Column width="100px">
+                                <Text text="{i18n>OP_firmDeliveryDate}" />
+                            </Column>
+                            <Column
+                                width="100px"
+                                visible="{pm>/detailPopup/SevkedVis}"
+                            >
+                                <Text text="{i18n>OP_sevkedQuantity}" />
+                            </Column>
+                            <Column width="100px">
+                                <Text text="{i18n>OP_reviseFirmDeliveryDate}" />
+                            </Column>
+
+                            <Column
+                                width="230px"
+                                visible="{pm>/detailPopup/TesyrVis}"
+                            >
+                                <Text text="{i18n>OP_deliveryPlace}" />
+                            </Column>
+                            <Column
+                                width="150px"
+                                visible="{pm>/detailPopup/PlakaVis}"
+                            >
+                                <Text text="{i18n>OP_plaka}" />
+                            </Column>
+                            <Column
+                                width="150px"
+                                visible="{pm>/detailPopup/SoforVis}"
+                            >
+                                <Text text="{i18n>OP_driverPhone}" />
+                            </Column>
+                            <Column
+                                width="100px"
+                                visible="{pm>/detailPopup/SevkmVis}"
+                            >
+                                <Text text="{i18n>OP_sevkQuantity}" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text  text="{
+                                                path: 'dm>Menge',
+                                                formatter: '.formatters.formatDecimal'
+                                            }"/>
+                                    <Text text="{dm>Meins}" />
+                                    <Text
+                                        text="{
                         path: 'dm>Slfdt',
                         type: 'sap.ui.model.odata.type.DateTime',
                         formatOptions: { pattern: 'dd.MM.yyyy' }
                     }"
-                                />
-                            </cells>
-                        </ColumnListItem>
-                    </items>
-                </Table>
+                                    />
+                                    <Text  text="{
+                                                path: 'dm>Sevkm',
+                                                formatter: '.formatters.formatDecimal'
+                                            }" />
+                                    <DatePicker
+                                        value="{path: 'dm>Slfdi',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                                                }
+                                            }"
+                                        displayFormat="short"
+                                        editable="{pm>/detailPopup/SlfdiEdit}"
+                                    />
+                                    <!-- visible="{pm>/detailPopup/SlfdiVis}" -->
+                                    <!-- <Input
+                                    value="{dm>Tesyr}"
+                                    editable="{pm>/detailPopup/TesyrVis}"
+                                    visible="{pm>/detailPopup/TesyrVis}"
+                                /> -->
+                                    <Select
+                                        selectedKey="{dm>Tesyr}"
+                                        items="{dm>/TeslimYeriList}"
+                                        templateShareable="true"
+                                        forceSelection="false"
+                                        width="190px"
+                                    >
+                                        <core:Item
+                                            key="{dm>DomvalueL}"
+                                            text="{dm>Ddtext}"
+                                        />
+                                    </Select>
+                                    <Input
+                                        value="{dm>Plaka}"
+                                        editable="{pm>/detailPopup/PlakaVis}"
+                                        visible="{pm>/detailPopup/PlakaVis}"
+                                    />
+                                    <Input
+                                        value="{dm>Sofor}"
+                                        editable="{pm>/detailPopup/SoforVis}"
+                                        visible="{pm>/detailPopup/SoforVis}"
+                                    />
+                                    <Input
+                                        value="{
+                                                path: 'dm>RestSevkm',
+                                                formatter: '.formatters.formatDecimal'
+                                            }"
+                                        editable="{pm>/detailPopup/SevkmVis}"
+                                        visible="{pm>/detailPopup/SevkmVis}"
+                                    />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </ScrollContainer>
             </VBox>
 
             <Toolbar class="sapUiTinyMarginTop">
@@ -282,29 +391,87 @@
                     text="{i18n>OP_btnApprove}"
                     icon="sap-icon://accept"
                     class="greenButton"
-                    press="onApproveOrder"
-                    visible="{pm>/detailPopup/approveButton}"
+                    press="onPressAction($event, 'AC')"
+                    visible="{pm>/detailPopup/BtnVisApprove}"
                 />
+
+                <Button
+                    text="{i18n>OP_btnReject}"
+                    icon="sap-icon://sys-cancel"
+                    class="redButton"
+                    press="onPressAction($event, 'RJ')"
+                    visible="{pm>/detailPopup/BtnVisReject}"
+                />
+
                 <Button
                     text="{i18n>OP_btnCancel}"
                     icon="sap-icon://cancel-maintenance"
                     class="redButton"
-                    press="onCancelOrder"
-                    visible="{pm>/detailPopup/cancelButton}"
+                    press="onPressAction($event, 'CN')"
+                    visible="{pm>/detailPopup/BtnVisAiCancel}"
                 />
+
+                <Button
+                    text="{i18n>OP_btnCancelAppr}"
+                    icon="sap-icon://cancel-share"
+                    class="greenButton"
+                    press="onPressAction($event, 'CA')"
+                    visible="{pm>/detailPopup/BtnVisTedCancAppr}"
+                />
+
+                <Button
+                    text="{i18n>OP_btnCancelReject}"
+                    icon="sap-icon://cancel-share"
+                    class="redButton"
+                    press="onPressAction($event, 'CR')"
+                    visible="{pm>/detailPopup/BtnVisTedCancReject}"
+                />
+
+                <Button
+                    text="{i18n>OP_btnCancelRevise}"
+                    icon="sap-icon://cancel-share"
+                    class="orangeButton"
+                    press="onPressAction($event, 'CV')"
+                    visible="{pm>/detailPopup/BtnVisTedCancRevise}"
+                />
+
                 <Button
                     text="{i18n>OP_btnRevise}"
                     icon="sap-icon://edit"
                     class="yellowButton"
-                    press="onReviseOrder"
-                    visible="{pm>/detailPopup/reviseButton}"
+                    press="onPressAction($event, 'RV')"
+                    visible="{pm>/detailPopup/BtnVisRevise}"
                 />
-                 <Button
-                    text="{i18n>OP_btnSave}"
-                    icon="sap-icon://save"
+
+                <!-- <Button
+                    text="{i18n>OP_btnSend}"
+                    icon="sap-icon://send-task"
                     class="greenButton"
-                    press="onSaveOrder"
-                    visible="{pm>/detailPopup/saveButton}"
+                    press="onPressAction($event, 'SD')"
+                    visible="{pm>/detailPopup/BtnVisSend}"
+                /> -->
+
+                <Button
+                    text="{i18n>OP_btnSevk}"
+                    icon="sap-icon://shipping-status"
+                    class="blueButton"
+                    press="onPressAction($event, 'SE')"
+                    visible="{pm>/detailPopup/BtnVisSevk}"
+                />
+
+                <Button
+                    text="{i18n>OP_btnPK}"
+                    icon="sap-icon://code1"
+                    class="orangeButton"
+                    press="onPressAction($event, 'PK')"
+                    visible="{pm>/detailPopup/BtnVisPk}"
+                />
+                <Button
+                    text="{i18n>OP_btnCompleteAction}"
+                    icon="sap-icon://complete"
+                    class="greenButton"
+                    press="onPressAction($event, 'CONFIRM')"
+                    visible="{pm>/detailPopup/BtnVisConfirmAction}"
                 />
                 <Button
                     text="{i18n>OP_btnClose}"

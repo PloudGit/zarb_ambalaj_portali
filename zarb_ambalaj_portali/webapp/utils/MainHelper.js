@@ -68,6 +68,7 @@ sap.ui.define([
                             new sap.m.Button({
                                 text: "Çağrı Uygulamasına Git",
                                 icon: "sap-icon://headset",
+                                visible: "{pm>/header/routeCallApplication}",
                                 press: that._main.onOpenCallScreen.bind(that)
                             }).addStyleClass("orangeButton sapUiSmallMarginLeft")
                         );
@@ -77,6 +78,27 @@ sap.ui.define([
                     debugger;
                 }
             });
+        },
+
+        setUiForSupplier: function (that, supplierNo) {
+
+            var dModel = that.getOModel(that, "dm");
+            var dData = dModel.getData();
+
+            var pModel = that.getOModel(that, "pm");
+            var pData = pModel.getData();
+
+            dData["isSupplier"] = true;
+            dData["supplierNo"] = supplierNo;
+            dModel.refresh();
+
+            pData["iconTabBar"]["PKOLMAYAN"] = false;
+            pData["iconTabBar"]["SUMMARY"] = true;
+
+            pData["header"]["lifnrFilter"] = false;
+            pData["header"]["routeCallApplication"] = false;
+
+            pModel.refresh();
         },
 
         onOpenCallScreen: function (that) {
@@ -183,6 +205,9 @@ sap.ui.define([
             dModel.setProperty(sPath, data);
             dModel.updateBindings(true);
 
+            if (selectedKey === "SUMMARY") {
+                that._main.splitOrderListByDeliveryDate(that, data);
+            }
             // IconTab bul
             var oIconTabBar = that.getView().byId("idIconTabBar");
             if (!oIconTabBar) return;
@@ -195,6 +220,45 @@ sap.ui.define([
 
             oInnerView.setModel(dModel, "dm");
 
+
+        },
+        splitOrderListByDeliveryDate: function (that, aOrderList) {
+            var oModel = that.getOModel(that, "dm");
+
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            var endOfWeek = new Date(today);
+            endOfWeek.setDate(endOfWeek.getDate() + 7);
+
+            var weeklyDeliveries = [];
+            var lateDeliveries = [];
+            var futureDeliveries = [];
+
+            aOrderList.forEach(function (oItem) {
+                var deliveryDate = oItem.Slfdt;
+                deliveryDate.setHours(0, 0, 0, 0);
+
+                if (!deliveryDate) return;
+
+                if (deliveryDate < today) {
+                    lateDeliveries.push(oItem);
+                } else if (deliveryDate >= today && deliveryDate <= endOfWeek) {
+                    weeklyDeliveries.push(oItem);
+                } else {
+                    futureDeliveries.push(oItem);
+                }
+            });
+
+            oModel.setProperty("/OrderListWeeklyDeliveries", weeklyDeliveries);
+            oModel.setProperty("/OrderListLateDeliveries", lateDeliveries);
+            oModel.setProperty("/OrderListFutureDeliveries", futureDeliveries);
+
+            oModel.setProperty("/summaryCounts", {
+                weekly: Array.isArray(weeklyDeliveries) ? weeklyDeliveries.length : 0,
+                late: Array.isArray(lateDeliveries) ? lateDeliveries.length : 0,
+                future: Array.isArray(futureDeliveries) ? futureDeliveries.length : 0
+            });
 
         },
 
@@ -248,125 +312,251 @@ sap.ui.define([
             pModel.refresh();
         },
 
-        setDetailPopupVisibility: function (that) {
+        setDetailPopupVisibility: function (that, data) {
+
+            // sevk miktarı alanlarını da güncelle 
             var dModel = that.getOModel(that, "dm");
+            var dData = dModel.getData();
+
+            dData["sSelectedEbelnTableData"][0]["Sevkm"] = data[0].Sevkm;
+            dData["sSelectedEbelnTableData"][0]["RestSevkm"] = data[0].RestSevkm;
+            dModel.refresh();
+
             var pModel = that.getOModel(that, "pm");
-
-            var role = dModel.getProperty("/Role");
-            var selectedKey = that._main.getIcontabBarSelectedKey(that);
-
             var pData = pModel.getData();
-            pData.detailPopup = pData.detailPopup || {};
 
-            // Tüm alanları default kapalı yap
-            var dp = pData.detailPopup;
-            dp["addNote"] = false;
-            dp["addNoteEditable"] = false;
-            dp["approveButton"] = false;
-            dp["cancelButton"] = false;
-            dp["reviseButton"] = false;
-            dp["saveButton"] = false;
-
-            // Tedarikçi için
-            if (role === "Tedarikçi") {
-                switch (selectedKey) {
-                    case "PKOLMAYAN":
-                        // dp["addNote"] = true;
-                        // dp["addNoteEditable"] = true;
-                        break;
-                    case "ACIKCAGRI":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["saveButton"] = true;
-                        break;
-
-                    case "ONAY":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["cancelButton"] = true;
-                        dp["reviseButton"] = true;
-                        dp["saveButton"] = true;
-                        break;
-
-                    case "REVF":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["approveButton"] = true;
-                        dp["cancelButton"] = true;
-                        dp["reviseButton"] = true;
-                        dp["saveButton"] = true;
-                        break;
-
-                    case "REVE":
-
-                        break;
-
-                    case "IPTT":
-
-                        break;
-
-                    case "TUM":
-                        break;
-                    case "GET_TUM_SIPARIS_S":
-
-                        break;
-
-                    default:
-                        break;
+            // hepsini önce false yap 
+            for (var key in pData.detailPopup) {
+                if (typeof pData.detailPopup[key] === "boolean") {
+                    pData.detailPopup[key] = false;
                 }
             }
-            // Abdici
-            else {
-                switch (selectedKey) {
-                    case "PKOLMAYAN":
-                        // dp["addNote"] = true;
-                        // dp["addNoteEditable"] = true;
-                        break;
-                    case "ACIKCAGRI":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["saveButton"] = true;
-                        break;
 
-                    case "ONAY":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["cancelButton"] = true;
-                        dp["reviseButton"] = true;
-                        dp["saveButton"] = true;
-                        break;
+            // sadece butonları yönet
+            if (data && data.length > 0) {
+                var result = data[0];
+                Object.keys(result).forEach(function (key) {
+                    if (key.startsWith("BtnVis") && pData.detailPopup.hasOwnProperty(key)) {
+                        pData.detailPopup[key] = result[key];
+                    }
+                });
+            }
 
-                    case "REVF":
-                        dp["addNote"] = true;
-                        dp["addNoteEditable"] = true;
-                        dp["approveButton"] = true;
-                        dp["cancelButton"] = true;
-                        dp["reviseButton"] = true;
-                        dp["saveButton"] = true;
-                        break;
+            // sevk mktarı açıksa - sevk yapılan miktarı görsün - 
+            if (pData.detailPopup["BtnVisSevk"]) {
+                pData.detailPopup["SevkedVis"] = true;
+            }
 
-                    case "REVE":
 
-                        break;
-
-                    case "IPTT":
-
-                        break;
-
-                    case "TUM":
-                        break;
-                    case "GET_TUM_SIPARIS_S":
-
-                        break;
-
-                    default:
-                        break;
-                }
+            // not ekle açıksa 
+            if (pData.detailPopup["BtnVisAddNote"] === true) {
+                pData.detailPopup["AddNoteArea"] = true;
             }
 
             pModel.refresh();
-        }
+            that.closeBusyDialog();
+        },
 
+
+        // checkData: function (that, action) {
+
+        //     var dModel = that.getOModel(that, "dm");
+        //     var dData = dModel.getData();
+
+        //     switch (action) {
+        //         case 'ADD_NOTE':
+        //             var note = dData.detailPopupNote?.trim();
+
+        //             if (!note) {
+        //                 // MessageBox.error(
+        //                 //     oBundle.getText("note_field_required"), // i18n: "Lütfen bir not giriniz."
+        //                 //     {
+        //                 //         title: oBundle.getText("missing_fields_title"),
+        //                 //         actions: [MessageBox.Action.OK],
+        //                 //         emphasizedAction: MessageBox.Action.OK
+        //                 //     }
+        //                 // );
+        //                 that.showMessage("error", "note_field_required");
+        //                 return;
+        //             }
+
+        //             that.confirmMessageWithActonResponse(that, "confirmAddNote", that.onConfirmResponse, 'ADD_NOTE'); // i18n: "Notu eklemek istediğinize emin misiniz?"
+        //             break;
+        //         default:
+        //             break;
+        //     }
+
+        // },
+
+
+        checkData: function (that, action) {
+            var dModel = that.getOModel(that, "dm");
+            var dData = dModel.getData();
+            var note = dData.detailPopupNote?.trim();
+
+            switch (action) {
+                case 'AN': // Not ekleme
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
+                    that.confirmMessageWithActonResponse(that, "confirmAddNote", that.onConfirmResponse, action);
+                    break;
+
+                case 'AC': // Onayla
+
+                    that.confirmMessageWithActonResponse(that, "confirmApprove", that.onConfirmResponse, action);
+                    break;
+
+                case 'RJ': // Reddet
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
+                    that.confirmMessageWithActonResponse(that, "confirmReject", that.onConfirmResponse, action);
+                    break;
+
+                case 'CN': // İptal Et
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
+                    that.confirmMessageWithActonResponse(that, "confirmCancel", that.onConfirmResponse, action);
+                    break;
+
+                case 'CA': // İptali Onayla
+                    that.confirmMessageWithActonResponse(that, "confirmCancelApprove", that.onConfirmResponse, action);
+                    break;
+
+                case 'CR': // İptali Reddet
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
+                    that.confirmMessageWithActonResponse(that, "confirmCancelReject", that.onConfirmResponse, action);
+                    break;
+
+                case 'CV': // İptali Revize Et
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
+                    var slfdi = dData.sSelectedEbelnTableData[0].Slfdi
+                    if (!slfdi || slfdi.toString().trim() === "") {
+                        that.showMessage("error", "slfdi_field_required");
+                        return;
+                    }
+                    that.confirmMessageWithActonResponse(that, "confirmCancelRevise", that.onConfirmResponse, action);
+                    break;
+
+                case 'RV': // Revize Et 
+                    // firma teslim tarihini revize edebilir yani zorunlu  - not girişi zorunludur
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
+
+                    var slfdi = dData.sSelectedEbelnTableData[0].Slfdi
+                    if (!slfdi || slfdi.toString().trim() === "") {
+                        that.showMessage("error", "slfdi_field_required");
+                        return;
+                    }
+                    that.confirmMessageWithActonResponse(that, "confirmRevise", that.onConfirmResponse, action);
+                    break;
+
+                // case 'SD': // Gönder
+
+                //     that.confirmMessageWithActonResponse(that, "confirmSend", that.onConfirmResponse, action);
+                //     break;
+
+                case 'SE': // Sevk Et
+                    debugger;
+                    var tesyr = dData.sSelectedEbelnTableData[0].Tesyr?.trim();
+                    var plaka = dData.sSelectedEbelnTableData[0].Plaka?.trim();
+                    var sofor = dData.sSelectedEbelnTableData[0].Sofor?.trim();
+                    var sevkm = dData.sSelectedEbelnTableData[0].RestSevkm?.trim();
+                    if (!tesyr) {
+                        that.showMessage("error", "tesyr_field_required");
+                        return;
+                    }
+                    if (!plaka) {
+                        that.showMessage("error", "plaka_field_required");
+                        return;
+                    }
+                    if (!sofor) {
+                        that.showMessage("error", "sofor_field_required");
+                        return;
+                    }
+                    if (!sevkm || sevkm === "0") {
+                        that.showMessage("error", "sevkm_field_required");
+                        return;
+                    }
+
+                    that.confirmMessageWithActonResponse(that, "confirmSevk", that.onConfirmResponse, action);
+                    break;
+
+                case 'PK': // PK
+
+                    that.confirmMessageWithActonResponse(that, "confirmPackage", that.onConfirmResponse, action);
+                    break;
+
+                default:
+                    break;
+            }
+        },
+
+        approveSuccessInformation: function (that, data) {
+            var i18n = that.getView().getModel("i18n").getResourceBundle();
+            var action = data.Action;
+            var successTitle = i18n.getText("Success");
+            var messageKey = "";
+
+            switch (action) {
+                case "AN":
+                    messageKey = "noteAddedSuccessfully";
+                    break;
+                case "AC":
+                    messageKey = "approvedSuccessfully";
+                    break;
+                case "RJ":
+                    messageKey = "rejectedSuccessfully";
+                    break;
+                case "CN":
+                    messageKey = "cancelledSuccessfully";
+                    break;
+                case "CA":
+                    messageKey = "cancelApproveSuccess";
+                    break;
+                case "CR":
+                    messageKey = "cancelRejectSuccess";
+                    break;
+                case "CV":
+                    messageKey = "cancelReviseSuccess";
+                    break;
+                case "RV":
+                    messageKey = "reviseSuccess";
+                    break;
+                case "SE":
+                    messageKey = "sevkSuccess";
+                    break;
+                case "PK":
+                    messageKey = "pkSuccess";
+                    break;
+                default:
+                    messageKey = "processSuccesfullyDone";
+                    break;
+            }
+
+            MessageBox.success(i18n.getText(messageKey), {
+                title: successTitle,
+                onClose: function () {
+                    if (that.OrderDetailPopup) {
+                        that.OrderDetailPopup.close();
+                    }
+                    that._oData.getList(that);
+                }
+            });
+        }
 
 
 

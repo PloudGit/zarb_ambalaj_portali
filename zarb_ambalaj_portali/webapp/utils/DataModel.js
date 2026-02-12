@@ -18,6 +18,10 @@ sap.ui.define([
 
 
 			var dData = {
+				TeslimYeriList:[],
+				supplierNo: "",
+				isSupplier: false,
+				detailPopupNote: "",
 				iconTabBarSelectedKey: "ACIKCAGRI",
 				OrderList: [],
 				OrderListPKOLMAYAN: [],
@@ -28,6 +32,17 @@ sap.ui.define([
 				OrderListIPTALCAGRI: [],
 				OrderListTUMCAGRI: [],
 				OrderListTUMSIPARIS: [],
+				OrderListSUMMARY: [],
+				OrderListWeeklyDeliveries: [],
+				OrderListLateDeliveries: [],
+				OrderListFutureDeliveries: [],
+				summaryCounts: {
+					weekly: 0,
+					late: 0,
+					future: 0
+				}
+
+
 			}
 
 
@@ -44,6 +59,10 @@ sap.ui.define([
 			var pModel = new JSONModel();
 
 			var pData = {
+				header: {
+					lifnrFilter: true,
+					routeCallApplication:true
+				},
 				iconTabBar: {
 					PKOLMAYAN: true,
 					ACIKCAGRI: true,
@@ -52,15 +71,39 @@ sap.ui.define([
 					REVE: true,
 					IPTT: true,
 					TUM: true,
-					GET_TUM_SIPARIS_S: true
+					GET_TUM_SIPARIS_S: true,
+					SUMMARY: false
 				},
 				detailPopup: {
-					addNote: false,
-					addNoteEditable: false,
-					approveButton: false,
-					cancelButton: false,
-					reviseButton: false,
-					saveButton:false
+					// addNote: false,
+					// addNoteEditable: false,
+					// approveButton: false,
+					// cancelButton: false,
+					// reviseButton: false,
+					// saveButton: false,
+					currentAction:"",
+					BtnVisConfirmAction:false,
+					BtnVisAddNote: false,
+					BtnVisAiCancel: false,
+					BtnVisApprove: false,
+					BtnVisPk: false,
+					BtnVisReject: false,
+					BtnVisRevise: false,
+					BtnVisSend: false,
+					BtnVisSevk: false,
+					BtnVisTedCancAppr: false,
+					BtnVisTedCancReject: false,
+					BtnVisTedCancRevise: false,
+					IsSupplier: false,
+					NormtEdit: false,
+					PlakaVis: false,
+					SevkmVis: false,
+					SlfdiEdit: false,
+					SlfdiVis: false,
+					SoforVis: false,
+					TesyrVis: false,
+					SevkedVis:false,
+					AddNoteArea:false
 				}
 
 
