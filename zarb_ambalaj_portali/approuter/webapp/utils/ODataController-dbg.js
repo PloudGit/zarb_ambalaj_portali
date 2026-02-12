@@ -48,6 +48,13 @@ sap.ui.define([
 			}
 			aFilters.push(new Filter("StatuFiori", FilterOperator.EQ, selectedKey));
 
+			if (dData["isSupplier"] === true && dData["supplierNo"] !== "") { // tedarikçi ise filtre olarak gönder 
+
+				aFilters.push(new Filter("Lifnr", FilterOperator.EQ, dData["supplierNo"]));
+
+			}
+
+
 			var oDataModel = that.getOwnerComponent().getModel();
 
 			that.openBusyDialog();
@@ -70,6 +77,104 @@ sap.ui.define([
 			});
 
 		},
+		getPopupInfo: function (that, rowData) {
+			return new Promise(function (resolve, reject) {
+
+				var dModel = that.getOModel(that, "dm");
+				var dData = dModel.getData();
+
+				var url = "/AmbDetailOprSet";
+				var oDataModel = that.getOwnerComponent().getModel();
+
+				var aFilters = [
+					new Filter("Ebeln", FilterOperator.EQ, rowData.Ebeln),
+					new Filter("Ebelp", FilterOperator.EQ, rowData.Ebelp),
+					new Filter("Etenr", FilterOperator.EQ, rowData.Etenr),
+					new Filter("Statu", FilterOperator.EQ, rowData.Statu),
+					new Filter("IsSupplier", FilterOperator.EQ, dData.isSupplier),
+					new Filter("Tabinfo", FilterOperator.EQ, dData.iconTabBarSelectedKey)
+				];
+
+				that.openBusyDialog();
+
+				oDataModel.read(url, {
+					filters: aFilters,
+					success: function (oData) {
+						// that.closeBusyDialog();
+
+						if (oData && oData.results) {
+							that._main.setDetailPopupVisibility(that, oData.results);
+							resolve();
+						} else {
+							reject();
+						}
+					},
+					error: function (oError) {
+						that.closeBusyDialog();
+						that._oData.handleODataErrors(that);
+						reject(oError);
+					}
+				});
+			});
+		},
+
+		approveProcess: function (that, data) {
+
+			var url = "/AmbDetailOprSet";
+
+			debugger;
+			var oDataModel = that.getOwnerComponent().getModel();
+			that.openBusyDialog();
+			oDataModel.create(url, data, {
+				success: function (oData, oResponse) {
+
+					debugger;
+					that.closeBusyDialog();
+					that._main.approveSuccessInformation(that, oData);
+				},
+				error: function (oError) {
+					debugger;
+					// that.openMessagePopover(that);
+					that.closeBusyDialog();
+					that._oData.handleODataErrors(that);
+
+				}
+			});
+
+		},
+
+		getTeslimYeriList: function (that) {
+
+			var url = "/DomainValueSet";
+
+			var bModel = that.getOModel(that, "bm");
+			var bData = bModel.getData();
+
+			var dModel = that.getOModel(that, "dm");
+			var dData = dModel.getData();
+			var aFilters = [];
+
+			aFilters.push(new Filter("Domname", FilterOperator.EQ, 'ZARBD_AP_TESYR'));
+
+			var oDataModel = that.getOwnerComponent().getModel();
+
+			oDataModel.read(url, {
+				filters: aFilters,
+				success: function (oData, oResponse) {
+
+					dData["TeslimYeriList"] = oData.results;
+					dModel.refresh();
+
+				},
+				error: function (oError) {
+					that.closeBusyDialog();
+					that._oData.handleODataErrors(that);
+
+				}
+
+			});
+
+		}
 
 
 

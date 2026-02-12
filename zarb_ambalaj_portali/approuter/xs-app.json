@@ -5,7 +5,6 @@
         {
             "source": "^/sap/(.*)$",
             "target": "/sap/$1",
-            // "destination": "aribads4connection",
             "destination": "aribaqs4connection",
             "authenticationType": "xsuaa",
             "scope": [

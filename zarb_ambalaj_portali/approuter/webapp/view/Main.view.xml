@@ -51,9 +51,15 @@
                                                 index="2"
                                                 visibleInAdvancedArea="true"
                                             />
-                                            <smartFilterBar:ControlConfiguration
+                                            <!-- <smartFilterBar:ControlConfiguration
                                                 key="Werks"
                                                 label="{i18n>plant}"
+                                                index="3"
+                                                visibleInAdvancedArea="true"
+                                            /> -->
+                                                <smartFilterBar:ControlConfiguration
+                                                key="Matkl"
+                                                label="{i18n>materialGroup}"
                                                 index="3"
                                                 visibleInAdvancedArea="true"
                                             />
@@ -70,6 +76,7 @@
                                                 label="{i18n>vendor}"
                                                 index="5"
                                                 visibleInAdvancedArea="true"
+                                                visible="{pm>/header/lifnrFilter}"
                                             />
                                             <smartFilterBar:ControlConfiguration
                                                 key="Statu"
@@ -119,7 +126,7 @@
                             >
                                 <items>
                                     <!-- PK Bilgisi Olmayan Çağrılar -->
-                                    <IconTabFilter
+                                    <!-- <IconTabFilter
                                         text="{i18n>tabNoPk}"
                                         key="PKOLMAYAN"
                                         icon="sap-icon://alert"
@@ -133,7 +140,7 @@
                                             models="{dm: ${dm}, i18n: ${i18n}}"
                                             height="100%"
                                         />
-                                    </IconTabFilter>
+                                    </IconTabFilter> -->
 
                                     <!-- Açık Çağrılar -->
                                     <IconTabFilter
@@ -242,6 +249,21 @@
                                     >
                                         <mvc:XMLView
                                             viewName="com.app.abdiibrahim.zarbambalajportali.view.AllOrders"
+                                            type="XML"
+                                            models="{dm: ${dm}, i18n: ${i18n}}"
+                                        />
+                                    </IconTabFilter>
+                                       <!-- ÖZET -->
+                                    <IconTabFilter
+                                        text="{i18n>tabSummary}"
+                                        key="SUMMARY"
+                                        icon="sap-icon://list"
+                                        design="Horizontal"
+                                        iconColor="Default"
+                                        visible="{pm>/iconTabBar/SUMMARY}"
+                                    >
+                                        <mvc:XMLView
+                                            viewName="com.app.abdiibrahim.zarbambalajportali.view.Summary"
                                             type="XML"
                                             models="{dm: ${dm}, i18n: ${i18n}}"
                                         />
