@@ -58,7 +58,7 @@ sap.ui.define([
                         oFB._oHideShowButton.addStyleClass("yellowButton");
                     }
 
-
+                    debugger;
                     // custom buton
                     var oToolbar = oFB.getToolbar ? oFB.getToolbar() : oFB._oToolbar;
                     if (oToolbar && !oFB._bCustomButtonAdded) {
@@ -73,9 +73,17 @@ sap.ui.define([
                             }).addStyleClass("orangeButton sapUiSmallMarginLeft")
                         );
 
-                    }
+                        // ambalaj log raporu
+                        oToolbar.addContent(
+                            new sap.m.Button({
+                                text: "Ambalaj Log Raporuna Git",
+                                icon: "sap-icon://table-view",
+                                press: that._main.onOpenLogScreen.bind(that),
+                                visible: "{pm>/header/routeLogApplication}",
+                            }).addStyleClass("blueButton sapUiSmallMarginLeft")
+                        );
 
-                    debugger;
+                    }
                 }
             });
         },
@@ -97,7 +105,8 @@ sap.ui.define([
 
             pData["header"]["lifnrFilter"] = false;
             pData["header"]["routeCallApplication"] = false;
-
+            pData["header"]["routeLogApplication"] = false;
+            
             pModel.refresh();
         },
 
@@ -132,6 +141,36 @@ sap.ui.define([
                 URLHelper.redirect(url, false);
             });
         },
+
+        onOpenLogScreen: function (that) {
+            debugger;
+
+            var systemId;
+            if (sap.ushell) {
+                systemId = sap.ushell.Container.getLogonSystem("system").getName();
+            } else {
+                systemId = "DS4";
+            }
+
+            var url;
+            if (systemId === "DS4") {
+                url = "https://vhvctds4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
+            }
+            else if (systemId === "QS4") {
+                url = "https://vhvctqs4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
+
+            }
+            else if (systemId === "PS4") {
+                url = "https://vhvctps4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
+
+            }
+
+            sap.ui.require(["sap/m/library"], function (library) {
+                var URLHelper = library.URLHelper;
+                URLHelper.redirect(url, false);
+            });
+        },
+
         getTabViewData: function (that) {
 
             // var selectedKey = that._main.getIcontabBarSelectedKey(that);

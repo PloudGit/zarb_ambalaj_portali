@@ -61,7 +61,8 @@ sap.ui.define([
 			var pData = {
 				header: {
 					lifnrFilter: true,
-					routeCallApplication:true
+					routeCallApplication:true,
+					routeLogApplication:true
 				},
 				iconTabBar: {
 					PKOLMAYAN: true,
