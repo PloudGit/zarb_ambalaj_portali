@@ -300,7 +300,7 @@ sap.ui.define([
                     Slfdi: that.formatters.adjustStartDateForUTC(tableRow.Slfdi),
                     IsSupplier: dData["isSupplier"],
                     Lifnr: dData["supplierNo"],
-                    Sevkm: tableRow.RestSevkm,
+                    Sevkm: that.formatters.toODataDecimal(tableRow.RestSevkm),
                     Desc1: row.Desc1  // aşağıda eklenecek not ekle denirse 
                 };
 

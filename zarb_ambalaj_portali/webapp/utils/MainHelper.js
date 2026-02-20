@@ -513,7 +513,7 @@ sap.ui.define([
                     var tesyr = dData.sSelectedEbelnTableData[0].Tesyr?.trim();
                     var plaka = dData.sSelectedEbelnTableData[0].Plaka?.trim();
                     var sofor = dData.sSelectedEbelnTableData[0].Sofor?.trim();
-                    var sevkm = dData.sSelectedEbelnTableData[0].RestSevkm?.trim();
+                    var sevkm = dData.sSelectedEbelnTableData[0].RestSevkm; // değer girilince float
                     if (!tesyr) {
                         that.showMessage("error", "tesyr_field_required");
                         return;

@@ -225,7 +225,19 @@ sap.ui.define([
         readOnlyEnjGapFormatter: function (bReadOnly, bButtonVisible) {
             return bReadOnly === false ? bButtonVisible : false;
         }
+        ,
+        toODataDecimal: function (value) {
+            if (value === null || value === undefined || value === "") {
+                return "0.00";
+            }
 
+            var fVal = Number(value);
+            if (isNaN(fVal)) {
+                return "0.00";
+            }
+
+            return fVal.toFixed(2);
+        }
 
 
 

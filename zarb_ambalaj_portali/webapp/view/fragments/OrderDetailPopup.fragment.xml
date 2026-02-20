@@ -316,10 +316,12 @@
                         <items>
                             <ColumnListItem>
                                 <cells>
-                                    <Text  text="{
+                                    <Text
+                                        text="{
                                                 path: 'dm>Menge',
                                                 formatter: '.formatters.formatDecimal'
-                                            }"/>
+                                            }"
+                                    />
                                     <Text text="{dm>Meins}" />
                                     <Text
                                         text="{
@@ -328,10 +330,12 @@
                         formatOptions: { pattern: 'dd.MM.yyyy' }
                     }"
                                     />
-                                    <Text  text="{
+                                    <Text
+                                        text="{
                                                 path: 'dm>Sevkm',
                                                 formatter: '.formatters.formatDecimal'
-                                            }" />
+                                            }"
+                                    />
                                     <DatePicker
                                         value="{path: 'dm>Slfdi',
                         type: 'sap.ui.model.odata.type.DateTime',
@@ -370,11 +374,22 @@
                                         editable="{pm>/detailPopup/SoforVis}"
                                         visible="{pm>/detailPopup/SoforVis}"
                                     />
-                                    <Input
-                                        value="{
+                                    <!-- value="{
                                                 path: 'dm>RestSevkm',
                                                 formatter: '.formatters.formatDecimal'
-                                            }"
+                                            }" -->
+                                    <Input
+                                        value="{
+        path: 'dm>RestSevkm',
+        type: 'sap.ui.model.type.Float',
+        formatOptions: {
+            groupingEnabled: true,
+            groupingSeparator: '.',
+            decimalSeparator: ',',
+            minFractionDigits: 2,
+            maxFractionDigits: 2
+        }
+    }"
                                         editable="{pm>/detailPopup/SevkmVis}"
                                         visible="{pm>/detailPopup/SevkmVis}"
                                     />
