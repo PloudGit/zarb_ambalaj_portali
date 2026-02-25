@@ -65,6 +65,8 @@ sap.ui.define([
             this._main.setFilterBar(this, "smartFilterBar");
 
             this._oData.getTeslimYeriList(this);
+            this._oData.getUserInfo(this);
+
         },
 
         _onRouteMatched: function () {

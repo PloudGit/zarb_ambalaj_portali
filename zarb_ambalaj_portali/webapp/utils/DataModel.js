@@ -18,6 +18,7 @@ sap.ui.define([
 
 
 			var dData = {
+				SyUname:"",
 				TeslimYeriList:[],
 				supplierNo: "",
 				isSupplier: false,

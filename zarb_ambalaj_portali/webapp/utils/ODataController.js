@@ -174,6 +174,42 @@ sap.ui.define([
 
 			});
 
+		},
+
+		getUserInfo: function (that) {
+
+			var url = "/UserInfoSet";
+
+			var dModel = that.getOModel(that, "dm");
+			var dData = dModel.getData();
+
+			var oDataModel = that.getOwnerComponent().getModel();
+
+			oDataModel.read(url, {
+				success: function (oData, oResponse) {
+
+					if (!oData || !oData.results || oData.results.length === 0) {
+						return;
+					}
+
+					var userData = oData.results[0];
+
+					if (!userData.Uname) {
+						return;
+					}
+
+					dData["SyUname"] = userData.Uname;
+					dModel.refresh();
+
+				},
+				error: function (oError) {
+					that.closeBusyDialog();
+					that._oData.handleODataErrors(that);
+
+				}
+
+			});
+
 		}
 
 
