@@ -286,6 +286,19 @@ sap.ui.define([
             var finalNote = "";
             var combinedNote = "";
 
+            var userName = dData["SyUname"] || "";
+            var now = new Date();
+
+            var formattedDateTime = now.toLocaleString("tr-TR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+
+            var noteHeader = userName + " " + formattedDateTime + "   ";
+
             if (response === 'OK') {
                 var row = dData.sSelectedEbelnRowData;
                 var payload = {
@@ -331,8 +344,8 @@ sap.ui.define([
                                 prefix = oBundle.getText("note_type_DEFAULT");
                         }
 
-                        finalNote = prefix + " " + newNote;
-                        combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+                        finalNote = noteHeader + prefix + " " + newNote;
+                        combinedNote = oldNote ? oldNote + "\n\n" + finalNote : finalNote;
 
                         dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
                         dModel.setProperty("/detailPopupNote", "");
@@ -348,8 +361,8 @@ sap.ui.define([
                         var status = row.Statu;
 
                         prefix = oBundle.getText("note_type_REJECT");
-                        finalNote = prefix + " " + newNote;
-                        combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+                        finalNote = noteHeader + prefix + " " + newNote;
+                        combinedNote = oldNote ? oldNote + "\n\n" + finalNote : finalNote;
 
                         dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
                         dModel.setProperty("/detailPopupNote", "");
@@ -361,8 +374,8 @@ sap.ui.define([
                         var status = row.Statu;
 
                         prefix = oBundle.getText("note_type_CANCEL");
-                        finalNote = prefix + " " + newNote;
-                        combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+                        finalNote = noteHeader + prefix + " " + newNote;
+                        combinedNote = oldNote ? oldNote + "\n\n" + finalNote : finalNote;
 
                         dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
                         dModel.setProperty("/detailPopupNote", "");
@@ -378,8 +391,8 @@ sap.ui.define([
                         var status = row.Statu;
 
                         prefix = oBundle.getText("note_type_REVISE");
-                        finalNote = prefix + " " + newNote;
-                        combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+                        finalNote = noteHeader + prefix + " " + newNote;
+                        combinedNote = oldNote ? oldNote + "\n\n" + finalNote : finalNote;
 
                         dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
                         dModel.setProperty("/detailPopupNote", "");
@@ -440,7 +453,7 @@ sap.ui.define([
         //                 }
 
         //                 var finalNote = prefix + " " + newNote;
-        //                 var combinedNote = oldNote ? oldNote + "\n" + finalNote : finalNote;
+        //                 var combinedNote = oldNote ? oldNote + "\n\n" + finalNote : finalNote;
 
         //                 dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
         //                 dModel.setProperty("/detailPopupNote", "");
