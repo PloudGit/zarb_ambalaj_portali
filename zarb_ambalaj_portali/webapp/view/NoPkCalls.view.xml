@@ -118,8 +118,15 @@
 
             <t:Column>
                 <Label text="{i18n>callCreatedDate}" />
-                <t:template>
-                    <Text text="{dm>CreateDate}" />
+                 <t:template>
+                    <Text
+                        text="{path: 'dm>CreateDate',
+                        type: 'sap.ui.model.odata.type.DateTime',
+                        formatOptions: {
+                        pattern: 'dd.MM.yyyy'
+                                                }
+                                            }"
+                    />
                 </t:template>
             </t:Column>
 
