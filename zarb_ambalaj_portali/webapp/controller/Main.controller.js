@@ -345,7 +345,18 @@ sap.ui.define([
                         }
 
                         finalNote = noteHeader + prefix + " " + newNote;
-                        combinedNote = oldNote ? oldNote + "\n\n" + finalNote : finalNote;
+
+                        finalNote = noteHeader + prefix + " " + newNote;
+
+                        if (oldNote) {
+                            combinedNote = oldNote.includes("\n")
+                                ? oldNote + "\n\n" + finalNote
+                                : oldNote + "\n" + finalNote;
+                        } else {
+                            combinedNote = finalNote;
+                        }
+
+                        // combinedNote = oldNote ? oldNote + "\n\n" + finalNote : finalNote;
 
                         dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
                         dModel.setProperty("/detailPopupNote", "");
@@ -355,6 +366,7 @@ sap.ui.define([
                         break;
 
                     case 'AC': // Approve
+                       break;
                     case 'RJ': // Reject
                         var newNote = dData.detailPopupNote?.trim();
                         var oldNote = row.Desc1?.trim() || "";
@@ -367,7 +379,7 @@ sap.ui.define([
                         dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
                         dModel.setProperty("/detailPopupNote", "");
                         payload.Desc1 = combinedNote;
-
+                        break;
                     case 'CN': // Cancel
                         var newNote = dData.detailPopupNote?.trim();
                         var oldNote = row.Desc1?.trim() || "";
@@ -380,10 +392,13 @@ sap.ui.define([
                         dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
                         dModel.setProperty("/detailPopupNote", "");
                         payload.Desc1 = combinedNote;
-
+                        break;
                     case 'CA': // Cancel Approve
+                       break;
                     case 'CR': // Cancel Reject
+                       break;
                     case 'CV': // Cancel Revise
+                       break;
                     case 'RV': // Revise
 
                         var newNote = dData.detailPopupNote?.trim();
@@ -400,11 +415,11 @@ sap.ui.define([
 
                         break;
                     case 'SD': // Send
+                       break;
                     case 'SE': // Sevk
+                       break;
                     case 'PK': // PK
-
                         break;
-
                     default:
                         return;
                 }

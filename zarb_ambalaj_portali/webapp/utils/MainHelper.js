@@ -106,7 +106,7 @@ sap.ui.define([
             pData["header"]["lifnrFilter"] = false;
             pData["header"]["routeCallApplication"] = false;
             pData["header"]["routeLogApplication"] = false;
-            
+
             pModel.refresh();
         },
 
@@ -275,7 +275,18 @@ sap.ui.define([
             var futureDeliveries = [];
 
             aOrderList.forEach(function (oItem) {
-                var deliveryDate = oItem.Slfdt;
+                var deliveryDate = null;
+
+                if (oItem.Slfdi && oItem.Statu === "ACCE") {
+                    deliveryDate = new Date(oItem.Slfdi);
+                } else if (oItem.Slfdt) {
+                    deliveryDate = new Date(oItem.Slfdt);
+                }
+
+                if (!deliveryDate || isNaN(deliveryDate.getTime())) {
+                    return;
+                }
+
                 deliveryDate.setHours(0, 0, 0, 0);
 
                 if (!deliveryDate) return;
@@ -496,10 +507,34 @@ sap.ui.define([
                     }
 
                     var slfdi = dData.sSelectedEbelnTableData[0].Slfdi
+                    var slfdt = dData.sSelectedEbelnTableData[0].Slfdt
+
                     if (!slfdi || slfdi.toString().trim() === "") {
                         that.showMessage("error", "slfdi_field_required");
                         return;
                     }
+
+                    // Tarihleri gün bazında karşılaştırmak için 
+                    var oSlfdi = new Date(slfdi);
+                    var oSlfdt = new Date(slfdt);
+                    var oToday = new Date();
+
+                    oSlfdi.setHours(0, 0, 0, 0);
+                    oSlfdt.setHours(0, 0, 0, 0);
+                    oToday.setHours(0, 0, 0, 0);
+
+                    // Geçmiş tarih kontrolü
+                    if (oSlfdi < oToday) {
+                        that.showMessage("error", "revise_delivery_date_cannot_be_past");
+                        return;
+                    }
+
+                    // Mevcut firma teslim tarihinden farklı olmalı
+                    if (oSlfdi.getTime() === oSlfdt.getTime()) {
+                        that.showMessage("error", "revise_delivery_date_must_be_different");
+                        return;
+                    }
+
                     that.confirmMessageWithActonResponse(that, "confirmRevise", that.onConfirmResponse, action);
                     break;
 
