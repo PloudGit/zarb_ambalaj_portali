@@ -284,10 +284,9 @@
                             >
                                 <Text text="{i18n>OP_sevkedQuantity}" />
                             </Column>
-                            <Column width="100px">
+                            <Column  visible="{pm>/detailPopup/SlfdiVis}" width="100px">
                                 <Text text="{i18n>OP_reviseFirmDeliveryDate}" />
                             </Column>
-
                             <Column
                                 width="230px"
                                 visible="{pm>/detailPopup/TesyrVis}"
@@ -345,6 +344,7 @@
                                             }"
                                         displayFormat="short"
                                         editable="{pm>/detailPopup/SlfdiEdit}"
+                                        visible="{pm>/detailPopup/SlfdiVis}"
                                     />
                                     <!-- visible="{pm>/detailPopup/SlfdiVis}" -->
                                     <!-- <Input

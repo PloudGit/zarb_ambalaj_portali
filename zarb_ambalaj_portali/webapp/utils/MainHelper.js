@@ -334,13 +334,7 @@ sap.ui.define([
                 pData.iconTabBar["TUM"] = false;
                 pData.iconTabBar["GET_TUM_SIPARIS_S"] = false;
 
-                // // detailPopup 
-                // pData.detailPopup["addNote"] = true;
-                // pData.detailPopup["addNoteEditable"] = true;
-                // pData.detailPopup["approveButton"] = false;
-                // pData.detailPopup["cancelButton"] = true;
-                // pData.detailPopup["reviseButton"] = false;
-
+     
             } else {
                 pData.iconTabBar["PKOLMAYAN"] = true;
                 pData.iconTabBar["ACIKCAGRI"] = true;
@@ -351,13 +345,7 @@ sap.ui.define([
                 pData.iconTabBar["TUM"] = true;
                 pData.iconTabBar["GET_TUM_SIPARIS_S"] = true;
 
-                // // detailPopup 
-                // pData.detailPopup["addNote"] = true;
-                // pData.detailPopup["addNoteEditable"] = false;
-                // pData.detailPopup["approveButton"] = true;
-                // pData.detailPopup["cancelButton"] = true;
-                // pData.detailPopup["reviseButton"] = true;
-            }
+               }
 
             pModel.refresh();
         },
@@ -370,6 +358,9 @@ sap.ui.define([
 
             dData["sSelectedEbelnTableData"][0]["Sevkm"] = data[0].Sevkm;
             dData["sSelectedEbelnTableData"][0]["RestSevkm"] = data[0].RestSevkm;
+
+            var selectedKey = dData["iconTabBarSelectedKey"];
+
             dModel.refresh();
 
             var pModel = that.getOModel(that, "pm");
@@ -401,6 +392,11 @@ sap.ui.define([
             // not ekle açıksa 
             if (pData.detailPopup["BtnVisAddNote"] === true) {
                 pData.detailPopup["AddNoteArea"] = true;
+            }
+
+            // taba göre göster veya gösterme 
+            if(selectedKey === 'REVF' || selectedKey === 'REVE'){
+                pData.detailPopup["SlfdiVis"] = true;
             }
 
             pModel.refresh();
