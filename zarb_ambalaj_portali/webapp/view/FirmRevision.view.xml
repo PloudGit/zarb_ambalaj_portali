@@ -35,14 +35,14 @@
             </Toolbar>
         </t:toolbar>
         <t:columns>
-            <t:Column>
+          <t:Column sortProperty="ApKey" width="130px">
                 <Label text="{i18n>callNumber}" />
                 <t:template>
                     <Text text="{dm>ApKey}" />
                 </t:template>
             </t:Column>
 
-            <t:Column>
+             <t:Column sortProperty="Ebeln"  width="130px">
                 <Label text="{i18n>orderNumber}" />
                 <t:template>
                     <Link

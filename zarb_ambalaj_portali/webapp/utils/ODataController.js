@@ -32,6 +32,25 @@ sap.ui.define([
 
 		getList: function (that) {
 
+			// her koşulda Main controller'dan al
+			var oMainController = null;
+			if (that.getView().getViewName().indexOf("Main") !== -1) {
+				oMainController = that;
+			} else {
+				// OpenCalls gibi sub-view'lardan geliyorsa parent'tan bul
+				var oParent = that.getView().getParent();
+				while (oParent) {
+					if (oParent.getController && oParent.getController()) {
+						var ctrl = oParent.getController();
+						if (ctrl.getView().getViewName().indexOf("Main") !== -1) {
+							oMainController = ctrl;
+							break;
+						}
+					}
+					oParent = oParent.getParent();
+				}
+			}
+
 			var url = "/AmbOrderListSet";
 
 			var bModel = that.getOModel(that, "bm");
@@ -42,7 +61,9 @@ sap.ui.define([
 			var aFilters = [];
 			var selectedKey = that._main.getIcontabBarSelectedKey(that);
 
-			var oSmartFilterBar = that.byId("smartFilterBar");
+			var oSmartFilterBar = oMainController._oSmartFilterBar || oMainController.byId("smartFilterBar");
+
+			// var oSmartFilterBar = that.byId("smartFilterBar");
 			if (oSmartFilterBar) {
 				aFilters = oSmartFilterBar.getFilters();
 			}

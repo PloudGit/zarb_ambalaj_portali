@@ -366,7 +366,7 @@ sap.ui.define([
                         break;
 
                     case 'AC': // Approve
-                       break;
+                        break;
                     case 'RJ': // Reject
                         var newNote = dData.detailPopupNote?.trim();
                         var oldNote = row.Desc1?.trim() || "";
@@ -394,11 +394,11 @@ sap.ui.define([
                         payload.Desc1 = combinedNote;
                         break;
                     case 'CA': // Cancel Approve
-                       break;
+                        break;
                     case 'CR': // Cancel Reject
-                       break;
+                        break;
                     case 'CV': // Cancel Revise
-                       break;
+                        break;
                     case 'RV': // Revise
 
                         var newNote = dData.detailPopupNote?.trim();
@@ -415,9 +415,9 @@ sap.ui.define([
 
                         break;
                     case 'SD': // Send
-                       break;
+                        break;
                     case 'SE': // Sevk
-                       break;
+                        break;
                     case 'PK': // PK
                         break;
                     default:

@@ -334,7 +334,7 @@ sap.ui.define([
                 pData.iconTabBar["TUM"] = false;
                 pData.iconTabBar["GET_TUM_SIPARIS_S"] = false;
 
-     
+
             } else {
                 pData.iconTabBar["PKOLMAYAN"] = true;
                 pData.iconTabBar["ACIKCAGRI"] = true;
@@ -345,7 +345,7 @@ sap.ui.define([
                 pData.iconTabBar["TUM"] = true;
                 pData.iconTabBar["GET_TUM_SIPARIS_S"] = true;
 
-               }
+            }
 
             pModel.refresh();
         },
@@ -395,7 +395,7 @@ sap.ui.define([
             }
 
             // taba göre göster veya gösterme 
-            if(selectedKey === 'REVF' || selectedKey === 'REVE'){
+            if (selectedKey === 'REVF' || selectedKey === 'REVE') {
                 pData.detailPopup["SlfdiVis"] = true;
             }
 
