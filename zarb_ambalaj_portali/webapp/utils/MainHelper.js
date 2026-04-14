@@ -58,7 +58,7 @@ sap.ui.define([
                         oFB._oHideShowButton.addStyleClass("yellowButton");
                     }
 
-
+                    debugger;
                     // custom buton
                     var oToolbar = oFB.getToolbar ? oFB.getToolbar() : oFB._oToolbar;
                     if (oToolbar && !oFB._bCustomButtonAdded) {
@@ -73,9 +73,17 @@ sap.ui.define([
                             }).addStyleClass("orangeButton sapUiSmallMarginLeft")
                         );
 
-                    }
+                        // ambalaj log raporu
+                        oToolbar.addContent(
+                            new sap.m.Button({
+                                text: "Ambalaj Log Raporuna Git",
+                                icon: "sap-icon://table-view",
+                                press: that._main.onOpenLogScreen.bind(that),
+                                visible: "{pm>/header/routeLogApplication}",
+                            }).addStyleClass("blueButton sapUiSmallMarginLeft")
+                        );
 
-                    debugger;
+                    }
                 }
             });
         },
@@ -97,6 +105,7 @@ sap.ui.define([
 
             pData["header"]["lifnrFilter"] = false;
             pData["header"]["routeCallApplication"] = false;
+            pData["header"]["routeLogApplication"] = false;
 
             pModel.refresh();
         },
@@ -132,6 +141,36 @@ sap.ui.define([
                 URLHelper.redirect(url, false);
             });
         },
+
+        onOpenLogScreen: function (that) {
+            debugger;
+
+            var systemId;
+            if (sap.ushell) {
+                systemId = sap.ushell.Container.getLogonSystem("system").getName();
+            } else {
+                systemId = "DS4";
+            }
+
+            var url;
+            if (systemId === "DS4") {
+                url = "https://vhvctds4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
+            }
+            else if (systemId === "QS4") {
+                url = "https://vhvctqs4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
+
+            }
+            else if (systemId === "PS4") {
+                url = "https://vhvctps4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
+
+            }
+
+            sap.ui.require(["sap/m/library"], function (library) {
+                var URLHelper = library.URLHelper;
+                URLHelper.redirect(url, false);
+            });
+        },
+
         getTabViewData: function (that) {
 
             // var selectedKey = that._main.getIcontabBarSelectedKey(that);
@@ -236,7 +275,18 @@ sap.ui.define([
             var futureDeliveries = [];
 
             aOrderList.forEach(function (oItem) {
-                var deliveryDate = oItem.Slfdt;
+                var deliveryDate = null;
+
+                if (oItem.Slfdi && oItem.Statu === "ACCE") {
+                    deliveryDate = new Date(oItem.Slfdi);
+                } else if (oItem.Slfdt) {
+                    deliveryDate = new Date(oItem.Slfdt);
+                }
+
+                if (!deliveryDate || isNaN(deliveryDate.getTime())) {
+                    return;
+                }
+
                 deliveryDate.setHours(0, 0, 0, 0);
 
                 if (!deliveryDate) return;
@@ -284,12 +334,6 @@ sap.ui.define([
                 pData.iconTabBar["TUM"] = false;
                 pData.iconTabBar["GET_TUM_SIPARIS_S"] = false;
 
-                // // detailPopup 
-                // pData.detailPopup["addNote"] = true;
-                // pData.detailPopup["addNoteEditable"] = true;
-                // pData.detailPopup["approveButton"] = false;
-                // pData.detailPopup["cancelButton"] = true;
-                // pData.detailPopup["reviseButton"] = false;
 
             } else {
                 pData.iconTabBar["PKOLMAYAN"] = true;
@@ -301,12 +345,6 @@ sap.ui.define([
                 pData.iconTabBar["TUM"] = true;
                 pData.iconTabBar["GET_TUM_SIPARIS_S"] = true;
 
-                // // detailPopup 
-                // pData.detailPopup["addNote"] = true;
-                // pData.detailPopup["addNoteEditable"] = false;
-                // pData.detailPopup["approveButton"] = true;
-                // pData.detailPopup["cancelButton"] = true;
-                // pData.detailPopup["reviseButton"] = true;
             }
 
             pModel.refresh();
@@ -320,6 +358,9 @@ sap.ui.define([
 
             dData["sSelectedEbelnTableData"][0]["Sevkm"] = data[0].Sevkm;
             dData["sSelectedEbelnTableData"][0]["RestSevkm"] = data[0].RestSevkm;
+
+            var selectedKey = dData["iconTabBarSelectedKey"];
+
             dModel.refresh();
 
             var pModel = that.getOModel(that, "pm");
@@ -351,6 +392,11 @@ sap.ui.define([
             // not ekle açıksa 
             if (pData.detailPopup["BtnVisAddNote"] === true) {
                 pData.detailPopup["AddNoteArea"] = true;
+            }
+
+            // taba göre göster veya gösterme 
+            if (selectedKey === 'REVF' || selectedKey === 'REVE') {
+                pData.detailPopup["SlfdiVis"] = true;
             }
 
             pModel.refresh();
@@ -457,10 +503,34 @@ sap.ui.define([
                     }
 
                     var slfdi = dData.sSelectedEbelnTableData[0].Slfdi
+                    var slfdt = dData.sSelectedEbelnTableData[0].Slfdt
+
                     if (!slfdi || slfdi.toString().trim() === "") {
                         that.showMessage("error", "slfdi_field_required");
                         return;
                     }
+
+                    // Tarihleri gün bazında karşılaştırmak için 
+                    var oSlfdi = new Date(slfdi);
+                    var oSlfdt = new Date(slfdt);
+                    var oToday = new Date();
+
+                    oSlfdi.setHours(0, 0, 0, 0);
+                    oSlfdt.setHours(0, 0, 0, 0);
+                    oToday.setHours(0, 0, 0, 0);
+
+                    // Geçmiş tarih kontrolü
+                    if (oSlfdi < oToday) {
+                        that.showMessage("error", "revise_delivery_date_cannot_be_past");
+                        return;
+                    }
+
+                    // Mevcut firma teslim tarihinden farklı olmalı
+                    if (oSlfdi.getTime() === oSlfdt.getTime()) {
+                        that.showMessage("error", "revise_delivery_date_must_be_different");
+                        return;
+                    }
+
                     that.confirmMessageWithActonResponse(that, "confirmRevise", that.onConfirmResponse, action);
                     break;
 
@@ -474,7 +544,7 @@ sap.ui.define([
                     var tesyr = dData.sSelectedEbelnTableData[0].Tesyr?.trim();
                     var plaka = dData.sSelectedEbelnTableData[0].Plaka?.trim();
                     var sofor = dData.sSelectedEbelnTableData[0].Sofor?.trim();
-                    var sevkm = dData.sSelectedEbelnTableData[0].RestSevkm?.trim();
+                    var sevkm = dData.sSelectedEbelnTableData[0].RestSevkm; // değer girilince float
                     if (!tesyr) {
                         that.showMessage("error", "tesyr_field_required");
                         return;

@@ -284,10 +284,9 @@
                             >
                                 <Text text="{i18n>OP_sevkedQuantity}" />
                             </Column>
-                            <Column width="100px">
+                            <Column  visible="{pm>/detailPopup/SlfdiVis}" width="100px">
                                 <Text text="{i18n>OP_reviseFirmDeliveryDate}" />
                             </Column>
-
                             <Column
                                 width="230px"
                                 visible="{pm>/detailPopup/TesyrVis}"
@@ -316,10 +315,12 @@
                         <items>
                             <ColumnListItem>
                                 <cells>
-                                    <Text  text="{
+                                    <Text
+                                        text="{
                                                 path: 'dm>Menge',
                                                 formatter: '.formatters.formatDecimal'
-                                            }"/>
+                                            }"
+                                    />
                                     <Text text="{dm>Meins}" />
                                     <Text
                                         text="{
@@ -328,10 +329,12 @@
                         formatOptions: { pattern: 'dd.MM.yyyy' }
                     }"
                                     />
-                                    <Text  text="{
+                                    <Text
+                                        text="{
                                                 path: 'dm>Sevkm',
                                                 formatter: '.formatters.formatDecimal'
-                                            }" />
+                                            }"
+                                    />
                                     <DatePicker
                                         value="{path: 'dm>Slfdi',
                         type: 'sap.ui.model.odata.type.DateTime',
@@ -341,6 +344,7 @@
                                             }"
                                         displayFormat="short"
                                         editable="{pm>/detailPopup/SlfdiEdit}"
+                                        visible="{pm>/detailPopup/SlfdiVis}"
                                     />
                                     <!-- visible="{pm>/detailPopup/SlfdiVis}" -->
                                     <!-- <Input
@@ -370,11 +374,22 @@
                                         editable="{pm>/detailPopup/SoforVis}"
                                         visible="{pm>/detailPopup/SoforVis}"
                                     />
-                                    <Input
-                                        value="{
+                                    <!-- value="{
                                                 path: 'dm>RestSevkm',
                                                 formatter: '.formatters.formatDecimal'
-                                            }"
+                                            }" -->
+                                    <Input
+                                        value="{
+        path: 'dm>RestSevkm',
+        type: 'sap.ui.model.type.Float',
+        formatOptions: {
+            groupingEnabled: true,
+            groupingSeparator: '.',
+            decimalSeparator: ',',
+            minFractionDigits: 2,
+            maxFractionDigits: 2
+        }
+    }"
                                         editable="{pm>/detailPopup/SevkmVis}"
                                         visible="{pm>/detailPopup/SevkmVis}"
                                     />
