@@ -18,10 +18,11 @@ sap.ui.define([
 
 
 			var dData = {
-				SyUname:"",
-				TeslimYeriList:[],
+				SyUname: "",
+				IsSupplier: false, // BTP için kullanılan 
+				TeslimYeriList: [],
 				supplierNo: "",
-				isSupplier: false,
+				isSupplier: false, // Launchpad TEST için kullanılan
 				detailPopupNote: "",
 				iconTabBarSelectedKey: "ACIKCAGRI",
 				OrderList: [],
@@ -62,8 +63,8 @@ sap.ui.define([
 			var pData = {
 				header: {
 					lifnrFilter: true,
-					routeCallApplication:true,
-					routeLogApplication:true
+					routeCallApplication: true,
+					routeLogApplication: true
 				},
 				iconTabBar: {
 					PKOLMAYAN: true,
@@ -83,8 +84,8 @@ sap.ui.define([
 					// cancelButton: false,
 					// reviseButton: false,
 					// saveButton: false,
-					currentAction:"",
-					BtnVisConfirmAction:false,
+					currentAction: "",
+					BtnVisConfirmAction: false,
 					BtnVisAddNote: false,
 					BtnVisAiCancel: false,
 					BtnVisApprove: false,
@@ -104,8 +105,8 @@ sap.ui.define([
 					SlfdiVis: false,
 					SoforVis: false,
 					TesyrVis: false,
-					SevkedVis:false,
-					AddNoteArea:false
+					SevkedVis: false,
+					AddNoteArea: false
 				}
 
 

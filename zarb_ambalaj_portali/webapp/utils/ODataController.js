@@ -220,7 +220,13 @@ sap.ui.define([
 					}
 
 					dData["SyUname"] = userData.Uname;
+					dData["IsSupplier"] = userData.IsSupplier;
 					dModel.refresh();
+
+					// tedarikçi ise ui değiştir 
+					if (userData.IsSupplier) {
+						that._main.setUiForSupplier(that, userData.Uname);
+					}
 
 				},
 				error: function (oError) {
