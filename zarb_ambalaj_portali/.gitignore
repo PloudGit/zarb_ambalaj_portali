@@ -8,3 +8,5 @@ mta-*
 resources
 archive.zip
 .*_mta_build_tmp
+approuter/webapp
+.zarb_ambalaj_portali_mta_build_tmp
