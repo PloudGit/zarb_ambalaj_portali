@@ -20,6 +20,6 @@ builder:
           name: ZARBUI_AMBALAJP
           description: Ambalaj Portali Uygulaması
           package: ZARIBA
-          transport: DS4K912867
+          transport: DS4K915694
         exclude:
           - /test/
