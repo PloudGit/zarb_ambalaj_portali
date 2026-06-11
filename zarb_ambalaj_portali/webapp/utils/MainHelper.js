@@ -111,8 +111,6 @@ sap.ui.define([
         },
 
         onOpenCallScreen: function (that) {
-            debugger;
-
             var systemId;
             if (sap.ushell) {
                 systemId = sap.ushell.Container.getLogonSystem("system").getName();
@@ -122,18 +120,13 @@ sap.ui.define([
 
             var url;
             if (systemId === "DS4") {
-                // url = i18n.getText("urlCallDev");
-                url = "https://vhvctds4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJC-manage";
+                url = "https://fioridev.sap.abdiibrahim.com.tr/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR&saml2=disabled#ZARB_AMBALAJC-manage";
             }
             else if (systemId === "QS4") {
-                // url = i18n.getText("urlCallQa");
-                url = "https://vhvctqs4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJC-manage";
-
+                url = "https://fioriqa.sap.abdiibrahim.com.tr/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR&saml2=disabled#ZARB_AMBALAJC-manage";
             }
             else if (systemId === "PS4") {
-                // url = i18n.getText("urlCallProd");
-                url = "https://vhvctps4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJC-manage";
-
+                url = "https://fiori.sap.abdiibrahim.com.tr/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR&saml2=disabled#ZARB_AMBALAJC-manage";
             }
 
             sap.ui.require(["sap/m/library"], function (library) {
@@ -141,10 +134,40 @@ sap.ui.define([
                 URLHelper.redirect(url, false);
             });
         },
+
+        // onOpenCallScreen: function (that) {
+        //     debugger;
+
+        //     var systemId;
+        //     if (sap.ushell) {
+        //         systemId = sap.ushell.Container.getLogonSystem("system").getName();
+        //     } else {
+        //         systemId = "DS4";
+        //     }
+
+        //     var url;
+        //     if (systemId === "DS4") {
+        //         // url = i18n.getText("urlCallDev");
+        //         url = "https://vhvctds4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJC-manage";
+        //     }
+        //     else if (systemId === "QS4") {
+        //         // url = i18n.getText("urlCallQa");
+        //         url = "https://vhvctqs4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJC-manage";
+
+        //     }
+        //     else if (systemId === "PS4") {
+        //         // url = i18n.getText("urlCallProd");
+        //         url = "https://vhvctps4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJC-manage";
+
+        //     }
+
+        //     sap.ui.require(["sap/m/library"], function (library) {
+        //         var URLHelper = library.URLHelper;
+        //         URLHelper.redirect(url, false);
+        //     });
+        // },
 
         onOpenLogScreen: function (that) {
-            debugger;
-
             var systemId;
             if (sap.ushell) {
                 systemId = sap.ushell.Container.getLogonSystem("system").getName();
@@ -154,15 +177,13 @@ sap.ui.define([
 
             var url;
             if (systemId === "DS4") {
-                url = "https://vhvctds4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
+                url = "https://fioridev.sap.abdiibrahim.com.tr/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR&saml2=disabled#ZARB_AMBALAJL-display";
             }
             else if (systemId === "QS4") {
-                url = "https://vhvctqs4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
-
+                url = "https://fioriqa.sap.abdiibrahim.com.tr/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR&saml2=disabled#ZARB_AMBALAJL-display";
             }
             else if (systemId === "PS4") {
-                url = "https://vhvctps4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
-
+                url = "https://fiori.sap.abdiibrahim.com.tr/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR&saml2=disabled#ZARB_AMBALAJL-display";
             }
 
             sap.ui.require(["sap/m/library"], function (library) {
@@ -170,6 +191,34 @@ sap.ui.define([
                 URLHelper.redirect(url, false);
             });
         },
+        // onOpenLogScreen: function (that) {
+        //     debugger;
+
+        //     var systemId;
+        //     if (sap.ushell) {
+        //         systemId = sap.ushell.Container.getLogonSystem("system").getName();
+        //     } else {
+        //         systemId = "DS4";
+        //     }
+
+        //     var url;
+        //     if (systemId === "DS4") {
+        //         url = "https://vhvctds4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
+        //     }
+        //     else if (systemId === "QS4") {
+        //         url = "https://vhvctqs4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
+
+        //     }
+        //     else if (systemId === "PS4") {
+        //         url = "https://vhvctps4ci.sap.abdiibrahim.com.tr:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=TR#ZARB_AMBALAJL-display";
+
+        //     }
+
+        //     sap.ui.require(["sap/m/library"], function (library) {
+        //         var URLHelper = library.URLHelper;
+        //         URLHelper.redirect(url, false);
+        //     });
+        // },
 
         getTabViewData: function (that) {
 
