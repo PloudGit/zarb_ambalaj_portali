@@ -25,6 +25,7 @@ resources:
       service-plan: application
       path: xs-security.json
   - name: zarbambalajportali-connectivity
-    type: org.cloudfoundry.existing-service
+    type: org.cloudfoundry.managed-service
     parameters:
-      service-name: zarbambalajportali-connectivity
+      service: connectivity
+      service-plan: lite
