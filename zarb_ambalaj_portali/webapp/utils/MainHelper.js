@@ -615,6 +615,17 @@ sap.ui.define([
                     break;
 
                 case 'PK': // PK
+                    var row = dData.sSelectedEbelnRowData;
+
+                    if (!row.Normt || !row.Normt.trim()) {
+                        that.showMessage("error", "printkod_field_required");
+                        return;
+                    }
+
+                    if (row.Normt && row.Matnr && !row.Normt.includes(row.Matnr)) {
+                        that.showMessage("error", "printkod_must_contain_material_number");
+                        return;
+                    }
 
                     that.confirmMessageWithActonResponse(that, "confirmPackage", that.onConfirmResponse, action);
                     break;
