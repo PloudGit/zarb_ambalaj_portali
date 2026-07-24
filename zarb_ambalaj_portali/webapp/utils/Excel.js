@@ -160,7 +160,7 @@ sap.ui.define([
                 { label: i18n.getText("callCreatedDate"), property: "CreateDate", type: "date", width: 15 },
                 { label: i18n.getText("firmDeliveryDate"), property: "Slfdt", type: "date", width: 15 },
         
-                { label: i18n.getText("reviseFirmDeliveryDate"), property: "Eindt", type: "date", width: 15 },
+                { label: i18n.getText("reviseFirmDeliveryDate"), property: "Slfdi", type: "date", width: 15 },
                 { label: i18n.getText("price"), property: "Netpr", width: 12 },
                 { label: i18n.getText("currency"), property: "Waers", width: 8 },
                 { label: i18n.getText("deliveryNumber"), property: "Etenr", width: 10 },

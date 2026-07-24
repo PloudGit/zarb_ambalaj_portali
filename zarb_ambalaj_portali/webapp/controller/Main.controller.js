@@ -269,6 +269,13 @@ sap.ui.define([
                 pData.detailPopup.AddNoteArea = true;
 
             }
+            else if (sActionCode === "PK") { // printkod gir
+                pData.detailPopup.NormtEdit = true;
+                pData.detailPopup.BtnVisAddNote = false;
+                pData.detailPopup.AddNoteArea = false;
+
+            }
+
 
             // işlemi tamamla butonunu da aç 
             pData.detailPopup.BtnVisConfirmAction = true;
