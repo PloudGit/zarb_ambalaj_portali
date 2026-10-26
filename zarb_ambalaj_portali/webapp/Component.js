@@ -1,3 +1,12 @@
+sap.ui.loader.config({
+    shim: {
+        "com/app/abdiibrahim/zarbambalajportali/libs/xlsx.full.min": {
+            amd: false,
+            exports: "XLSX"
+        }
+    }
+});
+
 sap.ui.define([
     "sap/ui/core/UIComponent",
     "com/app/abdiibrahim/zarbambalajportali/model/models"
