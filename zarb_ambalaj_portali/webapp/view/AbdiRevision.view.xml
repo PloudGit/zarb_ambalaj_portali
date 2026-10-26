@@ -3,6 +3,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:t="sap.ui.table"
+    xmlns:u="sap.ui.unified"
     displayBlock="true"
     height="100%"
     busyIndicatorDelay="0"
@@ -26,6 +27,22 @@
             <Toolbar>
                 <Title text="{i18n>abdiRevisionTableTitle}" />
                 <ToolbarSpacer />
+                <u:FileUploader
+                    buttonOnly="true"
+                    buttonText="{i18n>fcUpload}"
+                    icon="sap-icon://excel-attachment"
+                    fileType="xlsx,xls"
+                    sameFilenameAllowed="true"
+                    change="onFirmaTeyitUpload($event, 'OrderListREVE')"
+                    visible="{= ${dm>/isSupplier} === true }"
+                />
+                   <Button
+                    icon="sap-icon://save"
+                    text="{i18n>fcSave}"
+                    type="Emphasized"
+                    press="onFirmaTeyitSave($event, 'OrderListREVE')"
+                    visible="{= ${dm>/isSupplier} === true }"
+                />
                 <Button
                     icon="sap-icon://download"
                     text="{i18n>download}"
@@ -35,14 +52,20 @@
             </Toolbar>
         </t:toolbar>
         <t:columns>
-            <t:Column sortProperty="ApKey" width="130px">
+            <t:Column
+                sortProperty="ApKey"
+                width="130px"
+            >
                 <Label text="{i18n>callNumber}" />
                 <t:template>
                     <Text text="{dm>ApKey}" />
                 </t:template>
             </t:Column>
 
-             <t:Column sortProperty="Ebeln"  width="130px">
+            <t:Column
+                sortProperty="Ebeln"
+                width="130px"
+            >
                 <Label text="{i18n>orderNumber}" />
                 <t:template>
                     <Link
@@ -145,6 +168,22 @@
                         pattern: 'dd.MM.yyyy'
                     }
                 }"
+                    />
+                </t:template>
+            </t:Column>
+
+            <t:Column
+                width="130px"
+                visible="{= ${dm>/isSupplier} === true }"
+            >
+                <Label text="{i18n>firmConfirm}" />
+                <t:template>
+                    <Text
+                        text="{
+                            path: 'dm>FirmaTeyit',
+                            type: 'sap.ui.model.type.Date',
+                            formatOptions: { pattern: 'dd.MM.yyyy' }
+                        }"
                     />
                 </t:template>
             </t:Column>

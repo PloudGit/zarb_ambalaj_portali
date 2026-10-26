@@ -237,7 +237,108 @@ sap.ui.define([
 
 			});
 
-		}
+		},
+		 // ================= FIRMA TEYİT - TOPLU ONAY / REVİZE =================
+        saveFirmaTeyit: function (that, sModelPath) {
+            var i18n = that.getView().getModel("i18n").getResourceBundle();
+            var dModel = that.getView().getModel("dm");
+            var dData = dModel.getData();
+
+            var aRows = (dModel.getProperty("/" + sModelPath) || []).filter(function (r) {
+                return r.BulkAction === "AC" || r.BulkAction === "RV";
+            });
+
+            if (!aRows.length) {
+                MessageBox.warning(i18n.getText("fcNothingToSave"));
+                return;
+            }
+
+            var iAc = aRows.filter(function (r) { return r.BulkAction === "AC"; }).length;
+            var iRv = aRows.length - iAc;
+
+            MessageBox.confirm(i18n.getText("fcConfirmSave", [aRows.length, iAc, iRv]), {
+                title: i18n.getText("titleConfirm"),
+                actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                emphasizedAction: MessageBox.Action.OK,
+                onClose: function (sAction) {
+                    if (sAction === MessageBox.Action.OK) {
+                        that._oData._sendFirmaTeyit(that, sModelPath, aRows, i18n, dData);
+                    }
+                }
+            });
+        },
+
+        _sendFirmaTeyit: function (that, sModelPath, aRows, i18n, dData) {
+            var oDataModel = that.getOwnerComponent().getModel();
+
+            // Not başlığı - tekli revize ile aynı format
+            var sFormattedDateTime = new Date().toLocaleString("tr-TR", {
+                day: "2-digit", month: "2-digit", year: "numeric",
+                hour: "2-digit", minute: "2-digit"
+            });
+            var sNoteHeader = (dData["SyUname"] || "") + " " + sFormattedDateTime + "   ";
+            var sNewNote = sNoteHeader + i18n.getText("note_type_REVISE") + " " + i18n.getText("fcExcelNote");
+
+            var aItems = aRows.map(function (r) {
+                var oItem = {
+                    Ebeln: r.Ebeln,
+                    Ebelp: r.Ebelp,
+                    Etenr: r.Etenr,
+                    Action: r.BulkAction
+                };
+
+                if (r.BulkAction === "RV") {
+                    var sOldNote = (r.Desc1 || "").trim();
+                    oItem.Slfdi = that.formatters.adjustStartDateForUTC(r.FirmaTeyit);
+                    oItem.Desc1 = sOldNote ? sOldNote + "\n\n" + sNewNote : sNewNote; // not geçmişi korunur
+                }
+                return oItem;
+            });
+
+            var oPayload = {
+                BulkId: "1",
+                Tabinfo: sModelPath.replace("OrderList", ""),
+                ToBulkItems: aItems
+            };
+
+            that.openBusyDialog();
+            oDataModel.create("/AmbBulkHeaderSet", oPayload, {
+                success: function (oData) {
+                    that.closeBusyDialog();
+                    that._oData._showFirmaTeyitResult(that, oData, i18n);
+                },
+                error: function () {
+                    that.closeBusyDialog();
+                    that._oData.handleODataErrors(that);
+                }
+            });
+        },
+
+        _showFirmaTeyitResult: function (that, oData, i18n) {
+            var aResults = (oData.ToBulkItems && oData.ToBulkItems.results) || [];
+            var aErrors = aResults.filter(function (r) { return r.Msgty === "E"; });
+
+            var fnRefresh = function () {
+                that._oData.getList(that);
+            };
+
+            if (!aErrors.length) {
+                MessageBox.success(i18n.getText("fcSaveSuccess", [oData.SuccessCnt]), {
+                    onClose: fnRefresh
+                });
+                return;
+            }
+
+            var sDetails = "<ul>" + aErrors.map(function (r) {
+                return "<li>" + r.Ebeln + " / " + r.Ebelp + " / " + r.Etenr + ": " + r.Message + "</li>";
+            }).join("") + "</ul>";
+
+            MessageBox.warning(i18n.getText("fcSavePartial", [oData.SuccessCnt, oData.ErrorCnt]), {
+                details: sDetails,
+                onClose: fnRefresh
+            });
+        },
+
 
 
 

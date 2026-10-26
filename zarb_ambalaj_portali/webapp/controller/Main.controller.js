@@ -510,6 +510,21 @@ sap.ui.define([
 
         },
 
+        // FIRMA TEYİT - EXCEL UPLOAD
+        onFirmaTeyitUpload: function (oEvent, sModelPath) {
+            var oUploader = oEvent.getSource();
+            var aFiles = oEvent.getParameter("files");
+            var oFile = aFiles && aFiles[0];
 
+            if (oFile) {
+                this._excel.uploadFirmaTeyit(this, oFile, sModelPath);
+            }
+            oUploader.clear(); // aynı dosya tekrar seçilebilsin
+        },
+        onFirmaTeyitSave: function (oEvent, sModelPath) {
+            this._oData.saveFirmaTeyit(this, sModelPath);
+        }
+
+       
     });
 });
