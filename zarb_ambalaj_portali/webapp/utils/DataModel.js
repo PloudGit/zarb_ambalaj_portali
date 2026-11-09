@@ -88,6 +88,7 @@ sap.ui.define([
 					BtnVisConfirmAction: false,
 					BtnVisAddNote: false,
 					BtnVisAiCancel: false,
+					BtnVisChangeDate: false,
 					BtnVisApprove: false,
 					BtnVisPk: false,
 					BtnVisReject: false,
