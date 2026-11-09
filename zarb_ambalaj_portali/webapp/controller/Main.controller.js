@@ -230,6 +230,7 @@ sap.ui.define([
             }
 
             if (sActionCode === "AC" || sActionCode === 'RJ' || sActionCode === 'CN' || sActionCode === 'CA' || sActionCode === 'CR') {
+                // CD bilerek burada değil: önce tarih alanı açılır, "İşlemi Tamamla" ile gönderilir
                 that._main.checkData(that, sActionCode);
                 return;
             }
@@ -262,7 +263,14 @@ sap.ui.define([
 
 
             }
-            else if (sActionCode === "CV") { // iptali revize et 
+            else if (sActionCode === "CV") { // iptali revize et
+                pData.detailPopup.SlfdiVis = true;
+                pData.detailPopup.SlfdiEdit = true;
+                pData.detailPopup.BtnVisAddNote = false;
+                pData.detailPopup.AddNoteArea = true;
+
+            }
+            else if (sActionCode === "CD") { // çağrıyı değiştir (sadece firma teslim tarihi)
                 pData.detailPopup.SlfdiVis = true;
                 pData.detailPopup.SlfdiEdit = true;
                 pData.detailPopup.BtnVisAddNote = false;
@@ -401,10 +409,33 @@ sap.ui.define([
                         payload.Desc1 = combinedNote;
                         break;
                     case 'CA': // Cancel Approve
+                        // tarihçe için onay notu eklenir (backend not boşsa hata veriyor)
+                        var newNote = dData.detailPopupNote?.trim() || "";
+                        var oldNote = row.Desc1?.trim() || "";
+
+                        prefix = oBundle.getText("note_type_CANCEL_APPROVE");
+                        finalNote = noteHeader + prefix + (newNote ? " " + newNote : "");
+                        combinedNote = oldNote ? oldNote + "\n\n" + finalNote : finalNote;
+
+                        dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
+                        dModel.setProperty("/detailPopupNote", "");
+                        payload.Desc1 = combinedNote;
                         break;
                     case 'CR': // Cancel Reject
                         break;
                     case 'CV': // Cancel Revise
+                        break;
+                    case 'CD': // Change Date - yeni tarih payload.Slfdi ile gider
+                        var newNote = dData.detailPopupNote?.trim();
+                        var oldNote = row.Desc1?.trim() || "";
+
+                        prefix = oBundle.getText("note_type_CHANGE_DATE");
+                        finalNote = noteHeader + prefix + " " + newNote;
+                        combinedNote = oldNote ? oldNote + "\n\n" + finalNote : finalNote;
+
+                        dModel.setProperty("/sSelectedEbelnRowData/Desc1", combinedNote);
+                        dModel.setProperty("/detailPopupNote", "");
+                        payload.Desc1 = combinedNote;
                         break;
                     case 'RV': // Revise
 

@@ -544,6 +544,41 @@ sap.ui.define([
                     that.confirmMessageWithActonResponse(that, "confirmCancelRevise", that.onConfirmResponse, action);
                     break;
 
+                case 'CD': // Çağrıyı Değiştir - sadece firma teslim tarihi
+                    if (!note) {
+                        that.showMessage("error", "note_field_required");
+                        return;
+                    }
+
+                    var cdSlfdi = dData.sSelectedEbelnTableData[0].Slfdi;
+                    var cdSlfdt = dData.sSelectedEbelnTableData[0].Slfdt;
+
+                    if (!cdSlfdi || cdSlfdi.toString().trim() === "") {
+                        that.showMessage("error", "change_date_field_required");
+                        return;
+                    }
+
+                    var oCdNew = new Date(cdSlfdi);
+                    var oCdOld = new Date(cdSlfdt);
+                    var oCdToday = new Date();
+
+                    oCdNew.setHours(0, 0, 0, 0);
+                    oCdOld.setHours(0, 0, 0, 0);
+                    oCdToday.setHours(0, 0, 0, 0);
+
+                    if (oCdNew < oCdToday) {
+                        that.showMessage("error", "change_date_cannot_be_past");
+                        return;
+                    }
+
+                    if (oCdNew.getTime() === oCdOld.getTime()) {
+                        that.showMessage("error", "revise_delivery_date_must_be_different");
+                        return;
+                    }
+
+                    that.confirmMessageWithActonResponse(that, "confirmChangeDate", that.onConfirmResponse, action);
+                    break;
+
                 case 'RV': // Revize Et 
                     // firma teslim tarihini revize edebilir yani zorunlu  - not girişi zorunludur
                     if (!note) {
@@ -652,7 +687,18 @@ sap.ui.define([
                     messageKey = "rejectedSuccessfully";
                     break;
                 case "CN":
-                    messageKey = "cancelledSuccessfully";
+                    // açık çağrı direkt iptal edilip çağrı ekranına döner,
+                    // teyit edilen çağrı tedarikçi onayına (Abdi Revizyon Talepleri) düşer
+                    if (data.Statu === "INIT") {
+                        messageKey = "cancelledReturnedToOrder";
+                    } else if (data.Statu === "ACCE") {
+                        messageKey = "cancelRequestSent";
+                    } else {
+                        messageKey = "cancelledSuccessfully";
+                    }
+                    break;
+                case "CD":
+                    messageKey = "changeDateSuccess";
                     break;
                 case "CA":
                     messageKey = "cancelApproveSuccess";

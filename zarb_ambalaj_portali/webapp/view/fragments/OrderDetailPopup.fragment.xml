@@ -427,6 +427,14 @@
                 />
 
                 <Button
+                    text="{i18n>OP_btnChangeDate}"
+                    icon="sap-icon://appointment-2"
+                    class="yellowButton"
+                    press="onPressAction($event, 'CD')"
+                    visible="{pm>/detailPopup/BtnVisChangeDate}"
+                />
+
+                <Button
                     text="{i18n>OP_btnCancelAppr}"
                     icon="sap-icon://cancel-share"
                     class="greenButton"
