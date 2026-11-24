@@ -541,6 +541,27 @@ sap.ui.define([
 
         },
 
+        // Tüm Çağrılar: statü kodu yerine çağrının bulunduğu sekmenin adı
+        formatStatusText: function (sStatu) {
+            if (!sStatu) {
+                return "";
+            }
+            var mKeys = {
+                INIT: "tabOpen",
+                NOPK: "tabNoPk",
+                ACCE: "tabConfirmed",
+                REVF: "tabCompanyRev",
+                REVE: "tabInternalRev",
+                AIPT: "tabInternalRev",
+                IPTL: "tabCanceled"
+            };
+            var sKey = mKeys[sStatu];
+            if (!sKey) {
+                return sStatu;
+            }
+            return this.getOwnerComponent().getModel("i18n").getResourceBundle().getText(sKey);
+        },
+
         // FIRMA TEYİT - EXCEL UPLOAD
         onFirmaTeyitUpload: function (oEvent, sModelPath) {
             var oUploader = oEvent.getSource();
@@ -556,6 +577,6 @@ sap.ui.define([
             this._oData.saveFirmaTeyit(this, sModelPath);
         }
 
-       
+
     });
 });

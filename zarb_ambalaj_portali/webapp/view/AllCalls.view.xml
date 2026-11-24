@@ -35,14 +35,20 @@
             </Toolbar>
         </t:toolbar>
         <t:columns>
-           <t:Column sortProperty="ApKey" width="130px">
+            <t:Column
+                sortProperty="ApKey"
+                width="130px"
+            >
                 <Label text="{i18n>callNumber}" />
                 <t:template>
                     <Text text="{dm>ApKey}" />
                 </t:template>
             </t:Column>
 
-             <t:Column sortProperty="Ebeln"  width="130px">
+            <t:Column
+                sortProperty="Ebeln"
+                width="130px"
+            >
                 <Label text="{i18n>orderNumber}" />
                 <t:template>
                     <Link
@@ -186,7 +192,9 @@
             <t:Column>
                 <Label text="{i18n>statu}" />
                 <t:template>
-                    <Text text="{dm>Statu}" />
+                    <Text
+                        text="{ path: 'dm>Statu', formatter: '.formatStatusText' }"
+                    />
                 </t:template>
             </t:Column>
 
