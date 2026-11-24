@@ -553,7 +553,8 @@ sap.ui.define([
                 REVF: "tabCompanyRev",
                 REVE: "tabInternalRev",
                 AIPT: "tabInternalRev",
-                IPTL: "tabCanceled"
+                IPTL: "tabCanceled",
+                DELI: "statusDELI"
             };
             var sKey = mKeys[sStatu];
             if (!sKey) {
