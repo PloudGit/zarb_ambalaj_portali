@@ -33,9 +33,9 @@ sap.ui.define([
             return (mFileNames[sModelPath] || "Export") + ".xlsx";
         },
         export: function (oConfig, that) {
-            debugger;
+
             var aFormattedData = oConfig.data.map(function (item) {
-                return Object.assign({}, item, {
+                var oRow = Object.assign({}, item, {
                     Menge: that.formatters.formatDecimal(item.Menge),
                     Netpr: that.formatters.formatDecimal(item.Netpr),
                     MalGirisi: that.formatters.formatDecimal(item.MalGirisi),
@@ -44,6 +44,11 @@ sap.ui.define([
                     CreateDate: that.formatters.adjustStartDateForUTC(item.CreateDate),
                     Eindt: that.formatters.adjustStartDateForUTC(item.Eindt)
                 });
+                // Tüm Çağrılar Excel'inde de ekrandaki statü metni
+                if (oConfig.sheetName === "OrderListTUM") {
+                    oRow.Statu = that.formatStatusText(item.Statu);
+                }
+                return oRow;
             });
 
             var oSettings = {
